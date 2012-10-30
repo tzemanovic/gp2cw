@@ -1,0 +1,8 @@
+﻿  ZionNoiseStd.cpp
+d3dx10.lib(d3dx10_43.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in d3d10.lib(d3d10.dll); second definition ignored
+d3dx10.lib(d3dx10_43.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+XInput.lib(XINPUT1_3.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in d3d10.lib(d3d10.dll); second definition ignored
+XInput.lib(XINPUT1_3.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+fbxsdk-2013.3d.lib(fbxsdk-2013.3d.dll) : warning LNK4006: __NULL_IMPORT_DESCRIPTOR already defined in d3d10.lib(d3d10.dll); second definition ignored
+fbxsdk-2013.3d.lib(fbxsdk-2013.3d.dll) : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  ZionNoise_2010.vcxproj -> C:\Users\Tomas\Documents\GitHub\gp2cw\Source\ZionNoise\Msvc\..\..\Lib\Win32Debug\ZionNoise_2010.lib
