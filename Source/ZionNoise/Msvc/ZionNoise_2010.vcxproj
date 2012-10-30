@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Utilities\INoCopy.h" />
+    <ClInclude Include="..\Window\Window.h" />
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>

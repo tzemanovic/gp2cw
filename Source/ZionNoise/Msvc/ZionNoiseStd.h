@@ -7,15 +7,15 @@
 
 #if defined(_WIN32) || defined(__WIN32__)
     // Windows
-    #define ZN_SYSTEM_WINDOWS
+#   define ZN_SYSTEM_WINDOWS
     // avoid min/max problems
-    #ifndef NOMINMAX
-        #define NOMINMAX
-    #endif
+#   ifndef NOMINMAX
+#       define NOMINMAX
+#   endif
     // exclude rarely-used services from Windows headers
-    #ifndef WIN32_LEAN_AND_MEAN
-        #define WIN32_LEAN_AND_MEAN
-    #endif
+#   ifndef WIN32_LEAN_AND_MEAN
+#       define WIN32_LEAN_AND_MEAN
+#   endif
 #else
-    #error This operation system is not supported
+#   error This operation system is not supported
 #endif

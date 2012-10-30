@@ -2,6 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="ZionNoiseStd.h" />
+    <ClInclude Include="..\Window\Window.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\INoCopy.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -12,6 +18,12 @@
   <ItemGroup>
     <Filter Include="Main">
       <UniqueIdentifier>{cca3a936-48dd-4aad-994b-30662ff7af0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{e549eab6-dc99-40cd-85c6-4b02f2e5ad93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{4af0dceb-cde1-4db1-92c9-46c2170a35d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
