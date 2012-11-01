@@ -1,0 +1,15 @@
+#pragma once
+////////////////////////////////////////////////////
+// renderers base
+////////////////////////////////////////////////////
+
+#include "Renderer.h"
+
+namespace zn
+{
+    class IRender
+    {
+    protected:
+        Renderer renderer;
+    };
+}

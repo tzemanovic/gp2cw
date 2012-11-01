@@ -1,0 +1,14 @@
+#pragma once
+////////////////////////////////////////////////////
+// Direct3D renderers base
+////////////////////////////////////////////////////
+
+#include "..\IRender.h"
+
+namespace zn
+{
+    class IRenderD3D : public IRender
+    {
+
+    };
+}

@@ -1,12 +1,30 @@
 #pragma once
 ////////////////////////////////////////////////////
-// window class
+// window
 ////////////////////////////////////////////////////
 
-#include "ZionNoiseStd.h"
-#include "INoCopy.h"
+#include "..\Utilities\INoCopy.h"
+#include "WndStyle.h"
+#include "Message.h"
 
-class Window : private INoCopy
+namespace zn
 {
+    class WndImpl;
+    class Window : private INoCopy
+    {
+    public:
+        Window();
+        ~Window();
 
-};
+        bool Open( const string&, const iVec2&, const uint8 = WndStyle::Default );
+        void Close();
+        bool IsOpen() const;
+        void SetVisible( const bool );
+        void SetMouseCursorVisible( const bool );
+        bool PollMessage( Message& );
+        bool IsFullscreen();
+
+    private:
+        WndImpl* m_pWndImpl;
+    };
+}

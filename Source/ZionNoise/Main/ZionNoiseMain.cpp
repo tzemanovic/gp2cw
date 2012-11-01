@@ -10,10 +10,10 @@
 #ifdef ZN_SYSTEM_WINDOWS
     #include <Windows.h>
 
-    extern int main(int argc, char** argv);
+    extern int main( int argc, char** argv );
 
-    int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
+    int WINAPI WinMain( HINSTANCE, HINSTANCE, LPSTR, INT )
     {
-        return main(__argc, __argv);
+        return main( __argc, __argv );
     }
 #endif

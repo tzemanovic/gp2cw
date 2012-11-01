@@ -3,4 +3,6 @@
 // precompiled header file
 ////////////////////////////////////////////////////
 
-#include "../../ZionNoise/Msvc/ZionNoiseStd.h"
+#include "..\..\ZionNoise\Main\ZionNoise.h"
+
+using namespace zn;

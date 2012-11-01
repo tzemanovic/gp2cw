@@ -1,0 +1,14 @@
+#pragma once
+////////////////////////////////////////////////////
+// Direct 3D 10 renderer
+////////////////////////////////////////////////////
+
+#include "..\IRenderD3D.h"
+
+namespace zn
+{
+    class RenderD3D10 : public IRenderD3D
+    {
+
+    };
+}

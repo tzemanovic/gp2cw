@@ -11,12 +11,26 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Game\Game.h" />
+    <ClInclude Include="..\Graphics\D3D\10\RenderD3D10.h" />
+    <ClInclude Include="..\Graphics\D3D\IRenderD3D.h" />
+    <ClInclude Include="..\Graphics\IRender.h" />
+    <ClInclude Include="..\Graphics\Renderer.h" />
+    <ClInclude Include="..\Main\ZionNoise.h" />
     <ClInclude Include="..\Utilities\INoCopy.h" />
+    <ClInclude Include="..\Window\Message.h" />
+    <ClInclude Include="..\Window\WndImpl.h" />
+    <ClInclude Include="..\Window\Win32\WndImplWin32.h" />
     <ClInclude Include="..\Window\Window.h" />
+    <ClInclude Include="..\Window\WndStyle.h" />
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
+    <ClCompile Include="..\Window\Win32\WndImplWin32.cpp" />
+    <ClCompile Include="..\Window\Window.cpp" />
+    <ClCompile Include="..\Window\WndImpl.cpp" />
     <ClCompile Include="ZionNoiseStd.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -47,16 +61,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(FBXSDK_DIR)lib\vs2010\x86;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(FBXSDK_DIR)\lib\vs2010\x86;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)include;$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(FBXSDK_DIR)lib\vs2010\x86;$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(FBXSDK_DIR)\lib\vs2010\x86;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>

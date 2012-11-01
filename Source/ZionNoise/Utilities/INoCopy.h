@@ -3,14 +3,15 @@
 // interface to be inherited by non copyable class
 ////////////////////////////////////////////////////
 
-#include "ZionNoiseStd.h"
-
-class INoCopy
+namespace zn
 {
-protected:
-    INoCopy() {}
-    ~INoCopy() {}
-private:
-    INoCopy( const INoCopy& );
-    const INoCopy& operator=( const INoCopy& );
-};
+    class INoCopy
+    {
+    protected:
+        INoCopy() {}
+        ~INoCopy() {}
+    private:
+        INoCopy( const INoCopy& );
+        const INoCopy& operator=( const INoCopy& );
+    };
+}
