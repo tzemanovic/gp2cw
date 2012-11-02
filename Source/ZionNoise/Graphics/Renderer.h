@@ -3,29 +3,22 @@
 // renderers base
 ////////////////////////////////////////////////////
 
-#ifdef ZN_SYSTEM_WINDOWS
-#   include <D3D10.h>
-#   include <D3DX10.h>
-#endif
+#include "..\Utilities\INoCopy.h"
+#include "RendererType.h"
 
 namespace zn
 {
-    class Renderer
+    class IRendererImpl;
+    class Renderer : private INoCopy
     {
     public:
-        enum Type
-        {
-            DirectX10,
-#           if defined(ZN_SYSTEM_WINDOWS)
-                Default = DirectX10
-#           else
-                Default
-#           endif
-        };
-
-        Renderer() : type( Type::Default ) {}
-        Renderer( const Renderer::Type type ) : type( type ) {}
-
-        Type type;
+        Renderer();
+        ~Renderer();
+        
+        // initialize renderer
+        bool Init( const uint8 );
+    private:
+        //renderer implementation
+        IRendererImpl* m_pRendererImpl;
     };
 }

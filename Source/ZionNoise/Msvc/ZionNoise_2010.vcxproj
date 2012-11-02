@@ -12,25 +12,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Game\Game.h" />
-    <ClInclude Include="..\Graphics\D3D\10\RenderD3D10.h" />
-    <ClInclude Include="..\Graphics\D3D\IRenderD3D.h" />
-    <ClInclude Include="..\Graphics\IRender.h" />
+    <ClInclude Include="..\Graphics\D3D\10\RenderImplD3D10.h" />
+    <ClInclude Include="..\Graphics\IRendererImpl.h" />
+    <ClInclude Include="..\Graphics\RendererType.h" />
     <ClInclude Include="..\Graphics\Renderer.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
     <ClInclude Include="..\Utilities\INoCopy.h" />
     <ClInclude Include="..\Window\Message.h" />
-    <ClInclude Include="..\Window\WndImpl.h" />
-    <ClInclude Include="..\Window\Win32\WndImplWin32.h" />
+    <ClInclude Include="..\Window\IWindowImpl.h" />
+    <ClInclude Include="..\Window\Win32\WindowImplWin32.h" />
     <ClInclude Include="..\Window\Window.h" />
-    <ClInclude Include="..\Window\WndStyle.h" />
+    <ClInclude Include="..\Window\WindowStyle.h" />
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Game\Game.cpp" />
+    <ClInclude Include="..\Graphics\D3D\10\RenderImplD3D10.cpp" />
+    <ClInclude Include="..\Graphics\Renderer.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
-    <ClCompile Include="..\Window\Win32\WndImplWin32.cpp" />
+    <ClCompile Include="..\Window\IWindowImpl.cpp" />
+    <ClCompile Include="..\Window\Win32\WindowImplWin32.cpp" />
     <ClCompile Include="..\Window\Window.cpp" />
-    <ClCompile Include="..\Window\WndImpl.cpp" />
     <ClCompile Include="ZionNoiseStd.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

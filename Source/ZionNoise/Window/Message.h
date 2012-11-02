@@ -18,6 +18,7 @@ namespace zn
         Message() {}
         Message( const Message::Type type ) : type( type ) {}
 
+        // compare messages' type
         bool operator==( const Message::Type type ) const { return Message::type == type; }
 
         Type type;

@@ -5,6 +5,7 @@
 
 #include "..\Utilities\INoCopy.h"
 #include "..\Window\Window.h"
+#include "..\Graphics\Renderer.h"
 
 namespace zn
 {
@@ -14,12 +15,18 @@ namespace zn
         Game();
         ~Game();
         
-        bool Init( const string&, const iVec2& = iVec2( 800, 600 ), const uint8 = WndStyle::Default );
+        // initialize game
+        bool Init( const string&, const iVec2& = iVec2( 800, 600 ), const uint8 = WindowStyle::Default );
+        // run game loop
         void Run();
 
     private:
-        bool InitWindow( const string&, const iVec2&, const uint8  );
+        // initalize window
+        bool InitWindow( const string&, const iVec2&, const uint8 );
+        // initialize graphics
+        bool InitGraphics( const uint8 = RendererType::Default );
 
         Window* m_pWindow;
+        Renderer* m_pRenderer;
     };
 }
