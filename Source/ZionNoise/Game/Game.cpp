@@ -18,11 +18,11 @@ namespace zn
         ZN_SAFE_DELETE( m_pWindow );
     }
 
-    bool Game::Init( const string& title, const iVec2& windowSize, const uint8 windowStyle )
+    bool Game::Init( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
     {
         if( !InitWindow( title, windowSize, windowStyle ) )
             return false;
-        if( !InitGraphics() )
+        if( !InitGraphics( windowSize ) )
             return false;
         return true;
     }
@@ -42,15 +42,17 @@ namespace zn
         }
     }
 
-    bool Game::InitWindow( const string& title, const iVec2& windowSize, const uint8 windowStyle )
+    bool Game::InitWindow( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
     {
         m_pWindow = ZN_NEW Window();
         return m_pWindow->Open( title, windowSize, windowStyle );
     }
 
-    bool Game::InitGraphics( const uint8 rendererType )
+    bool Game::InitGraphics( const uint16Vec2& windowSize, const uint8 rendererType )
     {
+        if( !m_pWindow )
+            return false;
         m_pRenderer = ZN_NEW Renderer();
-        return m_pRenderer->Init( rendererType );
+        return m_pRenderer->Init( rendererType, windowSize, true, m_pWindow->GetWindowImpl() );
     }
 }

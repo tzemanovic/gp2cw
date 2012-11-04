@@ -5,12 +5,13 @@
 
 #include <stdlib.h>
 #include <string>
+#include <queue>
 
 using namespace std;
 
 #if defined( _WIN32 ) || defined( __WIN32__ )
     // Windows
-#   define ZN_SYSTEM_WINDOWS
+#   define ZN_PLATFORM_WIN32
     // avoid min/max problems
 #   ifndef NOMINMAX
 #       define NOMINMAX
@@ -59,13 +60,6 @@ namespace zn
         typedef signed long long int64;
         typedef unsigned long long uint64;
 #   endif
-
-    struct iVec2 {
-        int x;
-        int y;
-        iVec2( int x, int y ) : x( x ), y( y )
-        {}
-        iVec2()
-        { x = 0; y = 0; }
-    };
 }
+
+#include "..\Geometry\Vec2.h"

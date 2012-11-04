@@ -9,9 +9,9 @@ int main()
     Game game;
 
 #   ifdef _DEBUG
-    game.Init( "ZN Test Game", iVec2( 800, 600 ), WndStyle::Window );
+    game.Init( "ZN Test Game", uint16Vec2( 800, 600 ), WindowStyle::Window );
 #   else
-    game.Init( "ZN Test Game", iVec2( 800, 600 ), WndStyle::Fullscreen );
+    game.Init( "ZN Test Game", uint16Vec2( 800, 600 ), WindowStyle::Fullscreen );
 #   endif
 
     game.Run();

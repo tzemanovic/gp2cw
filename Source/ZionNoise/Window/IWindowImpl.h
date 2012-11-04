@@ -5,7 +5,6 @@
 
 #include "..\Utilities\INoCopy.h"
 #include "Message.h"
-#include <queue>
 
 namespace zn
 {
@@ -19,19 +18,19 @@ namespace zn
         static IWindowImpl* InstancePtr();
 
         // pop message from the message queue
-        bool PopMessage( Message& );
+        const bool PopMessage( Message& message );
         
         // initialize window
-        virtual bool Init( const string&, const iVec2&, const uint8 ) = 0;
+        virtual const bool VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle ) = 0;
         // set window visibility
-        virtual void SetVisible( const bool ) = 0;
+        virtual void VSetVisible( const bool visible ) = 0;
         // set cursor visibility
-        virtual void SetMouseCursorVisible( const bool ) = 0;
+        virtual void VSetMouseCursorVisible( const bool visible ) = 0;
         // process window messages
-        virtual void ProcessMessages() = 0;
+        virtual void VProcessMessages() = 0;
 
-        // is window fullscreen?
-        bool IsFullscreen() { return m_isFullscreen; }
+        // accessors
+        const bool IsFullscreen() const { return m_isFullscreen; }
 
     protected:
         queue<Message> m_messages;

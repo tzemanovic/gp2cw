@@ -36,14 +36,14 @@ namespace zn
         return g_pWindow->WndProc( handle, message, wParam, lParam );
     }
 
-    bool WindowImplWin32::Init( const string& title, const iVec2& windowSize, const uint8 windowStyle )
+    const bool WindowImplWin32::VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
     {
         // covert title string to wstring
         wstring wTitle;
         wTitle.assign( title.begin(), title.end() );
 
         // window class details
-        WNDCLASSEX windowClass;
+        WNDCLASSEX windowClass = { 0 };
         windowClass.cbSize = sizeof( WNDCLASSEX );
         windowClass.style = CS_VREDRAW | CS_HREDRAW;
         windowClass.lpfnWndProc = &WindowImplWin32::StaticWndProc;
@@ -114,7 +114,7 @@ namespace zn
 	    return 0;
     }
 
-    void WindowImplWin32::SwitchToFullscreen( const iVec2& windowSize )
+    void WindowImplWin32::SwitchToFullscreen( const uint16Vec2& windowSize )
     {
         // set display settings
         DEVMODE devMode;
@@ -134,13 +134,13 @@ namespace zn
         // set window size, position and z-order
         SetWindowPos( m_wndHandle, HWND_TOP, 0, 0, windowSize.x, windowSize.y, SWP_FRAMECHANGED );
         // show the window
-        SetVisible( true );
+        VSetVisible( true );
     }
 
     void WindowImplWin32::WindowDestroyed()
     {
         // show cursor in case it was hidden
-        SetMouseCursorVisible( true );
+        VSetMouseCursorVisible( true );
         if( g_pWindow )
         {
             // reset display settings
@@ -149,13 +149,13 @@ namespace zn
         }
     }
 
-    void WindowImplWin32::SetVisible( const bool visible )
+    void WindowImplWin32::VSetVisible( const bool visible )
     {
         // show window
         ShowWindow( m_wndHandle, visible ? SW_SHOW : SW_HIDE );
     }
 
-    void WindowImplWin32::SetMouseCursorVisible( const bool visible )
+    void WindowImplWin32::VSetMouseCursorVisible( const bool visible )
     {
         if( visible )
         {
@@ -172,7 +172,7 @@ namespace zn
         }
     }
 
-    void WindowImplWin32::ProcessMessages()
+    void WindowImplWin32::VProcessMessages()
     {
         // process window messages
         MSG message;

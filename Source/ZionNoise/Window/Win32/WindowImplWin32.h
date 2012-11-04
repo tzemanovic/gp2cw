@@ -20,18 +20,18 @@ namespace zn
         // window's proc function
         LRESULT CALLBACK WndProc( HWND, UINT, WPARAM, LPARAM );
         // switch window to fullscreen mode
-        void SwitchToFullscreen( const iVec2& );
+        void SwitchToFullscreen( const uint16Vec2& );
         // call when window is destroyed
         void WindowDestroyed();
         
         // initialize window
-        virtual bool Init( const string&, const iVec2&, const uint8 );
+        virtual const bool VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
         // set window visibility
-        virtual void SetVisible( const bool );
+        virtual void VSetVisible( const bool visible );
         // set cursor visibility
-        virtual void SetMouseCursorVisible( const bool );
+        virtual void VSetMouseCursorVisible( const bool visible );
         // process window messages
-        virtual void ProcessMessages();
+        virtual void VProcessMessages();
 
         // accessors
         HWND GetWndHandle() { return m_wndHandle; }

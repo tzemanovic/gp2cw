@@ -12,7 +12,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Game\Game.h" />
-    <ClInclude Include="..\Graphics\D3D\10\RenderImplD3D10.h" />
+    <ClInclude Include="..\Geometry\Vec2.h" />
+    <ClInclude Include="..\Graphics\D3D10\RendererImplD3D10.h" />
+    <ClInclude Include="..\Graphics\D3D11\RendererImplD3D11.h" />
     <ClInclude Include="..\Graphics\IRendererImpl.h" />
     <ClInclude Include="..\Graphics\RendererType.h" />
     <ClInclude Include="..\Graphics\Renderer.h" />
@@ -27,8 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Game\Game.cpp" />
-    <ClInclude Include="..\Graphics\D3D\10\RenderImplD3D10.cpp" />
-    <ClInclude Include="..\Graphics\Renderer.cpp" />
+    <ClCompile Include="..\Graphics\D3D10\RendererImplD3D10.cpp" />
+    <ClCompile Include="..\Graphics\D3D11\RendererImplD3D11.cpp" />
+    <ClCompile Include="..\Graphics\Renderer.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
     <ClCompile Include="..\Window\IWindowImpl.cpp" />
     <ClCompile Include="..\Window\Win32\WindowImplWin32.cpp" />
@@ -89,7 +92,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>d3d10.lib;d3dx10.lib;XInput.lib;fbxsdk-2013.3d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +113,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>d3d10.lib;d3dx10.lib;XInput.lib;fbxsdk-2013.3d.lib;</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

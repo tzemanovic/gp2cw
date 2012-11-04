@@ -6,9 +6,9 @@
 #include "IWindowImpl.h"
 
 // decide which implementation is required
-#ifdef ZN_SYSTEM_WINDOWS
+#ifdef ZN_PLATFORM_WIN32
 #   include "Win32\WindowImplWin32.h"
-    typedef zn::WindowImplWin32 WindowSystemImpl;
+    typedef zn::WindowImplWin32 WindowPlatformImpl;
 #endif
 
 namespace zn
@@ -25,15 +25,15 @@ namespace zn
 
     IWindowImpl* IWindowImpl::InstancePtr()
     {
-        return ZN_NEW WindowSystemImpl();
+        return ZN_NEW WindowPlatformImpl();
     }
 
-    bool IWindowImpl::PopMessage( Message& message )
+    const bool IWindowImpl::PopMessage( Message& message )
     {
         // if there are no messages in the queue, check for new ones
         if( m_messages.empty() )
         {
-            ProcessMessages();
+            VProcessMessages();
         }
         // if there are messages, pop a next message
         if( !m_messages.empty() )

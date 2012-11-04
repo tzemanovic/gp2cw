@@ -11,32 +11,38 @@
     <ClInclude Include="..\Main\ZionNoise.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\Window\WndImpl.h">
-      <Filter>Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Window\Win32\WndImplWin32.h">
-      <Filter>Window\Win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Window\WndStyle.h">
-      <Filter>Window</Filter>
-    </ClInclude>
     <ClInclude Include="..\Window\Message.h">
       <Filter>Window</Filter>
     </ClInclude>
     <ClInclude Include="..\Game\Game.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics\IRender.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\Graphics\Renderer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics\D3D\IRenderD3D.h">
-      <Filter>Graphics\D3D</Filter>
+    <ClInclude Include="..\Window\IWindowImpl.h">
+      <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics\D3D\10\RenderD3D10.h">
-      <Filter>Graphics\D3D\10</Filter>
+    <ClInclude Include="..\Window\Win32\WindowImplWin32.h">
+      <Filter>Window\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Window\WindowStyle.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\IRendererImpl.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\RendererType.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\D3D10\RendererImplD3D10.h">
+      <Filter>Graphics\D3D10</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\D3D11\RendererImplD3D11.h">
+      <Filter>Graphics\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Vec2.h">
+      <Filter>Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,14 +53,23 @@
     <ClCompile Include="..\Window\Window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\Window\WndImpl.cpp">
-      <Filter>Window</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Window\Win32\WndImplWin32.cpp">
-      <Filter>Window\Win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\Game\Game.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Window\IWindowImpl.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Window\Win32\WindowImplWin32.cpp">
+      <Filter>Window\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\D3D10\RendererImplD3D10.cpp">
+      <Filter>Graphics\D3D10</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\D3D11\RendererImplD3D11.cpp">
+      <Filter>Graphics\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Renderer.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,11 +91,14 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{98e03a74-8cbc-4d49-b779-d67f9a2ccb6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\D3D">
+    <Filter Include="Graphics\D3D10">
       <UniqueIdentifier>{e529ce6d-44b7-4ecd-8ab4-616f62c81632}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\D3D\10">
-      <UniqueIdentifier>{b5a580e5-1292-4e56-bf13-25d53ea3b14d}</UniqueIdentifier>
+    <Filter Include="Graphics\D3D11">
+      <UniqueIdentifier>{45d29262-6140-4d41-be30-174c9fa0ef77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{e94ba004-2aa8-44ee-85e6-e9eb03af9858}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

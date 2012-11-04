@@ -17,19 +17,22 @@ namespace zn
         ~Window();
 
         // open window
-        bool Open( const string&, const iVec2&, const uint8 = WindowStyle::Default );
+        const bool Open( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
         // close window
         void Close();
         // is window open
-        bool IsOpen() const;
+        const bool IsOpen() const;
         // set window visibility
-        void SetVisible( const bool );
+        void SetVisible( const bool visible );
         // set cursor visibility
-        void SetMouseCursorVisible( const bool );
+        void SetMouseCursorVisible( const bool visible );
         // poll a message
-        bool PollMessage( Message& );
+        const bool PollMessage( Message& message );
         // is window fullscreen
-        bool IsFullscreen();
+        const bool IsFullscreen() const;
+
+        // accessors
+        IWindowImpl* GetWindowImpl() const { return m_pWindowImpl; }
 
     private:
         // window implementation

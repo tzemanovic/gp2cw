@@ -18,14 +18,14 @@ namespace zn
         Close();
     }
 
-    bool Window::Open( const string& title, const iVec2& windowSize, const uint8 windowStyle )
+    const bool Window::Open( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
     {
         // close window in case it is already opened
         Close();
         // instatiate window implementation
         m_pWindowImpl = IWindowImpl::InstancePtr();
         // initialize window
-        if( !m_pWindowImpl->Init( title, windowSize, windowStyle ) )
+        if( !m_pWindowImpl->VInit( title, windowSize, windowStyle ) )
             return false;
         SetVisible( true );
         SetMouseCursorVisible( true );
@@ -38,7 +38,7 @@ namespace zn
         ZN_SAFE_DELETE( m_pWindowImpl );
     }
 
-    bool Window::IsOpen() const
+    const bool Window::IsOpen() const
     {
         return m_pWindowImpl != NULL;
     }
@@ -46,16 +46,16 @@ namespace zn
     void Window::SetVisible( const bool visible )
     {
         if( m_pWindowImpl )
-            m_pWindowImpl->SetVisible( visible );
+            m_pWindowImpl->VSetVisible( visible );
     }
 
     void Window::SetMouseCursorVisible( const bool visible )
     {
         if( m_pWindowImpl )
-            m_pWindowImpl->SetMouseCursorVisible( visible );
+            m_pWindowImpl->VSetMouseCursorVisible( visible );
     }
 
-    bool Window::PollMessage( Message& message )
+    const bool Window::PollMessage( Message& message )
     {
         // if there is a message, pop it
         if ( m_pWindowImpl && m_pWindowImpl->PopMessage( message ) )
@@ -63,7 +63,7 @@ namespace zn
         return false;
     }
 
-    bool Window::IsFullscreen()
+    const bool Window::IsFullscreen() const
     {
         if( m_pWindowImpl )
             return m_pWindowImpl->IsFullscreen();
