@@ -18,6 +18,13 @@ namespace zn
         
         // initialize renderer
         const bool Init( const uint8 rendererType, const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl );
+        // pre-render
+        void PreRender();
+        // post-render
+        void PostRender();
+        // show rendered image from back buffer
+        void Present();
+
     private:
         //renderer implementation
         IRendererImpl* m_pRendererImpl;

@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Game\Game.h" />
+    <ClInclude Include="..\Game\GameLogic.h" />
     <ClInclude Include="..\Geometry\Vec2.h" />
     <ClInclude Include="..\Graphics\D3D10\RendererImplD3D10.h" />
     <ClInclude Include="..\Graphics\D3D11\RendererImplD3D11.h" />
@@ -19,7 +20,12 @@
     <ClInclude Include="..\Graphics\RendererType.h" />
     <ClInclude Include="..\Graphics\Renderer.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
+    <ClInclude Include="..\UserInterface\ViewHuman.h" />
     <ClInclude Include="..\Utilities\INoCopy.h" />
+    <ClInclude Include="..\Utilities\ITimerImpl.h" />
+    <ClInclude Include="..\Utilities\IView.h" />
+    <ClInclude Include="..\Utilities\Timer.h" />
+    <ClInclude Include="..\Utilities\Win32\TimerImplWin32.h" />
     <ClInclude Include="..\Window\Message.h" />
     <ClInclude Include="..\Window\IWindowImpl.h" />
     <ClInclude Include="..\Window\Win32\WindowImplWin32.h" />
@@ -29,10 +35,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Game\Game.cpp" />
+    <ClCompile Include="..\Game\GameLogic.cpp" />
     <ClCompile Include="..\Graphics\D3D10\RendererImplD3D10.cpp" />
     <ClCompile Include="..\Graphics\D3D11\RendererImplD3D11.cpp" />
     <ClCompile Include="..\Graphics\Renderer.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
+    <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
+    <ClCompile Include="..\Utilities\ITimerImpl.cpp" />
+    <ClCompile Include="..\Utilities\Timer.cpp" />
+    <ClCompile Include="..\Utilities\Win32\TimerImplWin32.cpp" />
     <ClCompile Include="..\Window\IWindowImpl.cpp" />
     <ClCompile Include="..\Window\Win32\WindowImplWin32.cpp" />
     <ClCompile Include="..\Window\Window.cpp" />

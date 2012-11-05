@@ -6,8 +6,11 @@
 #include <stdlib.h>
 #include <string>
 #include <queue>
+#include <list>
+#include <map>
 
 using namespace std;
+using std::tr1::shared_ptr;
 
 #if defined( _WIN32 ) || defined( __WIN32__ )
     // Windows
@@ -60,6 +63,10 @@ namespace zn
         typedef signed long long int64;
         typedef unsigned long long uint64;
 #   endif
+
+    typedef uint32 GameObjectId;
 }
 
 #include "..\Geometry\Vec2.h"
+
+#include "..\Game\Game.h"

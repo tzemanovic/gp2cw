@@ -25,13 +25,13 @@ namespace zn
         void WindowDestroyed();
         
         // initialize window
-        virtual const bool VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
+        const bool VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
         // set window visibility
-        virtual void VSetVisible( const bool visible );
+        void VSetVisible( const bool visible );
         // set cursor visibility
-        virtual void VSetMouseCursorVisible( const bool visible );
+        void VSetMouseCursorVisible( const bool visible );
         // process window messages
-        virtual void VProcessMessages();
+        void VProcessMessages();
 
         // accessors
         HWND GetWndHandle() { return m_wndHandle; }

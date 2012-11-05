@@ -5,3 +5,4 @@
 
 #include "..\Msvc\ZionNoiseStd.h"
 #include "..\Game\Game.h"
+#include "..\UserInterface\ViewHuman.h"

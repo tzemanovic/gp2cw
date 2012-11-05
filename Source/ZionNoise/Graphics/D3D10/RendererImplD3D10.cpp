@@ -22,4 +22,19 @@ namespace zn
         // not implemented yet
         return false;
     }
+
+    void RendererImplD3D10::VPreRender()
+    {
+
+    }
+
+    void RendererImplD3D10::VPostRender()
+    {
+
+    }
+
+    void RendererImplD3D10::VPresent()
+    {
+
+    }
 }

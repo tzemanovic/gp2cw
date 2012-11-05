@@ -17,6 +17,7 @@ namespace zn
 
     RendererImplD3D11::~RendererImplD3D11()
     {
+        m_pSwapChain->SetFullscreenState( false, NULL );
         ZN_SAFE_RELEASE( m_pDepthStencilTexture );
         ZN_SAFE_RELEASE( m_pDepthStencilView );
         ZN_SAFE_RELEASE( m_pRenderTargetView );
@@ -56,6 +57,7 @@ namespace zn
         swapChainDesc.Windowed = !isFullscreen;
         swapChainDesc.SampleDesc.Count = 1;
         swapChainDesc.SampleDesc.Quality = 0;
+        swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 
         // device creation flags
         uint32 creationFlags = 0;
@@ -77,6 +79,9 @@ namespace zn
                 break;
             }
         }
+        /*result = D3D11CreateDeviceAndSwapChain( 0, D3D_DRIVER_TYPE_HARDWARE, 0, NULL, NULL, 
+                NULL, D3D11_SDK_VERSION, &swapChainDesc, &m_pSwapChain, &m_pDevice, &m_featureLevel,
+                &m_pDeviceContext );*/
         if( FAILED( result ) )
         {
             DXTRACE_MSG( L"Failed to create the Direct3D device!" );
@@ -144,5 +149,25 @@ namespace zn
         m_pDeviceContext->RSSetViewports( 1, &viewport );
         
         return true;
+    }
+
+    void RendererImplD3D11::VPreRender()
+    {
+        // clear the render target and depth stencil
+        // can be commented out once we render skybox
+        float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; 
+        m_pDeviceContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
+	    m_pDeviceContext->ClearDepthStencilView( m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0 );
+    }
+
+    void RendererImplD3D11::VPostRender()
+    {
+
+    }
+
+    void RendererImplD3D11::VPresent()
+    {
+        // flip the swap chain
+        m_pSwapChain->Present( 0, 0 );
     }
 }

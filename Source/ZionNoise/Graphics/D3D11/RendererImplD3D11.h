@@ -14,7 +14,13 @@ namespace zn
         ~RendererImplD3D11();
         
         // initialize renderer
-        virtual bool VInit( const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl );
+        bool VInit( const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl );
+        // pre-render
+        void VPreRender();
+        // post-render
+        void VPostRender();
+        // show rendered image from back buffer
+        void VPresent();
 
     private:
         HWND m_hWnd;

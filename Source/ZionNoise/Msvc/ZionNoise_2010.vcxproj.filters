@@ -44,6 +44,24 @@
     <ClInclude Include="..\Geometry\Vec2.h">
       <Filter>Geometry</Filter>
     </ClInclude>
+    <ClInclude Include="..\Utilities\IView.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\ViewHuman.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Game\GameLogic.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\Timer.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\Win32\TimerImplWin32.h">
+      <Filter>Utilities\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\ITimerImpl.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -70,6 +88,21 @@
     </ClCompile>
     <ClCompile Include="..\Graphics\Renderer.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UserInterface\ViewHuman.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Game\GameLogic.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\Win32\TimerImplWin32.cpp">
+      <Filter>Utilities\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\Timer.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Utilities\ITimerImpl.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +132,12 @@
     </Filter>
     <Filter Include="Geometry">
       <UniqueIdentifier>{e94ba004-2aa8-44ee-85e6-e9eb03af9858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{e53087a4-d215-4bd5-b702-ca1c3a365790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities\Win32">
+      <UniqueIdentifier>{c71dabdb-16fd-48cd-8d97-1e26680757be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

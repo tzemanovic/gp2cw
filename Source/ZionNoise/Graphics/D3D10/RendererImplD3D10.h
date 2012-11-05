@@ -15,8 +15,16 @@ namespace zn
         
         // initialize renderer
         virtual bool VInit( const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl );
+        // pre-render
+        void VPreRender();
+        // post-render
+        void VPostRender();
+        // show rendered image from back buffer
+        void VPresent();
 
     private:
+        HWND m_hWnd;
+
         ID3D10Device* m_pD3DDevice;
 	    IDXGISwapChain* m_pSwapChain;
 	    ID3D10RenderTargetView* m_pRenderTargetView;

@@ -46,4 +46,19 @@ namespace zn
         }
         return false;
     }
+
+    void Renderer::PreRender()
+    {
+        m_pRendererImpl->VPreRender();
+    }
+
+    void Renderer::PostRender()
+    {
+        m_pRendererImpl->VPostRender();
+    }
+
+    void Renderer::Present()
+    {
+        m_pRendererImpl->VPresent();
+    }
 }

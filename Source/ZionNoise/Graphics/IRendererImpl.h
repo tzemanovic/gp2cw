@@ -17,6 +17,12 @@ namespace zn
 
         // initialize renderer
         virtual bool VInit( const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl ) = 0;
+        // pre-render
+        virtual void VPreRender() = 0;
+        // post-render
+        virtual void VPostRender() = 0;
+        // show rendered image from back buffer
+        virtual void VPresent() = 0;
         
     protected:
         // renderer type
