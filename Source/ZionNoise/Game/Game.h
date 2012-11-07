@@ -21,7 +21,7 @@ namespace zn
         ~Game();
         
         // initialize game
-        bool Init( const string& title, const uint16Vec2& windowSize = uint16Vec2( 800, 600 ), const uint8 windowStyle = WindowStyle::Default );
+        bool Init( const string& title, const uint16Vec2& windowSize = uint16Vec2( 800, 600 ), const WindowStyleType windowStyle = WindowStyle::Default );
         // run game loop
         void Run();
         // add view
@@ -32,7 +32,7 @@ namespace zn
 
     private:
         // initalize window
-        bool InitWindow( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
+        bool InitWindow( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle );
         // initialize graphics
         bool InitGraphics( const uint16Vec2& windowSize, const uint8 rendererType = RendererType::Default );
         // render

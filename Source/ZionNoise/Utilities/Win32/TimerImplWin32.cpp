@@ -37,7 +37,7 @@ namespace zn
         }
         else
         {
-            m_FPS = static_cast<uint16>( 1000 * FPS_UPDATE / m_framesTimeMs );
+            m_FPS = static_cast< uint16 >( 1000 * FPS_UPDATE / m_framesTimeMs );
             m_framesTimeMs = 0;
             m_FPSFrame = 0;
         }
@@ -71,10 +71,5 @@ namespace zn
         SetThreadAffinityMask( currentThread, previousMask );
 
         return double( 1000 * time.QuadPart / frequency.QuadPart );
-    }
-    
-    const uint16 TimerImplWin32::VGetFPS() const
-    {
-        return m_FPS;
     }
 }

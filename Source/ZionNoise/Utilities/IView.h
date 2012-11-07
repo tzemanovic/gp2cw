@@ -6,6 +6,8 @@
 namespace zn
 {
     typedef uint32 ViewId;
+
+    class Message;
     class IView
     {
     public:
@@ -17,8 +19,9 @@ namespace zn
             m_owner = gameObjectId;
         }
 
-        virtual void VRender( float deltaMs ) = 0;
-        virtual void VUpdate( float deltaMs ) = 0;
+        virtual void VRender( const float deltaMs ) = 0;
+        virtual void VUpdate( const float deltaMs ) = 0;
+        virtual const bool VProcessMessage( const Message& message ) = 0;
 
     protected:
         ViewId m_viewId;

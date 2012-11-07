@@ -21,7 +21,7 @@ namespace zn
         const bool PopMessage( Message& message );
         
         // initialize window
-        virtual const bool VInit( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle ) = 0;
+        virtual const bool VInit( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle ) = 0;
         // set window visibility
         virtual void VSetVisible( const bool visible ) = 0;
         // set cursor visibility

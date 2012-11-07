@@ -62,6 +62,9 @@
     <ClInclude Include="..\Utilities\ITimerImpl.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="..\Window\InputDevices.h">
+      <Filter>Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />

@@ -5,6 +5,7 @@
 
 namespace zn
 {
+    typedef uint8 WindowStyleType; 
     namespace WindowStyle
     {
         enum

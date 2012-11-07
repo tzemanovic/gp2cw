@@ -18,7 +18,7 @@ namespace zn
         Close();
     }
 
-    const bool Window::Open( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
+    const bool Window::Open( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle )
     {
         // close window in case it is already opened
         Close();

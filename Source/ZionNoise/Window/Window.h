@@ -17,7 +17,7 @@ namespace zn
         ~Window();
 
         // open window
-        const bool Open( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle );
+        const bool Open( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle );
         // close window
         void Close();
         // is window open

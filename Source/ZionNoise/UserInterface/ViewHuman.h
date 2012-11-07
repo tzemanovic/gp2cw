@@ -13,7 +13,8 @@ namespace zn
         ViewHuman();
         ~ViewHuman();
 
-        void VRender( float deltaMs );
-        void VUpdate( float deltaMs );
+        virtual void VRender( const float deltaMs );
+        virtual void VUpdate( const float deltaMs );
+        virtual const bool VProcessMessage( const Message& message );
     };
 }

@@ -17,7 +17,7 @@ namespace zn
 
     }
 
-    void ViewHuman::VRender( float deltaMs )
+    void ViewHuman::VRender( const float deltaMs )
     {
         g_pGame->GetRenderer()->PreRender();
 
@@ -25,8 +25,13 @@ namespace zn
         g_pGame->GetRenderer()->Present();
     }
 
-    void ViewHuman::VUpdate( float deltaMs )
+    void ViewHuman::VUpdate( const float deltaMs )
     {
 
+    }
+    
+    const bool ViewHuman::VProcessMessage( const Message& message )
+    {
+        return false;
     }
 }

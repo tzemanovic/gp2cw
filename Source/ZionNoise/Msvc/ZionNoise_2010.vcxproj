@@ -26,6 +26,7 @@
     <ClInclude Include="..\Utilities\IView.h" />
     <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\Win32\TimerImplWin32.h" />
+    <ClInclude Include="..\Window\InputDevices.h" />
     <ClInclude Include="..\Window\Message.h" />
     <ClInclude Include="..\Window\IWindowImpl.h" />
     <ClInclude Include="..\Window\Win32\WindowImplWin32.h" />

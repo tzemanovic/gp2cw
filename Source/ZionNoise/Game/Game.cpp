@@ -26,7 +26,7 @@ namespace zn
         ZN_SAFE_DELETE( m_pWindow );
     }
 
-    bool Game::Init( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
+    bool Game::Init( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle )
     {
         if( !InitWindow( title, windowSize, windowStyle ) )
             return false;
@@ -48,7 +48,24 @@ namespace zn
             while( m_pWindow->PollMessage( msg ) )
             {
                 if( msg == Message::Close )
+                {
                     m_pWindow->Close();
+                }
+                // message from keyboard or mouse
+                else if( msg == Message::KeyDown || msg == Message::KeyUp ||
+                    msg == Message::MouseButtonDown || msg == Message::MouseButtonUp || 
+                    msg == Message::MouseMove || msg == Message::MouseWheel )
+                {
+                    // send message to the views to process
+                    for( ViewList::reverse_iterator i = m_pGameLogic->m_viewList.rbegin(), 
+                        end = m_pGameLogic->m_viewList.rend(); i != end; ++i )
+                    {
+                        if( ( *i )->VProcessMessage( msg ) )
+                        {
+                            break;
+                        }
+                    }
+                }
             }
             // update timer
             float deltaMs = m_pTimer->Update();
@@ -62,7 +79,7 @@ namespace zn
         m_pGameLogic->AddView( pView, gameObjectId );
     }
 
-    bool Game::InitWindow( const string& title, const uint16Vec2& windowSize, const uint8 windowStyle )
+    bool Game::InitWindow( const string& title, const uint16Vec2& windowSize, const WindowStyleType windowStyle )
     {
         m_pWindow = ZN_NEW Window();
         return m_pWindow->Open( title, windowSize, windowStyle );
