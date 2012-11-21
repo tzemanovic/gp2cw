@@ -6,8 +6,9 @@
 namespace zn
 {
     typedef uint32 ViewId;
-
     class Message;
+    class SceneNode;
+
     class IView
     {
     public:
@@ -22,6 +23,7 @@ namespace zn
         virtual void VRender( const float deltaMs ) = 0;
         virtual void VUpdate( const float deltaMs ) = 0;
         virtual const bool VProcessMessage( const Message& message ) = 0;
+        virtual void VAddSceneNode( shared_ptr< SceneNode > pSceneNode ) = 0;
 
     protected:
         ViewId m_viewId;

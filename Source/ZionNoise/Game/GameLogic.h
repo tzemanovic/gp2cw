@@ -7,8 +7,10 @@
 
 namespace zn
 {
+    class GameObject;
+
     typedef list< shared_ptr< IView > > ViewList;
-    //typedef map< GameObjectId, shared_ptr< GameObject > > GameObjectMap;
+    typedef map< GameObjectId, shared_ptr< GameObject > > GameObjectMap;
 
     class GameLogic
     {
@@ -20,8 +22,11 @@ namespace zn
         // add view
         void AddView( shared_ptr< IView > pView, GameObjectId gameObjectId );
 
-    private:
+        shared_ptr< GameObject > GetGameObject( GameObjectId id );
+        void AddGameObject( shared_ptr< GameObject > pGameObject );
+
+    protected:
         ViewList m_viewList;
-        //GameObjectMap m_gameObjectMap;
+        GameObjectMap m_gameObjectMap;
     };
 }

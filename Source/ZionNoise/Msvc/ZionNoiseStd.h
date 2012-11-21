@@ -8,9 +8,21 @@
 #include <queue>
 #include <list>
 #include <map>
+#include <vector>
+#include <math.h>
 
 using namespace std;
 using std::tr1::shared_ptr;
+using std::tr1::weak_ptr;
+
+template< class T >
+shared_ptr< T > MakeStrongPtr( weak_ptr< T > pWeakPtr )
+{
+    if ( !pWeakPtr.expired() )
+        return shared_ptr< T >( pWeakPtr );
+    else
+        return shared_ptr< T >();
+}
 
 #if defined( _WIN32 ) || defined( __WIN32__ )
     // Windows
@@ -28,8 +40,9 @@ using std::tr1::shared_ptr;
 #endif
 
 // redefine new for debugging purposes
-#if defined( _DEBUG )
+#if defined( _DEBUG ) || defined( DEBUG )
 #	define ZN_NEW new( _NORMAL_BLOCK, __FILE__, __LINE__ )
+#   define ZN_DEBUG
 #else
 #	define ZN_NEW new
 #endif
@@ -65,8 +78,31 @@ namespace zn
 #   endif
 
     typedef uint32 GameObjectId;
+    typedef uint32 Index;
+
+    template< class T >
+    struct SortBy_SharedPtr_Content
+    {
+        bool operator()( const shared_ptr< T > &ptr1, const shared_ptr< T > &ptr2 ) const
+        {
+            return *ptr1 < *ptr2;
+        }
+    };
+
+    extern const GameObjectId NO_GAME_OBJECT_ID;
+    extern const float ZN_PI;
+    extern const float ZN_2PI;
 }
 
 #include "..\Geometry\Vec2.h"
+#include "..\Geometry\Vec3.h"
+#include "..\Geometry\Vec4.h"
+#include "..\Geometry\Mat4x4.h"
+#include "..\Geometry\Quaternion.h"
+#include "..\Geometry\Vertex.h"
+#include "..\Geometry\Color.h"
+#include "..\Geometry\Vertex.h"
+#include "..\Geometry\Frustum.h"
+#include "..\Geometry\Plane.h"
 
 #include "..\Game\Game.h"

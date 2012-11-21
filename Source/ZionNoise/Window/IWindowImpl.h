@@ -31,9 +31,11 @@ namespace zn
 
         // accessors
         const bool IsFullscreen() const { return m_isFullscreen; }
+        const uint16Vec2& GetWindowSize() { return m_windowSize; }
 
     protected:
         queue<Message> m_messages;
         bool m_isFullscreen;
+        uint16Vec2 m_windowSize;
     };
 }

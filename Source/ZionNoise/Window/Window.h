@@ -30,6 +30,7 @@ namespace zn
         const bool PollMessage( Message& message );
         // is window fullscreen
         const bool IsFullscreen() const;
+        const uint16Vec2& GetWindowSize() const;
 
         // accessors
         IWindowImpl* GetWindowImpl() const { return m_pWindowImpl; }

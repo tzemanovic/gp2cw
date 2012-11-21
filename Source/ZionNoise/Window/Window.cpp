@@ -69,4 +69,9 @@ namespace zn
             return m_pWindowImpl->IsFullscreen();
         return false;
     }
+    
+    const uint16Vec2& Window::GetWindowSize() const
+    { 
+        return m_pWindowImpl->GetWindowSize(); 
+    }
 }

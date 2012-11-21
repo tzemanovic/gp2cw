@@ -35,9 +35,6 @@
     <ClInclude Include="..\Graphics\RendererType.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\Graphics\D3D10\RendererImplD3D10.h">
-      <Filter>Graphics\D3D10</Filter>
-    </ClInclude>
     <ClInclude Include="..\Graphics\D3D11\RendererImplD3D11.h">
       <Filter>Graphics\D3D11</Filter>
     </ClInclude>
@@ -65,6 +62,90 @@
     <ClInclude Include="..\Window\InputDevices.h">
       <Filter>Window</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameObject\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\GameObjectComponentType.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\TransformComponent.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Vec3.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Quaternion.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Mat4x4.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Render\RenderComponent.h">
+      <Filter>GameObject\Component\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Render\MeshComponent.h">
+      <Filter>GameObject\Component\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Vertex.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Color.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\MeshGeometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\Scene.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\SceneNode.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\ModelLoader.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\IScreenElement.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\ScreenElementScene.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\CameraNode.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Plane.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Frustum.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Vec4.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\IMeshMaterial.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\D3D11\MeshMaterialD3D11.h">
+      <Filter>Graphics\D3D11</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\Device.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\DeviceContext.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\RootSceneNode.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\VertexBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\IndexBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -82,9 +163,6 @@
     </ClCompile>
     <ClCompile Include="..\Window\Win32\WindowImplWin32.cpp">
       <Filter>Window\Win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\D3D10\RendererImplD3D10.cpp">
-      <Filter>Graphics\D3D10</Filter>
     </ClCompile>
     <ClCompile Include="..\Graphics\D3D11\RendererImplD3D11.cpp">
       <Filter>Graphics\D3D11</Filter>
@@ -107,6 +185,57 @@
     <ClCompile Include="..\Utilities\ITimerImpl.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameObject\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\TransformComponent.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Render\RenderComponent.cpp">
+      <Filter>GameObject\Component\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Render\MeshComponent.cpp">
+      <Filter>GameObject\Component\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\MeshGeometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Scene.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\SceneNode.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\ModelLoader.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\CameraNode.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Vec4.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Frustum.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Plane.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\IMeshMaterial.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\D3D11\MeshMaterialD3D11.cpp">
+      <Filter>Graphics\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\RootSceneNode.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Mat4x4.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Vec3.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -127,9 +256,6 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{98e03a74-8cbc-4d49-b779-d67f9a2ccb6e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\D3D10">
-      <UniqueIdentifier>{e529ce6d-44b7-4ecd-8ab4-616f62c81632}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\D3D11">
       <UniqueIdentifier>{45d29262-6140-4d41-be30-174c9fa0ef77}</UniqueIdentifier>
     </Filter>
@@ -141,6 +267,15 @@
     </Filter>
     <Filter Include="Utilities\Win32">
       <UniqueIdentifier>{c71dabdb-16fd-48cd-8d97-1e26680757be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{6a5ddf7e-0ac2-4c72-8a12-69dce1449d8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component">
+      <UniqueIdentifier>{a7147d2a-b8f6-42a4-8529-efbd0dd3659b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Render">
+      <UniqueIdentifier>{98ea0423-a88f-4a02-835d-dba45e0f00dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

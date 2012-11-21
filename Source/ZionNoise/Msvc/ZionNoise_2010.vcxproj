@@ -11,15 +11,42 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\GameObject\Component\GameObjectComponentType.h" />
+    <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Render\MeshComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Render\RenderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\TransformComponent.h" />
+    <ClInclude Include="..\GameObject\GameObject.h" />
     <ClInclude Include="..\Game\Game.h" />
     <ClInclude Include="..\Game\GameLogic.h" />
+    <ClInclude Include="..\Geometry\Color.h" />
+    <ClInclude Include="..\Geometry\Frustum.h" />
+    <ClInclude Include="..\Geometry\Mat4x4.h" />
+    <ClInclude Include="..\Geometry\MeshGeometry.h" />
+    <ClInclude Include="..\Geometry\ModelLoader.h" />
+    <ClInclude Include="..\Geometry\Plane.h" />
+    <ClInclude Include="..\Geometry\Quaternion.h" />
     <ClInclude Include="..\Geometry\Vec2.h" />
-    <ClInclude Include="..\Graphics\D3D10\RendererImplD3D10.h" />
+    <ClInclude Include="..\Geometry\Vec3.h" />
+    <ClInclude Include="..\Geometry\Vec4.h" />
+    <ClInclude Include="..\Geometry\Vertex.h" />
+    <ClInclude Include="..\Graphics\CameraNode.h" />
+    <ClInclude Include="..\Graphics\D3D11\MeshMaterialD3D11.h" />
     <ClInclude Include="..\Graphics\D3D11\RendererImplD3D11.h" />
+    <ClInclude Include="..\Graphics\Device.h" />
+    <ClInclude Include="..\Graphics\DeviceContext.h" />
+    <ClInclude Include="..\Graphics\IndexBuffer.h" />
+    <ClInclude Include="..\Graphics\IMeshMaterial.h" />
     <ClInclude Include="..\Graphics\IRendererImpl.h" />
+    <ClInclude Include="..\Graphics\IScreenElement.h" />
+    <ClInclude Include="..\Graphics\VertexBuffer.h" />
     <ClInclude Include="..\Graphics\RendererType.h" />
     <ClInclude Include="..\Graphics\Renderer.h" />
+    <ClInclude Include="..\Graphics\RootSceneNode.h" />
+    <ClInclude Include="..\Graphics\Scene.h" />
+    <ClInclude Include="..\Graphics\SceneNode.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
+    <ClInclude Include="..\UserInterface\ScreenElementScene.h" />
     <ClInclude Include="..\UserInterface\ViewHuman.h" />
     <ClInclude Include="..\Utilities\INoCopy.h" />
     <ClInclude Include="..\Utilities\ITimerImpl.h" />
@@ -35,11 +62,27 @@
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GameObject\Component\Render\MeshComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Render\RenderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\TransformComponent.cpp" />
+    <ClCompile Include="..\GameObject\GameObject.cpp" />
     <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Game\GameLogic.cpp" />
-    <ClCompile Include="..\Graphics\D3D10\RendererImplD3D10.cpp" />
+    <ClCompile Include="..\Geometry\Frustum.cpp" />
+    <ClCompile Include="..\Geometry\Mat4x4.cpp" />
+    <ClCompile Include="..\Geometry\MeshGeometry.cpp" />
+    <ClCompile Include="..\Geometry\ModelLoader.cpp" />
+    <ClCompile Include="..\Geometry\Plane.cpp" />
+    <ClCompile Include="..\Geometry\Vec3.cpp" />
+    <ClCompile Include="..\Geometry\Vec4.cpp" />
+    <ClCompile Include="..\Graphics\CameraNode.cpp" />
+    <ClCompile Include="..\Graphics\D3D11\MeshMaterialD3D11.cpp" />
     <ClCompile Include="..\Graphics\D3D11\RendererImplD3D11.cpp" />
+    <ClCompile Include="..\Graphics\IMeshMaterial.cpp" />
     <ClCompile Include="..\Graphics\Renderer.cpp" />
+    <ClCompile Include="..\Graphics\RootSceneNode.cpp" />
+    <ClCompile Include="..\Graphics\Scene.cpp" />
+    <ClCompile Include="..\Graphics\SceneNode.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
     <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
     <ClCompile Include="..\Utilities\ITimerImpl.cpp" />
@@ -78,16 +121,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(DXSDK_DIR)\Samples\C++\Effects11\Inc;$(ProjectDir)..\3rdParty\Effects11\Inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>$(FBXSDK_DIR)\lib\vs2010\x86;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(FBXSDK_DIR)\lib\vs2010\x86;$(DXSDK_DIR)\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(DXSDK_DIR)\Samples\C++\Effects11\Inc;$(ProjectDir)..\3rdParty\Effects11\Inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -106,6 +149,7 @@
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,6 +171,7 @@
     <Lib>
       <AdditionalDependencies>
       </AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

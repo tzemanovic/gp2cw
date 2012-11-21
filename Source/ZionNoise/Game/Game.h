@@ -13,6 +13,8 @@ namespace zn
     class Window;
     class GameLogic;
     class Timer;
+    class SceneNode;
+    class GameObject;
 
     class Game : INoCopy
     {
@@ -26,9 +28,14 @@ namespace zn
         void Run();
         // add view
         void AddView( shared_ptr< IView > pView, GameObjectId gameObjectId );
+        void AddSceneNode( shared_ptr< SceneNode > pSceneNode );
+        const uint16Vec2& GetWindowSize() const;
+        void AddGameObject( shared_ptr< GameObject > pGameObject );
 
         // accessors
-        Renderer* GetRenderer() { return m_pRenderer; }
+        shared_ptr< Renderer > GetRenderer() { return m_pRenderer; }
+        const uint32 GetRendererType() { return m_pRenderer->GetRendererType(); }
+        GameLogic* GetGameLogic() { return m_pGameLogic; }
 
     private:
         // initalize window
@@ -41,7 +48,7 @@ namespace zn
         void Update( const float deltaMs );
 
         Window* m_pWindow;
-        Renderer* m_pRenderer;
+        shared_ptr< Renderer > m_pRenderer;
         GameLogic* m_pGameLogic;
         Timer* m_pTimer;
     };

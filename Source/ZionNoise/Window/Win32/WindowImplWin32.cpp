@@ -222,7 +222,7 @@ namespace zn
         
         if( m_isFullscreen )
             SwitchToFullscreen( windowSize );
-
+        m_windowSize = uint16Vec2( width, height );
         return true;
     }
 

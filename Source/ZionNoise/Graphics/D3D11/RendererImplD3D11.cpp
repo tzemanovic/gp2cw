@@ -9,8 +9,9 @@
 namespace zn
 {
     RendererImplD3D11::RendererImplD3D11() : m_hWnd( NULL ), m_driverType( D3D_DRIVER_TYPE_NULL ), 
-        m_featureLevel( D3D_FEATURE_LEVEL_11_0 ), m_pDevice( NULL ), m_pDeviceContext( NULL ), m_pSwapChain( NULL ), 
-        m_pRenderTargetView( NULL ), m_pDepthStencilView( NULL ), m_pDepthStencilTexture( NULL )
+        m_featureLevel( D3D_FEATURE_LEVEL_11_0 ), m_pDevice( ZN_NEW Device() ), m_pDeviceContext( ZN_NEW DeviceContext() ), 
+        m_pSwapChain( NULL ), m_pRenderTargetView( NULL ), m_pDepthStencilView( NULL ), 
+        m_pDepthStencilTexture( NULL )
     {
         m_rendererType = RendererType::D3D11;
     }
@@ -22,8 +23,8 @@ namespace zn
         ZN_SAFE_RELEASE( m_pDepthStencilView );
         ZN_SAFE_RELEASE( m_pRenderTargetView );
         ZN_SAFE_RELEASE( m_pSwapChain );
-        ZN_SAFE_RELEASE( m_pDeviceContext );
-        ZN_SAFE_RELEASE( m_pDevice );
+        ZN_SAFE_DELETE( m_pDeviceContext );
+        ZN_SAFE_DELETE( m_pDevice );
     }
 
     bool RendererImplD3D11::VInit( const uint16Vec2 windowSize, const bool isFullscreen, IWindowImpl* pWindowImpl )
@@ -61,7 +62,7 @@ namespace zn
 
         // device creation flags
         uint32 creationFlags = 0;
-#       ifdef _DEBUG
+#       ifdef ZN_DEBUG
             creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #       endif
 
@@ -71,17 +72,14 @@ namespace zn
         for( driver; driver < totalDriverTypes; ++driver )
         {
             result = D3D11CreateDeviceAndSwapChain( 0, driverTypes[driver], 0, creationFlags, featureLevels, 
-                totalFeatureLevels, D3D11_SDK_VERSION, &swapChainDesc, &m_pSwapChain, &m_pDevice, &m_featureLevel,
-                &m_pDeviceContext );
+                totalFeatureLevels, D3D11_SDK_VERSION, &swapChainDesc, &m_pSwapChain, &m_pDevice->D3D11, &m_featureLevel,
+                &m_pDeviceContext->D3D11 );
             if( SUCCEEDED( result ) )
             {
                 m_driverType = driverTypes[driver];
                 break;
             }
         }
-        /*result = D3D11CreateDeviceAndSwapChain( 0, D3D_DRIVER_TYPE_HARDWARE, 0, NULL, NULL, 
-                NULL, D3D11_SDK_VERSION, &swapChainDesc, &m_pSwapChain, &m_pDevice, &m_featureLevel,
-                &m_pDeviceContext );*/
         if( FAILED( result ) )
         {
             DXTRACE_MSG( L"Failed to create the Direct3D device!" );
@@ -109,7 +107,7 @@ namespace zn
 	    depthDesc.CPUAccessFlags = 0;
 	    depthDesc.MiscFlags = 0;
 
-        if( FAILED( m_pDevice->CreateTexture2D( &depthDesc, NULL, &m_pDepthStencilTexture ) ) )
+        if( FAILED( m_pDevice->D3D11->CreateTexture2D( &depthDesc, NULL, &m_pDepthStencilTexture ) ) )
         {
             DXTRACE_MSG( L"Failed to create depth stencil texture!" );
             return false;
@@ -121,13 +119,13 @@ namespace zn
 	    depthViewDesc.Texture2D.MipSlice = 0;
         depthViewDesc.Flags = 0;
 
-        if( FAILED( m_pDevice->CreateDepthStencilView( m_pDepthStencilTexture, &depthViewDesc, &m_pDepthStencilView ) ) )
+        if( FAILED( m_pDevice->D3D11->CreateDepthStencilView( m_pDepthStencilTexture, &depthViewDesc, &m_pDepthStencilView ) ) )
         {
             DXTRACE_MSG( L"Failed to create depth stencil view!" );
             return false;
         }
 
-        if( FAILED( m_pDevice->CreateRenderTargetView( pBackBufferTexture, NULL, &m_pRenderTargetView ) ) )
+        if( FAILED( m_pDevice->D3D11->CreateRenderTargetView( pBackBufferTexture, NULL, &m_pRenderTargetView ) ) )
         {
             DXTRACE_MSG( L"Failed to create render target view!" );
             ZN_SAFE_RELEASE( pBackBufferTexture );
@@ -135,7 +133,7 @@ namespace zn
         }
         ZN_SAFE_RELEASE( pBackBufferTexture );
         
-        m_pDeviceContext->OMSetRenderTargets( 1, &m_pRenderTargetView, m_pDepthStencilView );
+        m_pDeviceContext->D3D11->OMSetRenderTargets( 1, &m_pRenderTargetView, m_pDepthStencilView );
 
         // setup the viewport
         D3D11_VIEWPORT viewport;
@@ -146,7 +144,9 @@ namespace zn
         viewport.TopLeftX = 0.f;
         viewport.TopLeftY = 0.f;
 
-        m_pDeviceContext->RSSetViewports( 1, &viewport );
+        m_pDeviceContext->D3D11->RSSetViewports( 1, &viewport );
+
+        m_pDeviceContext->D3D11->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );	
         
         return true;
     }
@@ -156,8 +156,8 @@ namespace zn
         // clear the render target and depth stencil
         // can be commented out once we render skybox
         float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; 
-        m_pDeviceContext->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
-	    m_pDeviceContext->ClearDepthStencilView( m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0 );
+        m_pDeviceContext->D3D11->ClearRenderTargetView( m_pRenderTargetView, ClearColor );
+	    m_pDeviceContext->D3D11->ClearDepthStencilView( m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0 );
     }
 
     void RendererImplD3D11::VPostRender()
@@ -169,5 +169,67 @@ namespace zn
     {
         // flip the swap chain
         m_pSwapChain->Present( 0, 0 );
+    }
+    
+    bool RendererImplD3D11::VCreateVertexBuffer( VertexBuffer* pVertexBuffer, uint32 byteWidth, const Vertex* pInitData )
+    {
+        if( pVertexBuffer )
+        {
+            D3D11_BUFFER_DESC bd;
+            bd.Usage = D3D11_USAGE_DEFAULT;
+            bd.ByteWidth = byteWidth;
+            bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+            bd.CPUAccessFlags = 0;
+            bd.MiscFlags = 0;
+            D3D11_SUBRESOURCE_DATA initData;
+            initData.pSysMem = pInitData;
+            initData.SysMemPitch = 0;
+            initData.SysMemSlicePitch = 0;
+            if( SUCCEEDED( m_pDevice->D3D11->CreateBuffer( &bd, &initData, &pVertexBuffer->D3D11 ) ) )
+                return true;
+        }
+        return false;
+    }
+    
+    bool RendererImplD3D11::VCreateIndexBuffer( IndexBuffer* pIndexBuffer, uint32 byteWidth, const Index* pInitData )
+    {
+        if( pIndexBuffer )
+        {
+            D3D11_BUFFER_DESC bd;
+            bd.Usage = D3D11_USAGE_DEFAULT;
+            bd.ByteWidth = byteWidth;
+            bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+            bd.CPUAccessFlags = 0;
+            bd.MiscFlags = 0;
+            D3D11_SUBRESOURCE_DATA initData;
+            initData.pSysMem = pInitData;
+            initData.SysMemPitch = 0;
+            initData.SysMemSlicePitch = 0;
+            if( SUCCEEDED( m_pDevice->D3D11->CreateBuffer( &bd, &initData, &pIndexBuffer->D3D11 ) ) )
+                return true;
+        }
+        return false;
+    }
+
+    void RendererImplD3D11::VSetVertexBuffers( VertexBuffer* pVertexBuffer, uint32* pStride, uint32* pOffset )
+    {
+        m_pDeviceContext->D3D11->IASetVertexBuffers( 0, 1, &pVertexBuffer->D3D11, pStride, pOffset );
+    }
+
+    void RendererImplD3D11::VSetIndexBuffer( IndexBuffer* pIndexBuffer )
+    {
+        m_pDeviceContext->D3D11->IASetIndexBuffer( pIndexBuffer->D3D11, DXGI_FORMAT_R32_UINT, 0 );
+    }
+    
+    void RendererImplD3D11::VDrawIndexed( uint32 indexCount, uint32 startIndexLocation, uint32 baseVertexLocation )
+    {
+        m_pDeviceContext->D3D11->DrawIndexed( indexCount, startIndexLocation, baseVertexLocation );
+    }
+
+    Mat4x4* RendererImplD3D11::VCreateMatrixPerspectiveFovLH( Mat4x4* pOut, float fieldOfView, float aspectRatio, 
+            float nearClipDist, float farClipDist )
+    {
+        D3DXMatrixPerspectiveFovLH( pOut, fieldOfView, aspectRatio, nearClipDist, farClipDist );
+        return pOut;
     }
 }

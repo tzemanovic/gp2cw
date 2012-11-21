@@ -9,6 +9,8 @@
 #   include <D3D10.h>
 #   include <D3DX10.h>
 #   include <DxErr.h>
+#   include <D3Dcompiler.h>
+#   include <d3dx11effect.h>
 #endif
 
 namespace zn
@@ -17,7 +19,7 @@ namespace zn
     {
         enum
         {
-            D3D10,
+            Undefined,
             D3D11,
             // default D3D10 on windows
 #           if defined(ZN_PLATFORM_WIN32)
