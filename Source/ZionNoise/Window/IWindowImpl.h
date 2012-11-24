@@ -28,6 +28,9 @@ namespace zn
         virtual void VSetMouseCursorVisible( const bool visible ) = 0;
         // process window messages
         virtual void VProcessMessages() = 0;
+        virtual const uint16Vec2 VGetCursorPos() const = 0;
+        virtual void VCaptureMouse() = 0;
+        virtual void VReleaseMouse() = 0;
 
         // accessors
         const bool IsFullscreen() const { return m_isFullscreen; }

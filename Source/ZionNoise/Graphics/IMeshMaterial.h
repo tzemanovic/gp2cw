@@ -12,6 +12,7 @@ namespace zn
         virtual ~IMeshMaterial() {}
         
         virtual bool VInit() = 0;
+        virtual bool VLoadEnvMapTexture( const string& filename ) = 0;
         virtual void VSetProjection( const Mat4x4& mat ) = 0;
         virtual void VSetView( const Mat4x4& mat ) = 0;
         virtual void VSetWorld( const Mat4x4& mat ) = 0;
@@ -25,8 +26,8 @@ namespace zn
         virtual void VBindInputLayout() = 0;
         virtual uint32 VGetPassCount() = 0;
         virtual void VApplyPass( uint32 i ) = 0;
-
-        static IMeshMaterial* CreateDefault();
+        
+        static IMeshMaterial* CreateDefault( const string& filename );
 
     protected:
         string m_filename;

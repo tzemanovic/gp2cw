@@ -12,8 +12,8 @@ namespace zn
     public:
         RootSceneNode();
 
-        //void VAddChild( shared_ptr< SceneNode > pSceneNode ); // override this when the render passes are implemented
-        //void VRenderChildren( Scene *pScene ); // override this when the render passes are implemented
+        void VAddChild( shared_ptr< SceneNode > pSceneNode );
+        void VRenderChildren( Scene *pScene );
 
         bool VIsVisible( Scene *pScene ) const { return true; }
     };

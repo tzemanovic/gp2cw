@@ -292,8 +292,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
-                    SetCapture( m_wndHandle );
-                    m_isMouseCaptured = true;
+                    VCaptureMouse();
                     break;
                 }
             case WM_LBUTTONUP:
@@ -303,8 +302,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
-                    m_isMouseCaptured = false;
-                    ReleaseCapture();
+                    VReleaseMouse();
                     break;
                 }
             case WM_RBUTTONDOWN:
@@ -321,6 +319,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
+                    VCaptureMouse();
                     break;
                 }
             case WM_RBUTTONUP:
@@ -330,6 +329,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
+                    VReleaseMouse();
                     break;
                 }
             case WM_MBUTTONDOWN:
@@ -346,6 +346,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
+                    VCaptureMouse();
                     break;
                 }
             case WM_MBUTTONUP:
@@ -355,6 +356,7 @@ namespace zn
                     msg.mouseButton.x = static_cast< int16 >( LOWORD( lParam ) );
                     msg.mouseButton.y = static_cast< int16 >( HIWORD( lParam ) );
                     m_messages.push( msg );
+                    VReleaseMouse();
                     break;
                 }
             case WM_XBUTTONDOWN:
@@ -504,5 +506,24 @@ namespace zn
             TranslateMessage( &message );
             DispatchMessage( &message );
         }
+    }
+
+    const uint16Vec2 WindowImplWin32::VGetCursorPos() const
+    {
+        POINT lpPoint;
+        GetCursorPos( &lpPoint );
+        return uint16Vec2( uint16( lpPoint.x ), uint16( lpPoint.y ) );
+    }
+
+    void WindowImplWin32::VCaptureMouse()
+    {
+        SetCapture( m_wndHandle );
+        m_isMouseCaptured = true;
+    }
+    
+    void WindowImplWin32::VReleaseMouse()
+    {
+        ReleaseCapture();
+        m_isMouseCaptured = false;
     }
 }

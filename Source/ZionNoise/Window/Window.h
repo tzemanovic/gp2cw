@@ -31,6 +31,9 @@ namespace zn
         // is window fullscreen
         const bool IsFullscreen() const;
         const uint16Vec2& GetWindowSize() const;
+        const uint16Vec2 GetCursorPos() const;
+        void CaptureMouse();
+        void ReleaseMouse();
 
         // accessors
         IWindowImpl* GetWindowImpl() const { return m_pWindowImpl; }

@@ -13,11 +13,12 @@ namespace zn
     class SceneNode
     {
     public:
-        SceneNode( GameObjectId gameObjectId, RenderComponent* pRenderComponent, const Mat4x4* pToWorld, const Mat4x4* pFromWorld = NULL );
+        SceneNode( const GameObjectId gameObjectId, RenderComponent* pRenderComponent, const RenderPassType renderPass,
+            const Mat4x4* pToWorld, const Mat4x4* pFromWorld = NULL );
         virtual ~SceneNode();
 
         void SetParent( SceneNode* pSceneNode );
-        void SetTransform( const Mat4x4* pToWorld, const Mat4x4* pFromWorld );
+        void SetTransform( const Mat4x4* pToWorld, const Mat4x4* pFromWorld = NULL );
 
         virtual void VAddChild( shared_ptr< SceneNode > pSceneNode );
 	    virtual bool VIsVisible( Scene *pScene ) const;
@@ -32,6 +33,7 @@ namespace zn
         const Mat4x4& GetToWorld() const { return m_toWorld; }
 	    const Mat4x4& GetFromWorld() const { return m_fromWorld; }
         fVec3 GetPosition() const { return m_toWorld.GetPosition(); }
+        const RenderPassType GetRenderPass() const { return m_renderPass; }
 
     protected:
         GameObjectId m_gameObjectId;
@@ -39,6 +41,7 @@ namespace zn
         SceneNode* m_pParent;
         RenderComponent* m_pRenderComponent;
         Mat4x4 m_toWorld, m_fromWorld;
+        RenderPassType m_renderPass;
         float m_radius;
     };
 }

@@ -35,6 +35,9 @@ namespace zn
         void VSetMouseCursorVisible( const bool visible );
         // process window messages
         void VProcessMessages();
+        const uint16Vec2 VGetCursorPos() const;
+        void VCaptureMouse();
+        void VReleaseMouse();
 
         // accessors
         HWND GetWndHandle() { return m_wndHandle; }

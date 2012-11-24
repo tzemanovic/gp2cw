@@ -82,8 +82,8 @@ namespace zn
         if( pHumanView )
         {
             pHumanView->SetRenderer( m_pRenderer );
-            pHumanView->Init();
         }
+        pView->VInit();
     }
 
     void Game::AddSceneNode( shared_ptr< SceneNode > pSceneNode )

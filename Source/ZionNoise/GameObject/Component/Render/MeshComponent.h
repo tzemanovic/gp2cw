@@ -16,9 +16,9 @@ namespace zn
     {
     public:
         MeshComponent();
-        ~MeshComponent();
+        virtual ~MeshComponent();
 
-        bool VInit();
+        virtual bool VInit();
         
         void LoadGeometryFromFile( const string& filename );
         void AddGeometry( MeshGeometry* pMeshGeometry );
@@ -27,8 +27,8 @@ namespace zn
         uint32 GetGeometryCount() { return m_meshGeometries.size(); }
         IMeshMaterial* GetMeshMaterial() { return m_pMeshMaterial; }
 
-    private:
-        shared_ptr< SceneNode > VCreateSceneNode();
+    protected:
+        virtual shared_ptr< SceneNode > VCreateSceneNode();
 
         IMeshMaterial* m_pMeshMaterial;
         MeshGeometryVector m_meshGeometries;

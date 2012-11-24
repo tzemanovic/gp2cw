@@ -8,8 +8,6 @@
 
 namespace zn
 {
-    class D3DMATRIXTYPE;
-
     class Mat4x4Def
     {
     public:
@@ -34,7 +32,7 @@ namespace zn
 
         static const Mat4x4Def identity;
 
-        static Mat4x4Def* Identity( Mat4x4Def* mat ) 
+        static inline Mat4x4Def* Identity( Mat4x4Def* mat ) 
         {
             // not implemented yet
             return &Mat4x4Def();
@@ -63,7 +61,14 @@ namespace zn
 
         static const Mat4x4DefD3D identity;
 
-        static D3DXMATRIX* Identity( Mat4x4DefD3D* mat ) { return D3DXMatrixIdentity( mat ); }
+        Mat4x4DefD3D operator*( const Mat4x4DefD3D& mat ) const
+        {
+            Mat4x4DefD3D out;
+            D3DXMatrixMultiply(&out, this, &mat);
+            return out;
+        }
+
+        static inline D3DXMATRIX* Identity( Mat4x4DefD3D* mat ) { return D3DXMatrixIdentity( mat ); }
 
         inline Mat4x4DefD3D Inverse() const
         {
@@ -72,14 +77,33 @@ namespace zn
 	        return inverse;
         }
 
-        inline const fVec3 GetPosition() const { return fVec3( m[3][0], m[3][1], m[3][2] ); }
-        inline void SetPosition( const fVec3 pos ) { m[3][0] = pos.x, m[3][1] = pos.y; m[3][2] = pos.z; m[3][3] = 1.0f; }
+        inline const fVec3 GetPosition() const 
+        { 
+            return fVec3( m[3][0], m[3][1], m[3][2] ); 
+        }
 
+        inline void SetPosition( const fVec3 pos ) 
+        { 
+            m[3][0] = pos.x, m[3][1] = pos.y; m[3][2] = pos.z; m[3][3] = 1.0f; 
+        }
+        
         inline fVec3 Transform( fVec3& v ) const
         {
-            fVec4 out, temp(v);
+            fVec4 out, temp( v );
             D3DXVec4Transform( &out, &temp, this );
             return fVec3( out.x, out.y, out.z );
+        }
+
+        inline fVec4 Transform( fVec4& v ) const
+        {
+            fVec4 out;
+            D3DXVec4Transform( &out, &v, this );
+            return out;
+        }
+
+        inline void BuildYawPitchRoll( const float yawRadians, const float pitchRadians, const float rollRadians )
+		{ 
+            D3DXMatrixRotationYawPitchRoll( this, yawRadians, pitchRadians, rollRadians ); 
         }
     };
 

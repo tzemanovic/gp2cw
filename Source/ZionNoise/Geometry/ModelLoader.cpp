@@ -24,7 +24,7 @@ namespace zn
         static FbxManager* pManager = FbxManager::Create();
         static FbxIOSettings* pSettings = FbxIOSettings::Create( pManager, IOSROOT );
         pManager->SetIOSettings( pSettings );
-        static FbxImporter* pImporter = FbxImporter::Create( pManager, "" );
+        FbxImporter* pImporter = FbxImporter::Create( pManager, "" );
         static FbxGeometryConverter converter( pManager );
 
         if( !pImporter->Initialize( filename.c_str(), -1, pManager->GetIOSettings() ) )
@@ -158,7 +158,7 @@ namespace zn
 		    fVec3 n = pVerticies[i].normal;
 		    fVec3 t = tan1[i];
 		    fVec3 tmp = ( t - n * fVec3::Vec3Dot( &n , &t ) );
-            fVec3::Vec3Normalize( &tmp, &tmp );
+            fVec3::Normalize( &tmp );
 		    pVerticies[i].tangent = fVec3( tmp.x, tmp.y, tmp.z );
 	    }
         ZN_SAFE_DELETE_ARRAY( tan2 );

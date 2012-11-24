@@ -10,11 +10,12 @@ namespace zn
     class MeshMaterialD3D11 : public IMeshMaterial
     {
     public:
-        MeshMaterialD3D11();
+        MeshMaterialD3D11( const string& filename );
         virtual ~MeshMaterialD3D11();
 
         bool VInit();
         bool CreateVertexLayout();
+        bool VLoadEnvMapTexture( const string& filename );
 
         void VSetProjection( const Mat4x4& mat ) 
         { 

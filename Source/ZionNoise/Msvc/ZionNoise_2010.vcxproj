@@ -15,6 +15,7 @@
     <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\MeshComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\RenderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Render\SkySphereComponent.h" />
     <ClInclude Include="..\GameObject\Component\TransformComponent.h" />
     <ClInclude Include="..\GameObject\GameObject.h" />
     <ClInclude Include="..\Game\Game.h" />
@@ -39,6 +40,8 @@
     <ClInclude Include="..\Graphics\IMeshMaterial.h" />
     <ClInclude Include="..\Graphics\IRendererImpl.h" />
     <ClInclude Include="..\Graphics\IScreenElement.h" />
+    <ClInclude Include="..\Graphics\RenderPass.h" />
+    <ClInclude Include="..\Graphics\SkySceneNode.h" />
     <ClInclude Include="..\Graphics\VertexBuffer.h" />
     <ClInclude Include="..\Graphics\RendererType.h" />
     <ClInclude Include="..\Graphics\Renderer.h" />
@@ -46,11 +49,15 @@
     <ClInclude Include="..\Graphics\Scene.h" />
     <ClInclude Include="..\Graphics\SceneNode.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
+    <ClInclude Include="..\UserInterface\IKeyboardHandler.h" />
+    <ClInclude Include="..\UserInterface\IMouseHandler.h" />
+    <ClInclude Include="..\UserInterface\MovementController.h" />
     <ClInclude Include="..\UserInterface\ScreenElementScene.h" />
     <ClInclude Include="..\UserInterface\ViewHuman.h" />
     <ClInclude Include="..\Utilities\INoCopy.h" />
     <ClInclude Include="..\Utilities\ITimerImpl.h" />
     <ClInclude Include="..\Utilities\IView.h" />
+    <ClInclude Include="..\Utilities\Math.h" />
     <ClInclude Include="..\Utilities\Timer.h" />
     <ClInclude Include="..\Utilities\Win32\TimerImplWin32.h" />
     <ClInclude Include="..\Window\InputDevices.h" />
@@ -64,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="..\GameObject\Component\Render\MeshComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\RenderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Render\SkySphereComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\TransformComponent.cpp" />
     <ClCompile Include="..\GameObject\GameObject.cpp" />
     <ClCompile Include="..\Game\Game.cpp" />
@@ -84,6 +92,7 @@
     <ClCompile Include="..\Graphics\Scene.cpp" />
     <ClCompile Include="..\Graphics\SceneNode.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
+    <ClCompile Include="..\UserInterface\MovementController.cpp" />
     <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
     <ClCompile Include="..\Utilities\ITimerImpl.cpp" />
     <ClCompile Include="..\Utilities\Timer.cpp" />
@@ -161,6 +170,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>ZionNoiseStd.h</PrecompiledHeaderFile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

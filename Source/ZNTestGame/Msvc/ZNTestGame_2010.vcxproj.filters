@@ -8,10 +8,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZNTestGameStd.h" />
+    <ClInclude Include="..\UserInterface\ViewHumanFirstPerson.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
       <UniqueIdentifier>{621e8542-c4bb-4f4d-bf2c-f3bea132d7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{7b13b39d-b78f-454f-abd2-213ea7667b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

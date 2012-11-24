@@ -8,7 +8,7 @@
 
 namespace zn
 {
-    MeshMaterialD3D11::MeshMaterialD3D11() : m_techniqueName( "Render" ), m_pEffect( NULL ), m_pTechnique( NULL ),
+    MeshMaterialD3D11::MeshMaterialD3D11( const string& filename ) : m_techniqueName( "Render" ), m_pEffect( NULL ), m_pTechnique( NULL ),
         m_pPass( NULL ), m_pInputLayout( NULL ), m_pViewMatrixVariable( NULL ), m_pProjectionMatrixVariable ( NULL ), 
         m_pWorldMatrixVariable( NULL ), m_pDiffuseTextureVariable( NULL ), m_pDiffuseTexture( NULL ), 
         m_pAmbientLightColourVariable( NULL ), m_pDiffuseLightColourVariable( NULL ), 
@@ -18,7 +18,7 @@ namespace zn
         m_ambientMaterial( Color( 0.5f, 0.5f, 0.5f, 1.0f ) ), m_diffuseMaterial( Color( 0.8f, 0.8f, 0.8f, 1.0f ) ),
         m_specularMaterial( Color( 1.0f, 1.0f, 1.0f, 1.0f ) ), m_specularPower( 25.f )
     {
-        m_filename = "Assets\\Effects\\Specular.fx";
+        m_filename = filename;
         ZeroMemory( &m_techniqueDesc, sizeof( D3D10_TECHNIQUE_DESC ) );
     }
 
@@ -39,24 +39,24 @@ namespace zn
             if( CreateVertexLayout() )
             {
                 // retrieve all variables using semantic
-                m_pWorldMatrixVariable=m_pEffect->GetVariableBySemantic("WORLD")->AsMatrix();
-	            m_pViewMatrixVariable=m_pEffect->GetVariableBySemantic("VIEW")->AsMatrix();
-	            m_pProjectionMatrixVariable=m_pEffect->GetVariableBySemantic("PROJECTION")->AsMatrix();
-	            m_pDiffuseTextureVariable=m_pEffect->GetVariableByName("diffuseMap")->AsShaderResource();
+                m_pWorldMatrixVariable = m_pEffect->GetVariableBySemantic( "WORLD" )->AsMatrix();
+	            m_pViewMatrixVariable = m_pEffect->GetVariableBySemantic( "VIEW" )->AsMatrix();
+	            m_pProjectionMatrixVariable = m_pEffect->GetVariableBySemantic( "PROJECTION" )->AsMatrix();
+	            m_pDiffuseTextureVariable = m_pEffect->GetVariableByName( "diffuseMap" )->AsShaderResource();
 	            // lights
-	            m_pAmbientLightColourVariable=m_pEffect->GetVariableByName("ambientLightColour")->AsVector();
-	            m_pDiffuseLightColourVariable=m_pEffect->GetVariableByName("diffuseLightColour")->AsVector();
-	            m_pSpecularLightColourVariable=m_pEffect->GetVariableByName("specularLightColour")->AsVector();
-	            m_pLightDirectionVariable=m_pEffect->GetVariableByName("lightDirection")->AsVector();
+	            m_pAmbientLightColourVariable = m_pEffect->GetVariableByName( "ambientLightColour" )->AsVector();
+	            m_pDiffuseLightColourVariable = m_pEffect->GetVariableByName( "diffuseLightColour" )->AsVector();
+	            m_pSpecularLightColourVariable = m_pEffect->GetVariableByName( "specularLightColour" )->AsVector();
+	            m_pLightDirectionVariable = m_pEffect->GetVariableByName( "lightDirection" )->AsVector();
 	            // materials
-	            m_pAmbientMaterialVariable=m_pEffect->GetVariableByName("ambientMaterialColour")->AsVector();
-	            m_pDiffuseMaterialVariable=m_pEffect->GetVariableByName("diffuseMaterialColour")->AsVector();
-	            m_pSpecularMaterialVariable=m_pEffect->GetVariableByName("specularMaterialColour")->AsVector();
-	            m_pSpecularPowerVariable=m_pEffect->GetVariableByName("specularPower")->AsScalar();
+	            m_pAmbientMaterialVariable = m_pEffect->GetVariableByName( "ambientMaterialColour" )->AsVector();
+	            m_pDiffuseMaterialVariable = m_pEffect->GetVariableByName( "diffuseMaterialColour" )->AsVector();
+	            m_pSpecularMaterialVariable = m_pEffect->GetVariableByName( "specularMaterialColour" )->AsVector();
+	            m_pSpecularPowerVariable = m_pEffect->GetVariableByName( "specularPower" )->AsScalar();
 	            // camera
-	            m_pCameraPositionVariable=m_pEffect->GetVariableByName("cameraPosition")->AsVector();
+	            m_pCameraPositionVariable = m_pEffect->GetVariableByName( "cameraPosition" )->AsVector();
                 // environment map
-                m_pEnvMapVariable=m_pEffect->GetVariableByName("envMap")->AsShaderResource();
+                m_pEnvMapVariable = m_pEffect->GetVariableByName( "envMap" )->AsShaderResource();
                 return true;
             }
         }
@@ -73,6 +73,16 @@ namespace zn
         {
             return false;
         }
+        return true;
+    }
+
+    bool MeshMaterialD3D11::VLoadEnvMapTexture( const string& filename )
+    {
+        wstring wFilename;
+        wFilename.assign( filename.begin(), filename.end() );
+        if( FAILED( D3DX11CreateShaderResourceViewFromFile( g_pGame->GetRenderer()->GetDevice()->D3D11,
+            wFilename.c_str(), NULL, NULL, &m_pEnvMapTexture, NULL ) ) )
+            return false;
         return true;
     }
 

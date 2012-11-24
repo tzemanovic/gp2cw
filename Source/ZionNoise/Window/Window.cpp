@@ -74,4 +74,19 @@ namespace zn
     { 
         return m_pWindowImpl->GetWindowSize(); 
     }
+
+    const uint16Vec2 Window::GetCursorPos() const
+    {
+        return m_pWindowImpl->VGetCursorPos();
+    }
+    
+    void Window::CaptureMouse()
+    {
+        m_pWindowImpl->VCaptureMouse();
+    }
+
+    void Window::ReleaseMouse()
+    {
+        m_pWindowImpl->VReleaseMouse();
+    }
 }

@@ -15,8 +15,12 @@ namespace zn
     public:
         T x, y, z, w;
         
+        static const Vec4< T > right;
+        static const Vec4< T > up;
+        static const Vec4< T > forward;
+        
         Vec4( const T x = 0, const T y = 0, const T z = 0, const T w = 0 ) : x( x ), y( y ), z( z ), w( w ) {}
-        Vec4( const fVec3 &vec );
+        Vec4( const fVec3& vec );
 
         static inline float Vec4Dot( const Vec4< T >* vec1, const Vec4< T >* vec2 )
         {
@@ -66,6 +70,10 @@ namespace zn
     class Vec4< D3DVECTOR4TYPE > : public D3DXVECTOR4
     {
     public:
+        static const Vec4< D3DVECTOR4TYPE > right;
+        static const Vec4< D3DVECTOR4TYPE > up;
+        static const Vec4< D3DVECTOR4TYPE > forward;
+
         Vec4( const float x = 0, const float y = 0, const float z = 0, const float w = 0 ) : D3DXVECTOR4( x, y, z, w ) {}
         Vec4( const fVec3 &vec );
 

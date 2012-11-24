@@ -14,9 +14,10 @@
 
 namespace zn
 {
-    SceneNode::SceneNode( GameObjectId gameObjectId, RenderComponent* pRenderComponent, const Mat4x4* pToWorld, 
-        const Mat4x4* pFromWorld ) 
-        : m_gameObjectId( gameObjectId ), m_pParent( NULL ), m_pRenderComponent( pRenderComponent ), m_radius( 0.f )
+    SceneNode::SceneNode( const GameObjectId gameObjectId, RenderComponent* pRenderComponent, 
+        const RenderPassType renderPass, const Mat4x4* pToWorld, const Mat4x4* pFromWorld ) 
+        : m_gameObjectId( gameObjectId ), m_pParent( NULL ), m_pRenderComponent( pRenderComponent ),
+        m_renderPass( renderPass ), m_radius( 0.f )
     {
         SetTransform( pToWorld, pFromWorld );
     }
@@ -91,8 +92,9 @@ namespace zn
                     pMeshMaterial->VSetAbientLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
                     pMeshMaterial->VSetDiffuseLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
 			        pMeshMaterial->VSetSpecularLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
-			        pMeshMaterial->VSetLightDirection( fVec3( 0.f, 0.f, -1.f ) );
-			
+			        pMeshMaterial->VSetLightDirection( fVec3( 0.1f, 0.1f, 1.f ) );
+			        
+                    // careful, this position is adjusted by rotation and scale
                     pMeshMaterial->VSetCameraPosition( pCamera->GetWorldPosition() );
 
                     pMeshMaterial->VSetTextures();

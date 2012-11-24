@@ -20,6 +20,7 @@ namespace zn
             m_owner = gameObjectId;
         }
 
+        virtual void VInit() = 0;
         virtual void VRender( const float deltaMs ) = 0;
         virtual void VUpdate( const float deltaMs ) = 0;
         virtual const bool VProcessMessage( const Message& message ) = 0;

@@ -146,6 +146,27 @@
     <ClInclude Include="..\Graphics\IndexBuffer.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\UserInterface\IKeyboardHandler.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\IMouseHandler.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\MovementController.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Utilities\Math.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\RenderPass.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Render\SkySphereComponent.h">
+      <Filter>GameObject\Component\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Graphics\SkySceneNode.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -235,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="..\Geometry\Vec3.cpp">
       <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UserInterface\MovementController.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Render\SkySphereComponent.cpp">
+      <Filter>GameObject\Component\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

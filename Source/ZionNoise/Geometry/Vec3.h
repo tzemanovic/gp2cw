@@ -27,7 +27,7 @@ namespace zn
             return 0.f;
         }
         
-        static inline Vec3< T >* Vec3Normalize( Vec3< T >* vecOut, const Vec3< T >* vecIn )
+        static inline Vec3< T >* Normalize( Vec3< T >* vecOut, const Vec3< T >* vecIn )
         {
             // not implemented yet
             return vecOut;
@@ -74,14 +74,20 @@ namespace zn
         static const Vec3< D3DVECTOR3TYPE > forward;
 
         Vec3( const float x = 0, const float y = 0, const float z = 0 ) : D3DXVECTOR3( x, y, z ) {}
+
         static inline float Vec3Dot( const Vec3< D3DVECTOR3TYPE >* vec1, const Vec3< D3DVECTOR3TYPE >* vec2 )
         {
             return D3DXVec3Dot( vec1, vec2 );
         }
         
-        static inline D3DXVECTOR3* Vec3Normalize( Vec3< D3DVECTOR3TYPE >* vecOut, const Vec3< D3DVECTOR3TYPE >* vecIn )
+        static inline D3DXVECTOR3* Normalize( Vec3< D3DVECTOR3TYPE >* vecOut, const Vec3< D3DVECTOR3TYPE >* vecIn )
         {
             return D3DXVec3Normalize( vecOut, vecIn );
+        }
+        
+        static inline D3DXVECTOR3* Normalize( Vec3< D3DVECTOR3TYPE >* vec )
+        {
+            return D3DXVec3Normalize( vec, vec );
         }
         
         Vec3< D3DVECTOR3TYPE > operator+( const Vec3< D3DVECTOR3TYPE >& vec ) const

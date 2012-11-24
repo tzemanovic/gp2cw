@@ -36,6 +36,7 @@ namespace zn
         shared_ptr< Renderer > GetRenderer() { return m_pRenderer; }
         const uint32 GetRendererType() { return m_pRenderer->GetRendererType(); }
         GameLogic* GetGameLogic() { return m_pGameLogic; }
+        Window* GetWindow() { return m_pWindow; }
 
     private:
         // initalize window

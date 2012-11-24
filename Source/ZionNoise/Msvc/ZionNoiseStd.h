@@ -94,6 +94,7 @@ namespace zn
     extern const float ZN_2PI;
 }
 
+#include "..\Utilities\Math.h"
 #include "..\Geometry\Vec2.h"
 #include "..\Geometry\Vec3.h"
 #include "..\Geometry\Vec4.h"
@@ -104,5 +105,6 @@ namespace zn
 #include "..\Geometry\Vertex.h"
 #include "..\Geometry\Frustum.h"
 #include "..\Geometry\Plane.h"
+#include "..\Graphics\RenderPass.h"
 
 #include "..\Game\Game.h"

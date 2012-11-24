@@ -40,7 +40,7 @@ namespace zn
     {
         if( !m_pMeshMaterial )
         {
-            m_pMeshMaterial = IMeshMaterial::CreateDefault();
+            m_pMeshMaterial = IMeshMaterial::CreateDefault( "Assets\\Effects\\Specular.fx" );
             if( !m_pMeshMaterial )
                 return false;
         }
@@ -86,7 +86,7 @@ namespace zn
             return shared_ptr< SceneNode >();
         }
 
-        shared_ptr< SceneNode > pSceneNode( ZN_NEW SceneNode( m_pGameObject->GetId(), this, &pTransformComponent->GetTransform() ) );
+        shared_ptr< SceneNode > pSceneNode( ZN_NEW SceneNode( m_pGameObject->GetId(), this, RenderPass::GameObjects, &pTransformComponent->GetTransform() ) );
         
         return pSceneNode;
     }
