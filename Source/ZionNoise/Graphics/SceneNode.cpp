@@ -94,7 +94,6 @@ namespace zn
 			        pMeshMaterial->VSetSpecularLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
 			        pMeshMaterial->VSetLightDirection( fVec3( 0.1f, 0.1f, 1.f ) );
 			        
-                    // careful, this position is adjusted by rotation and scale
                     pMeshMaterial->VSetCameraPosition( pCamera->GetWorldPosition() );
 
                     pMeshMaterial->VSetTextures();

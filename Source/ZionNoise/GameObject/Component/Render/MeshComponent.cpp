@@ -40,7 +40,7 @@ namespace zn
     {
         if( !m_pMeshMaterial )
         {
-            m_pMeshMaterial = IMeshMaterial::CreateDefault( "Assets\\Effects\\Specular.fx" );
+            m_pMeshMaterial = IMeshMaterial::CreateDefault( "Assets\\Effects\\Parallax.fx" );
             if( !m_pMeshMaterial )
                 return false;
         }

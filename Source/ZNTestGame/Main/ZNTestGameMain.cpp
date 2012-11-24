@@ -20,7 +20,7 @@ int main()
         shared_ptr< IView > pView = shared_ptr< IView >( ZN_NEW ViewHuman() );
         game.AddView( pView, 0 );
 
-        /*shared_ptr< GameObject > armoredRecon = shared_ptr< GameObject >( ZN_NEW GameObject( 1 ) );
+        shared_ptr< GameObject > armoredRecon = shared_ptr< GameObject >( ZN_NEW GameObject( 1 ) );
         shared_ptr< TransformComponent > armoredReconTrans = shared_ptr< TransformComponent >( ZN_NEW TransformComponent() );
         armoredReconTrans->SetPosition( fVec3( 0, 0, 30 ) );
         armoredRecon->AddComponent( armoredRecon, armoredReconTrans );
@@ -28,8 +28,13 @@ int main()
         armoredReconMesh->LoadGeometryFromFile( "Assets\\Models\\Vehicles\\armoredrecon.fbx" );
         armoredRecon->AddComponent( armoredRecon, armoredReconMesh );
         game.AddGameObject( armoredRecon );
+        IMeshMaterial* armoredReconMat = armoredReconMesh->GetMeshMaterial();
+        armoredReconMat->VLoadDiffuseTexture( "Assets\\Textures\\Vehicles\\armoredrecon_diff.png" );
+	    armoredReconMat->VLoadSpecularTexture( "Assets\\Textures\\Vehicles\\armoredrecon_spec.png" );
+	    armoredReconMat->VLoadBumpTexture( "Assets\\Textures\\Vehicles\\armoredrecon_N.png" );
+	    armoredReconMat->VLoadParallaxTexture( "Assets\\Textures\\Vehicles\\armoredrecon_Height.png" );
 
-        shared_ptr< GameObject > armoredRecon1 = shared_ptr< GameObject >( ZN_NEW GameObject( 2 ) );
+        /*shared_ptr< GameObject > armoredRecon1 = shared_ptr< GameObject >( ZN_NEW GameObject( 2 ) );
         shared_ptr< TransformComponent > armoredReconTrans1 = shared_ptr< TransformComponent >( ZN_NEW TransformComponent() );
         armoredReconTrans1->SetPosition( fVec3( 0, 0, -30 ) );
         armoredRecon1->AddComponent( armoredRecon1, armoredReconTrans1 );

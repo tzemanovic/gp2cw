@@ -9,12 +9,8 @@
 namespace zn
 {
     MeshMaterialD3D11::MeshMaterialD3D11( const string& filename ) : m_techniqueName( "Render" ), m_pEffect( NULL ), m_pTechnique( NULL ),
-        m_pPass( NULL ), m_pInputLayout( NULL ), m_pViewMatrixVariable( NULL ), m_pProjectionMatrixVariable ( NULL ), 
-        m_pWorldMatrixVariable( NULL ), m_pDiffuseTextureVariable( NULL ), m_pDiffuseTexture( NULL ), 
-        m_pAmbientLightColourVariable( NULL ), m_pDiffuseLightColourVariable( NULL ), 
-        m_pSpecularLightColourVariable( NULL ), m_pLightDirectionVariable( NULL ), m_pAmbientMaterialVariable( NULL ),
-        m_pDiffuseMaterialVariable( NULL ), m_pSpecularMaterialVariable( NULL ), m_pSpecularPowerVariable( NULL ),
-        m_pCameraPositionVariable( NULL ), m_pEnvMapTexture( NULL ), m_pEnvMapVariable( NULL ),
+        m_pInputLayout( NULL ), m_pDiffuseTexture( NULL ), m_pSpecularTexture( NULL ), m_pBumpTexture( NULL ), 
+        m_pParallaxTexture( NULL ), m_pEnvMapTexture( NULL ), 
         m_ambientMaterial( Color( 0.5f, 0.5f, 0.5f, 1.0f ) ), m_diffuseMaterial( Color( 0.8f, 0.8f, 0.8f, 1.0f ) ),
         m_specularMaterial( Color( 1.0f, 1.0f, 1.0f, 1.0f ) ), m_specularPower( 25.f )
     {
@@ -25,6 +21,9 @@ namespace zn
     MeshMaterialD3D11::~MeshMaterialD3D11()
     {
         ZN_SAFE_RELEASE( m_pEnvMapTexture );
+        ZN_SAFE_RELEASE( m_pParallaxTexture );
+        ZN_SAFE_RELEASE( m_pBumpTexture );
+        ZN_SAFE_RELEASE( m_pSpecularTexture );
         ZN_SAFE_RELEASE( m_pDiffuseTexture );
         ZN_SAFE_RELEASE( m_pInputLayout );
         ZN_SAFE_RELEASE( m_pEffect );
@@ -43,6 +42,10 @@ namespace zn
 	            m_pViewMatrixVariable = m_pEffect->GetVariableBySemantic( "VIEW" )->AsMatrix();
 	            m_pProjectionMatrixVariable = m_pEffect->GetVariableBySemantic( "PROJECTION" )->AsMatrix();
 	            m_pDiffuseTextureVariable = m_pEffect->GetVariableByName( "diffuseMap" )->AsShaderResource();
+	            m_pSpecularTextureVariable = m_pEffect->GetVariableByName( "specularMap" )->AsShaderResource();
+	            m_pBumpTextureVariable = m_pEffect->GetVariableByName( "bumpMap" )->AsShaderResource();
+	            m_pParallaxTextureVariable = m_pEffect->GetVariableByName( "heightMap" )->AsShaderResource();
+                m_pEnvMapVariable = m_pEffect->GetVariableByName( "envMap" )->AsShaderResource();
 	            // lights
 	            m_pAmbientLightColourVariable = m_pEffect->GetVariableByName( "ambientLightColour" )->AsVector();
 	            m_pDiffuseLightColourVariable = m_pEffect->GetVariableByName( "diffuseLightColour" )->AsVector();
@@ -55,8 +58,11 @@ namespace zn
 	            m_pSpecularPowerVariable = m_pEffect->GetVariableByName( "specularPower" )->AsScalar();
 	            // camera
 	            m_pCameraPositionVariable = m_pEffect->GetVariableByName( "cameraPosition" )->AsVector();
-                // environment map
-                m_pEnvMapVariable = m_pEffect->GetVariableByName( "envMap" )->AsShaderResource();
+                // booleans
+                m_pUseDiffuseTextureVariable = m_pEffect->GetVariableByName( "useDiffuseTexture" )->AsScalar();
+	            m_pUseSpecularTextureVariable = m_pEffect->GetVariableByName( "useSpecularTexture" )->AsScalar();
+	            m_pUseBumpTextureVariable = m_pEffect->GetVariableByName( "useBumpTexture" )->AsScalar();
+	            m_pUseParallaxTextureVariable = m_pEffect->GetVariableByName( "useHeightTexture" )->AsScalar();
                 return true;
             }
         }
@@ -75,7 +81,47 @@ namespace zn
         }
         return true;
     }
-
+    
+    bool MeshMaterialD3D11::VLoadDiffuseTexture( const string& filename )
+    {
+        wstring wFilename;
+        wFilename.assign( filename.begin(), filename.end() );
+        if( FAILED( D3DX11CreateShaderResourceViewFromFile( g_pGame->GetRenderer()->GetDevice()->D3D11,
+            wFilename.c_str(), NULL, NULL, &m_pDiffuseTexture, NULL ) ) )
+            return false;
+        return true;
+    }
+    
+    bool MeshMaterialD3D11::VLoadSpecularTexture( const string& filename )
+    {
+        wstring wFilename;
+        wFilename.assign( filename.begin(), filename.end() );
+        if( FAILED( D3DX11CreateShaderResourceViewFromFile( g_pGame->GetRenderer()->GetDevice()->D3D11,
+            wFilename.c_str(), NULL, NULL, &m_pSpecularTexture, NULL ) ) )
+            return false;
+        return true;
+    }
+    
+    bool MeshMaterialD3D11::VLoadBumpTexture( const string& filename )
+    {
+        wstring wFilename;
+        wFilename.assign( filename.begin(), filename.end() );
+        if( FAILED( D3DX11CreateShaderResourceViewFromFile( g_pGame->GetRenderer()->GetDevice()->D3D11,
+            wFilename.c_str(), NULL, NULL, &m_pBumpTexture, NULL ) ) )
+            return false;
+        return true;
+    }
+    
+    bool MeshMaterialD3D11::VLoadParallaxTexture( const string& filename )
+    {
+        wstring wFilename;
+        wFilename.assign( filename.begin(), filename.end() );
+        if( FAILED( D3DX11CreateShaderResourceViewFromFile( g_pGame->GetRenderer()->GetDevice()->D3D11,
+            wFilename.c_str(), NULL, NULL, &m_pParallaxTexture, NULL ) ) )
+            return false;
+        return true;
+    }
+    
     bool MeshMaterialD3D11::VLoadEnvMapTexture( const string& filename )
     {
         wstring wFilename;

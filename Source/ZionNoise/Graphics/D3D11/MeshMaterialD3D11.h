@@ -15,6 +15,10 @@ namespace zn
 
         bool VInit();
         bool CreateVertexLayout();
+	    bool VLoadDiffuseTexture( const string& filename );
+	    bool VLoadSpecularTexture( const string& filename );
+	    bool VLoadBumpTexture( const string& filename );
+	    bool VLoadParallaxTexture( const string& filename );
         bool VLoadEnvMapTexture( const string& filename );
 
         void VSetProjection( const Mat4x4& mat ) 
@@ -60,7 +64,19 @@ namespace zn
         void VSetTextures()
         {
             m_pDiffuseTextureVariable->SetResource( m_pDiffuseTexture );
+		    m_pSpecularTextureVariable->SetResource( m_pSpecularTexture );
+		    m_pBumpTextureVariable->SetResource( m_pBumpTexture );
+		    m_pParallaxTextureVariable->SetResource( m_pParallaxTexture );
             m_pEnvMapVariable->SetResource( m_pEnvMapTexture );
+            
+		    if( m_pDiffuseTexture )
+			    m_pUseDiffuseTextureVariable->SetBool( true );
+		    if( m_pSpecularTexture )
+			    m_pUseSpecularTextureVariable->SetBool( true );
+		    if( m_pBumpTexture )
+			    m_pUseBumpTextureVariable->SetBool( true );
+		    if( m_pParallaxTexture )
+			    m_pUseParallaxTextureVariable->SetBool( true );
         }
 
         void VSetMaterials()
@@ -92,38 +108,48 @@ namespace zn
         bool CompileD3DShader( const string& filePath, const string& shaderModel, ID3DBlob** ppBuffer );
 
         string m_techniqueName;
-        //effect variables
+        // effect variables
 	    ID3DX11Effect* m_pEffect;
 	    ID3DX11EffectTechnique* m_pTechnique;
         ID3DX11EffectPass* m_pPass;
-	    //input layout
+	    // input layout
 	    ID3D11InputLayout* m_pInputLayout;
-	    //technique desc
+	    // technique desc
 	    D3DX11_TECHNIQUE_DESC m_techniqueDesc;
-	    //effect variables(constants)
+	    // effect variables(constants)
 	    ID3DX11EffectMatrixVariable* m_pViewMatrixVariable;
 	    ID3DX11EffectMatrixVariable* m_pProjectionMatrixVariable;
 	    ID3DX11EffectMatrixVariable* m_pWorldMatrixVariable;
-	    //Textures
+	    // Textures
 	    ID3DX11EffectShaderResourceVariable* m_pDiffuseTextureVariable;
-	    ID3D11ShaderResourceView *m_pDiffuseTexture;
-	    //Light
+	    ID3DX11EffectShaderResourceVariable* m_pSpecularTextureVariable;
+	    ID3DX11EffectShaderResourceVariable* m_pBumpTextureVariable;
+	    ID3DX11EffectShaderResourceVariable* m_pParallaxTextureVariable;
+        ID3DX11EffectShaderResourceVariable* m_pEnvMapVariable;
+	    ID3D11ShaderResourceView* m_pDiffuseTexture;
+	    ID3D11ShaderResourceView* m_pSpecularTexture;
+	    ID3D11ShaderResourceView* m_pBumpTexture;
+	    ID3D11ShaderResourceView* m_pParallaxTexture;
+        ID3D11ShaderResourceView* m_pEnvMapTexture;
+	    // Texture switches
+	    ID3DX11EffectScalarVariable* m_pUseDiffuseTextureVariable;
+	    ID3DX11EffectScalarVariable* m_pUseSpecularTextureVariable;
+	    ID3DX11EffectScalarVariable* m_pUseBumpTextureVariable;
+	    ID3DX11EffectScalarVariable* m_pUseParallaxTextureVariable;
+	    // Light
 	    ID3DX11EffectVectorVariable* m_pAmbientLightColourVariable;
 	    ID3DX11EffectVectorVariable* m_pDiffuseLightColourVariable;
 	    ID3DX11EffectVectorVariable* m_pSpecularLightColourVariable;
-	    //Direction
+	    // Direction
 	    ID3DX11EffectVectorVariable* m_pLightDirectionVariable;
-	    //Material
+	    // Material
 	    ID3DX11EffectVectorVariable* m_pAmbientMaterialVariable;
 	    ID3DX11EffectVectorVariable* m_pDiffuseMaterialVariable;
 	    ID3DX11EffectVectorVariable* m_pSpecularMaterialVariable;
 	    ID3DX11EffectScalarVariable* m_pSpecularPowerVariable;
-	    //Camera
+	    // Camera
 	    ID3DX11EffectVectorVariable* m_pCameraPositionVariable;
-        //Environment
-        ID3D11ShaderResourceView* m_pEnvMapTexture;
-        ID3DX11EffectShaderResourceVariable* m_pEnvMapVariable;
-	    //Material colours
+	    // Material colours
 	    Color m_ambientMaterial;
 	    Color m_diffuseMaterial;
 	    Color m_specularMaterial;

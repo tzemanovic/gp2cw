@@ -11,7 +11,7 @@ namespace zn
     {
         fVec3 position;
         Color color;
-        fVec3 texCoord;
+        fVec2 texCoord;
         fVec3 normal;
         fVec3 tangent;
     };

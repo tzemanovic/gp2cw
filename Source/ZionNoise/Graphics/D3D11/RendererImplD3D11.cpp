@@ -100,8 +100,8 @@ namespace zn
         depthDesc.MipLevels = 1;
         depthDesc.ArraySize = 1;
         depthDesc.Format = DXGI_FORMAT_D32_FLOAT;
-	    depthDesc.SampleDesc.Count=1;
-	    depthDesc.SampleDesc.Quality=0;
+	    depthDesc.SampleDesc.Count = 1;
+	    depthDesc.SampleDesc.Quality = 0;
 	    depthDesc.Usage = D3D11_USAGE_DEFAULT;
 	    depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	    depthDesc.CPUAccessFlags = 0;

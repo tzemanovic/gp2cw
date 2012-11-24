@@ -125,9 +125,9 @@ namespace zn
 		    fVec3 v2 = pVerticies[i+1].position;
 		    fVec3 v3 = pVerticies[i+2].position;
 
-            fVec3 uv1 = pVerticies[i].texCoord;
-            fVec3 uv2 = pVerticies[i+1].texCoord;
-            fVec3 uv3 = pVerticies[i+2].texCoord;
+            fVec2 uv1 = pVerticies[i].texCoord;
+            fVec2 uv2 = pVerticies[i+1].texCoord;
+            fVec2 uv3 = pVerticies[i+2].texCoord;
 			
 		    float x1 = v2.x - v1.x;
             float x2 = v3.x - v1.x;

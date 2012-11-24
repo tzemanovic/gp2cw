@@ -69,7 +69,7 @@ PS_INPUT VS(VS_INPUT input)
 	output.normal=normalize(mul(input.normal,matWorld));
 	
 	float4 worldPos=mul(input.pos,matWorld);
-	output.cameraDirection=normalize(cameraPosition-worldPos);
+	output.cameraDirection=normalize(cameraPosition.xyz-worldPos.xyz);
 	return output;
 }
 
@@ -87,12 +87,12 @@ float4 PS(PS_INPUT input):SV_TARGET
 
 RasterizerState DisableCulling
 {
-    CullMode = NONE;
+    CullMode = BACK;
 };
 
 DepthStencilState EnableZBuffering
 {
-	DepthEnable = TRUE;
+	DepthEnable = FALSE;
 };
 
 technique10 Render

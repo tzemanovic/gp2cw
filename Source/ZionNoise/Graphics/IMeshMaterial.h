@@ -12,6 +12,10 @@ namespace zn
         virtual ~IMeshMaterial() {}
         
         virtual bool VInit() = 0;
+	    virtual bool VLoadDiffuseTexture( const string& filename ) = 0;
+	    virtual bool VLoadSpecularTexture( const string& filename ) = 0;
+	    virtual bool VLoadBumpTexture( const string& filename ) = 0;
+	    virtual bool VLoadParallaxTexture( const string& filename ) = 0;
         virtual bool VLoadEnvMapTexture( const string& filename ) = 0;
         virtual void VSetProjection( const Mat4x4& mat ) = 0;
         virtual void VSetView( const Mat4x4& mat ) = 0;
