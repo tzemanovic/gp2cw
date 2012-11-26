@@ -49,6 +49,7 @@
     <ClInclude Include="..\Graphics\Scene.h" />
     <ClInclude Include="..\Graphics\SceneNode.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
+    <ClInclude Include="..\Scripting\LuaScriptManager.h" />
     <ClInclude Include="..\UserInterface\IKeyboardHandler.h" />
     <ClInclude Include="..\UserInterface\IMouseHandler.h" />
     <ClInclude Include="..\UserInterface\MovementController.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="..\Graphics\Scene.cpp" />
     <ClCompile Include="..\Graphics\SceneNode.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
+    <ClCompile Include="..\Scripting\LuaScriptManager.cpp" />
     <ClCompile Include="..\UserInterface\MovementController.cpp" />
     <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
     <ClCompile Include="..\Utilities\ITimerImpl.cpp" />
@@ -130,7 +132,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(DXSDK_DIR)\Samples\C++\Effects11\Inc;$(ProjectDir)..\3rdParty\Effects11\Inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)\Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -138,7 +140,7 @@
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(FBXSDK_DIR)\include;$(DXSDK_DIR)\Include;$(DXSDK_DIR)\Samples\C++\Effects11\Inc;$(ProjectDir)..\3rdParty\Effects11\Inc;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)\Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
@@ -159,6 +161,7 @@
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -182,6 +185,7 @@
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

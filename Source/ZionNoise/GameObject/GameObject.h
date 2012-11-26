@@ -16,6 +16,7 @@ namespace zn
 
         void Destroy();
         void AddComponent( shared_ptr< GameObject > pGameObject, shared_ptr< IGameObjectComponent > pComponent );
+        static void SAddComponent( shared_ptr< GameObject > pGameObject, shared_ptr< IGameObjectComponent > pComponent );
         bool Init();
 
         template< class TComponent >

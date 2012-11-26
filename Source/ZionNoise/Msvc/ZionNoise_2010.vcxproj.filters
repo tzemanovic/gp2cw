@@ -167,6 +167,9 @@
     <ClInclude Include="..\Graphics\SkySceneNode.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\Scripting\LuaScriptManager.h">
+      <Filter>Scripting</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -263,6 +266,9 @@
     <ClCompile Include="..\GameObject\Component\Render\SkySphereComponent.cpp">
       <Filter>GameObject\Component\Render</Filter>
     </ClCompile>
+    <ClCompile Include="..\Scripting\LuaScriptManager.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -303,6 +309,9 @@
     </Filter>
     <Filter Include="GameObject\Component\Render">
       <UniqueIdentifier>{98ea0423-a88f-4a02-835d-dba45e0f00dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{65e90063-ab39-4d02-b551-3fb1ef27b471}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,9 +11,52 @@
 #include <vector>
 #include <math.h>
 
-using namespace std;
+// luabind warnings
+#pragma warning( disable : 4251 )
+
+// overload get_pointer to use std::shared_ptr within luabind
+namespace boost { 
+  template<class T> const T* get_pointer(const std::shared_ptr<T>& ptr) 
+  {
+    return ptr.get();
+  }
+
+  template<class T> T* get_pointer(std::shared_ptr<T>& ptr)
+  {
+    return ptr.get();
+  }
+}
+
+extern "C"
+{
+    #include "lua.h"
+}
+
+#include <luabind/luabind.hpp>
+#include <luabind/adopt_policy.hpp>
+
+#define FBXSDK_NEW_API
+
+using luabind::module;
+using luabind::class_;
+using luabind::constructor;
+using luabind::call_function;
+using luabind::def;
+
 using std::tr1::shared_ptr;
 using std::tr1::weak_ptr;
+using std::tr1::static_pointer_cast;
+
+
+
+using std::vector;
+using std::map;
+using std::list;
+using std::queue;
+using std::string;
+using std::wstring;
+using std::pair;
+using std::make_pair;
 
 template< class T >
 shared_ptr< T > MakeStrongPtr( weak_ptr< T > pWeakPtr )

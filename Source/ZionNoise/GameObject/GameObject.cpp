@@ -27,6 +27,13 @@ namespace zn
         m_components.insert( pair< GameObjectComponentType, shared_ptr< IGameObjectComponent > >( pComponent->GetType(), pComponent ) );
         pComponent->SetGameObject( pGameObject );
     }
+
+    void GameObject::SAddComponent( shared_ptr< GameObject > pGameObject, shared_ptr< IGameObjectComponent > pComponent )
+    {
+        pGameObject->AddComponent( pGameObject, pComponent );
+        //m_components.insert( pair< GameObjectComponentType, shared_ptr< IGameObjectComponent > >( pComponent->GetType(), pComponent ) );
+        //pComponent->SetGameObject( pGameObject );
+    }
     
     bool GameObject::Init()
     {
