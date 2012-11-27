@@ -34,6 +34,7 @@ namespace zn
 
     void Scene::Update( const float deltaMs )
     {
-
+        if( m_pRoot )
+            m_pRoot->VUpdate( this, deltaMs );
     }
 }

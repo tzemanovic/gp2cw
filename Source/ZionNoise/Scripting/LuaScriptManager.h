@@ -12,6 +12,7 @@ namespace zn
     {
     public:
         ~LuaScriptManager();
+
         static LuaScriptManager* Get()
         {
             static LuaScriptManager instance;

@@ -13,7 +13,7 @@ namespace zn
     SkySphereComponent::SkySphereComponent( const string& textureFilename ) : MeshComponent(), 
         m_textureFilename( textureFilename )
     {
-
+        m_type = GameObjectComponent::SkySphere;
     }
 
     bool SkySphereComponent::VInit()

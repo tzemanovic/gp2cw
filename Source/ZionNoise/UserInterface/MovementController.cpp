@@ -16,16 +16,17 @@ namespace zn
 
         m_targetYaw = m_yaw = Math::RadiansToDegrees( -yawInDegrees );
         m_targetPitch = m_pitch = Math::DegreesToRadians( pitchInDegrees );
-        m_maxSpeed = 10.f;
+        m_maxSpeed = 50.0f;
         m_currentSpeed = 0.f;
         fVec3 pos = m_toWorld.GetPosition();
         m_position = Mat4x4::identity;
         m_position.SetPosition( pos );
+        m_startingToWorld = m_toWorld;
 
         uint16Vec2 mousePos = g_pGame->GetWindow()->GetCursorPos();
         m_mouseLastX = mousePos.x;
         m_mouseLastY = mousePos.y;
-        
+        // reset arrays to false
         memset( m_keyState, 0x00, sizeof( m_keyState ) );
         memset( m_keyOldState, 0x00, sizeof( m_keyOldState ) );
     }
@@ -72,23 +73,45 @@ namespace zn
         
         if( m_keyState[Key::W] || m_keyState[Key::S] )
         {
-            zTranslation = fVec4::forward;
-            if( m_keyState[Key::S] )
+            if( m_keyState[Key::Ctrl] )
             {
-                zTranslation *= -1.f;
+                yTranslation = fVec4::up;
+                if( m_keyState[Key::S] )
+                {
+                    yTranslation *= -1.f;
+                }
             }
-            zTranslation = m_toWorld.Transform( zTranslation );
+            else
+            {
+                zTranslation = fVec4::forward;
+                if( m_keyState[Key::S] )
+                {
+                    zTranslation *= -1.f;
+                }
+                // apply orientation to the tranlation vector
+                zTranslation = m_toWorld.Transform( zTranslation );
+            }
             translating = true;
         }
-        else if( m_keyState[Key::A] || m_keyState[Key::D] )
+        if( m_keyState[Key::A] || m_keyState[Key::D] )
         {
             xTranslation = fVec4::right;
             if( m_keyState[Key::A] )
             {
                 xTranslation *= -1.f;
             }
+            // apply orientation to the tranlation vector
             xTranslation = m_toWorld.Transform( xTranslation );
             translating = true;
+        }
+        if( m_keyState[Key::R] )
+        {
+            m_toWorld = m_startingToWorld;
+            fVec3 pos = m_toWorld.GetPosition();
+            m_position = Mat4x4::identity;
+            m_position.SetPosition( pos );
+		    m_fromWorld = m_toWorld.Inverse();
+            m_pControlledObject->SetTransform( &m_toWorld, &m_fromWorld );
         }
 
         m_yaw += (m_targetYaw - m_yaw) * ( .35f );
@@ -109,20 +132,22 @@ namespace zn
             fVec4 direction4 = xTranslation + yTranslation + zTranslation;
             fVec3 direction( direction4.x, direction4.y, direction4.z );
             fVec3::Normalize( &direction );
-            float elapsedTime = deltaMs / 1000.0f;
+            float deltaS = deltaMs / 1000.0f;
+            // 5 seconds to go full speed
             float numberOfSeconds = 5.f;
             if( m_currentSpeed < m_maxSpeed )
-                m_currentSpeed += m_maxSpeed * ( ( elapsedTime * elapsedTime ) / numberOfSeconds);
+                m_currentSpeed += m_maxSpeed * ( deltaS / numberOfSeconds );
 		    if( m_currentSpeed > m_maxSpeed )
 			    m_currentSpeed = m_maxSpeed;
-
-		    direction *= m_currentSpeed;
-
+            // get translation vector
+		    direction *= m_currentSpeed * deltaS;
+            // add to the current position
             fVec3 pos = m_position.GetPosition() + direction;
 		    m_position.SetPosition( pos );
 		    m_toWorld.SetPosition( pos );
 
 		    m_fromWorld = m_toWorld.Inverse();
+            // set controlled object transform
             m_pControlledObject->SetTransform( &m_toWorld, &m_fromWorld );
         }
         else

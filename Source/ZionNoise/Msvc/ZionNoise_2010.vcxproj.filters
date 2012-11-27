@@ -170,6 +170,24 @@
     <ClInclude Include="..\Scripting\LuaScriptManager.h">
       <Filter>Scripting</Filter>
     </ClInclude>
+    <ClInclude Include="..\Physics\Physics.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\ColliderComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\RigidBodyComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Geometry\Geometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\BoxColliderComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Physics\ContactListener.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -269,6 +287,21 @@
     <ClCompile Include="..\Scripting\LuaScriptManager.cpp">
       <Filter>Scripting</Filter>
     </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\ColliderComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\RigidBodyComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Geometry\Geometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\BoxColliderComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Physics\Physics.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -312,6 +345,12 @@
     </Filter>
     <Filter Include="Scripting">
       <UniqueIdentifier>{65e90063-ab39-4d02-b551-3fb1ef27b471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{67f3f8b9-cae0-46af-98b1-42c87de232a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Component\Physics">
+      <UniqueIdentifier>{932cb579-4f30-470e-a65b-6817d37aa425}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

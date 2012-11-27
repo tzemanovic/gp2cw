@@ -15,12 +15,14 @@ namespace zn
     class GameLogic
     {
         friend class Game;
+
     public:
         GameLogic();
         ~GameLogic();
 
         // add view
         void AddView( shared_ptr< IView > pView, GameObjectId gameObjectId );
+        void Update( const float deltaMs );
 
         shared_ptr< GameObject > GetGameObject( GameObjectId id );
         void AddGameObject( shared_ptr< GameObject > pGameObject );

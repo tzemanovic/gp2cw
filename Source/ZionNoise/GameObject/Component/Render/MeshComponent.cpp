@@ -11,6 +11,7 @@
 #include "..\..\..\Graphics\SceneNode.h"
 #include "..\..\GameObject.h"
 #include "..\..\..\Graphics\IMeshMaterial.h"
+#include "..\..\..\Geometry\MeshGeometry.h"
 
 namespace zn
 {
@@ -62,7 +63,12 @@ namespace zn
 
     void MeshComponent::LoadGeometryFromFile( const string& filename )
     {
-        ModelLoader::LoadModelFromFile( this, filename );
+        ModelLoader::LoadModelFromFile( *this, filename );
+    }
+
+    void MeshComponent::CreateCubeGeometry( const fVec3& dimensions )
+    {
+        ModelLoader::CreateCubeGeometry( *this, dimensions );
     }
     
     void MeshComponent::AddGeometry( MeshGeometry* pMeshGeometry )
@@ -87,7 +93,31 @@ namespace zn
         }
 
         shared_ptr< SceneNode > pSceneNode( ZN_NEW SceneNode( m_pGameObject->GetId(), this, RenderPass::GameObjects, &pTransformComponent->GetTransform() ) );
-        
+        pSceneNode->SetRadius( VCalculateBoudingSphereRadius() );
+
         return pSceneNode;
+    }
+
+    const float MeshComponent::VCalculateBoudingSphereRadius()
+    {
+        float radius = 0.0f;
+        for( MeshGeometryVector::iterator i = m_meshGeometries.begin(); i != m_meshGeometries.end(); ++i )
+        {
+            if( *i )
+            {
+		        Vertices vertices = ( *i )->GetVertices();
+                for( Vertices::iterator vi = vertices.begin(); vi != vertices.end(); ++vi )
+                {
+                    fVec3 extents  = ( *vi ).position;
+		            extents.x = abs( extents.x );
+		            extents.y = abs( extents.y );
+		            extents.z = abs( extents.z );
+		            radius = ( radius > extents.x ) ? radius : extents.x;
+		            radius = ( radius > extents.y ) ? radius : extents.y;
+		            radius = ( radius > extents.z ) ? radius : extents.z;
+                }
+            }
+	    }
+	    return radius;
     }
 }

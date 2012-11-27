@@ -28,13 +28,6 @@ namespace zn
         pComponent->SetGameObject( pGameObject );
     }
 
-    void GameObject::SAddComponent( shared_ptr< GameObject > pGameObject, shared_ptr< IGameObjectComponent > pComponent )
-    {
-        pGameObject->AddComponent( pGameObject, pComponent );
-        //m_components.insert( pair< GameObjectComponentType, shared_ptr< IGameObjectComponent > >( pComponent->GetType(), pComponent ) );
-        //pComponent->SetGameObject( pGameObject );
-    }
-    
     bool GameObject::Init()
     {
         bool result = true;
@@ -47,5 +40,13 @@ namespace zn
             }
         }
         return result;
+    }
+
+    void GameObject::Update( const float deltaMs )
+    {
+        for( GameObjectComponentsMap::iterator it = m_components.begin(), end = m_components.end(); it != end; ++it )
+        {
+            it->second->VUpdate( deltaMs );
+        }
     }
 }

@@ -10,10 +10,11 @@ namespace zn
     class ModelLoader
     {
     public:
-        static void LoadModelFromFile( MeshComponent* pMeshComponent, const string& filename );
+        static void LoadModelFromFile( MeshComponent& meshComponent, const string& filename );
+        static void CreateCubeGeometry( MeshComponent& meshComponent, const fVec3& dimensions );
 
     private:
-        static void LoadModelFromFBXFile( MeshComponent* pMeshComponent, const string& filename );
+        static void LoadModelFromFBXFile( MeshComponent& meshComponent, const string& filename );
         static void ComputeTangents( Vertex* pVerticies, uint32 vertexCount );
     };
 }

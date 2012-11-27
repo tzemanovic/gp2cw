@@ -10,16 +10,108 @@
 
 namespace zn
 {
-    void ModelLoader::LoadModelFromFile( MeshComponent* pMeshComponent, const string& filename )
+    void ModelLoader::LoadModelFromFile( MeshComponent& meshComponent, const string& filename )
     {
         string fileExt = filename.substr( filename.find( '.' ) + 1 );
         if( fileExt.compare( "fbx" ) == 0 )
         {
-            LoadModelFromFBXFile( pMeshComponent, filename );
+            LoadModelFromFBXFile( meshComponent, filename );
         }
     }
+    
+    void ModelLoader::CreateCubeGeometry( MeshComponent& meshComponent, const fVec3& dimensions )
+    {
+        MeshGeometry* pGeometry = ZN_NEW MeshGeometry();
 
-    void ModelLoader::LoadModelFromFBXFile( MeshComponent* pMeshComponent, const string& filename )
+        float halfWidth = dimensions.x / 2.f;
+        float halfHeight = dimensions.y / 2.f;
+        float halfLength = dimensions.z / 2.f;
+        
+        /*Vertex vertices[] = 
+        {
+            // front
+            { fVec3( -halfWidth, halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ) }, //0 front top left
+            { fVec3( halfWidth, halfHeight, -halfLength ), Color(), fVec2( 1.0f, 0.0f ) },//1 front top right
+            { fVec3( -halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 0.0f, 1.0f ) }, //2 front bottom left
+            { fVec3( halfWidth, -halfHeight, -halfLength ),  Color(), fVec2( 1.0f, 1.0f ) }, //3 front bottom right
+
+            //back
+            { fVec3( -halfWidth, halfHeight, halfLength ), Color(), fVec2( 0.0f, 1.0f ) }, //4 back top left
+            { fVec3( halfWidth, halfHeight, halfLength ), Color(), fVec2( 1.0f, 1.0f ) },//5 back top right
+            { fVec3( -halfWidth, -halfHeight, halfLength ), Color(), fVec2( 0.0f, 0.0f ) }, //6 back bottom left
+            { fVec3( halfWidth, -halfHeight, halfLength ), Color(), fVec2( 1.0f, 0.0f ) } //7 back bottom right
+        };
+        Index indices[]=
+        {
+            2, 0, 3, 3, 0, 1,// front face
+            3, 1, 7, 7, 1, 5, // right
+            6, 4, 2, 2, 4, 0, // left
+            7, 5, 6, 6, 5, 4, // back
+            0, 4, 1, 1, 4, 5, // top
+            6, 2, 7, 7, 2, 3 // bottom
+        };
+        for( uint16 i = 0; i < 8; i++ )
+        {
+            pGeometry->AddVertex( vertices[i] );
+        }
+        for( uint16 i = 0; i < 36; i++ )
+        {
+            pGeometry->AddIndex( indices[i] );
+        }*/
+        Vertex vertices[] =
+        {
+            { fVec3( -halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ), fVec3::up }, // 0 +Y (top face)
+            { fVec3(  halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 1.0f, 0.0f ), fVec3::up }, // 1
+            { fVec3(  halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 1.0f, 1.0f ), fVec3::up }, // 2
+            { fVec3( -halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 0.0f, 1.0f ), fVec3::up }, // 3
+
+            { fVec3( -halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 0.0f, 0.0f ), -1*fVec3::up }, // 4 -Y (bottom face)
+            { fVec3(  halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 1.0f, 0.0f ), -1*fVec3::up }, // 5
+            { fVec3(  halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 1.0f, 1.0f ), -1*fVec3::up }, // 6
+            { fVec3( -halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 0.0f, 1.0f ), -1*fVec3::up }, // 7
+
+            { fVec3(  halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 0.0f, 0.0f ), fVec3::right }, // 8 +X (right face)
+            { fVec3(  halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 1.0f, 0.0f ), fVec3::right }, // 9
+            { fVec3(  halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 1.0f, 1.0f ), fVec3::right }, // 10
+            { fVec3(  halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 0.0f, 1.0f ), fVec3::right }, // 11
+
+            { fVec3( -halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ), -1*fVec3::right }, // 12 -X (left face)
+            { fVec3( -halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 1.0f, 0.0f ), -1*fVec3::right }, // 13
+            { fVec3( -halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 1.0f, 1.0f ), -1*fVec3::right }, // 14
+            { fVec3( -halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 0.0f, 1.0f ), -1*fVec3::right }, // 15
+
+            { fVec3( -halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 0.0f, 0.0f ), fVec3::forward }, // 16 +Z (front face)
+            { fVec3(  halfWidth,  halfHeight,  halfLength ), Color(), fVec2( 1.0f, 0.0f ), fVec3::forward }, // 17
+            { fVec3(  halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 1.0f, 1.0f ), fVec3::forward }, // 18
+            { fVec3( -halfWidth, -halfHeight,  halfLength ), Color(), fVec2( 0.0f, 1.0f ), fVec3::forward }, // 19
+
+            { fVec3(  halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ), -1*fVec3::forward }, // 20 -Z (back face)
+            { fVec3( -halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 1.0f, 0.0f ), -1*fVec3::forward }, // 21
+            { fVec3( -halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 1.0f, 1.0f ), -1*fVec3::forward }, // 22
+            { fVec3(  halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 0.0f, 1.0f ), -1*fVec3::forward }, // 23
+        };
+        Index indices[] =
+        {
+            1, 0, 2, 2, 0, 3, // top face
+            5, 4, 6, 6, 4, 7, // bottom
+            9, 8, 10, 10, 8, 11, // right
+            13, 12, 14, 14, 12, 15, // left
+            17, 16, 18, 18, 16, 19, // front
+            21, 20, 22, 22, 20, 23 // back
+        };
+        ComputeTangents( vertices, 24 );
+        for( uint16 i = 0; i < 24; i++ )
+        {
+            pGeometry->AddVertex( vertices[i] );
+        }
+        for( uint16 i = 0; i < 36; i++ )
+        {
+            pGeometry->AddIndex( indices[i] );
+        }
+        meshComponent.AddGeometry( pGeometry );
+    }
+
+    void ModelLoader::LoadModelFromFBXFile( MeshComponent& meshComponent, const string& filename )
     {
         static FbxManager* pManager = FbxManager::Create();
         static FbxIOSettings* pSettings = FbxIOSettings::Create( pManager, IOSROOT );
@@ -105,7 +197,7 @@ namespace zn
                                 pGeometry->AddIndex( pIndicies[k] );
                             }
                             ZN_SAFE_DELETE_ARRAY( pVerticies );
-                            pMeshComponent->AddGeometry( pGeometry );
+                            meshComponent.AddGeometry( pGeometry );
                         }
                     }
                 }

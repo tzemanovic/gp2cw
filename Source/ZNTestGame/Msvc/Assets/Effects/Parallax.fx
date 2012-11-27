@@ -70,12 +70,17 @@ string UIName="Use Parrallax";
 
 float scale=0.05;
 float bias=0.01;
+const float3x3 identityMatrix3x3 = {
+	float3(1,0,0),
+	float3(0,1,0),
+	float3(0,0,1)
+};
 
 SamplerState wrapSampler
 {
     Filter = MIN_MAG_MIP_LINEAR;
-    AddressU = Clamp;
-    AddressV = Clamp;
+    AddressU = Wrap;
+    AddressV = Wrap;
 };
 
 struct VS_INPUT
@@ -102,21 +107,14 @@ PS_INPUT VS(VS_INPUT input)
 	float4x4 matViewProjection=mul(matView,matProjection);
 	float4x4 matWorldViewProjection=mul(matWorld,matViewProjection);
 	float4 worldPos=mul(input.pos,matWorld);
-	if (useBumpTexture){
-		float3x3 worldToTangent;
-		worldToTangent[0]=mul(input.tangent,matWorld);
-		worldToTangent[1]=mul(cross(input.tangent,input.normal),matWorld);
-		worldToTangent[2]=mul(input.normal,matWorld);
-		output.normal=normalize(mul(input.normal,worldToTangent));
-		output.cameraDirection=mul(normalize(cameraPosition.xyz-worldPos.xyz),worldToTangent);
-		output.lightDir=mul(lightDirection,worldToTangent);		
-	}
-	else
-	{
-		output.normal=normalize(mul(input.normal,matWorld));
-		output.cameraDirection=mul(normalize(cameraPosition.xyz-worldPos.xyz),matWorld);
-		output.lightDir=lightDirection.xyz;			
-	}
+	
+	float3x3 worldToTangent;
+	worldToTangent[0]=mul(input.tangent,matWorld);
+	worldToTangent[1]=mul(cross(input.tangent,input.normal),matWorld);
+	worldToTangent[2]=mul(input.normal,matWorld);
+	output.normal=normalize(mul(input.normal,worldToTangent*useBumpTexture + matWorld*!useBumpTexture));
+	output.cameraDirection=mul(normalize(cameraPosition.xyz-worldPos.xyz),worldToTangent*useBumpTexture + matWorld*!useBumpTexture);
+	output.lightDir=mul(lightDirection.xyz,worldToTangent*useBumpTexture + identityMatrix3x3*!useBumpTexture);		
 	
 	output.pos=mul(input.pos,matWorldViewProjection);
 
@@ -128,29 +126,17 @@ PS_INPUT VS(VS_INPUT input)
 
 float4 PS(PS_INPUT input):SV_TARGET
 {
-	float3 normal=input.normal;
 	float2 texCoord=input.texCoord;
+	float3 normal=input.normal*!useBumpTexture + normalize((2*(bumpMap.Sample(wrapSampler,texCoord)))-1.0)*useBumpTexture;
 	
-	if (useHeightTexture){
-		float heightVal=heightMap.Sample(wrapSampler,input.texCoord).x;
-		float height=scale*heightVal-bias;
-		texCoord=height*input.cameraDirection.xy+input.texCoord;
-	}
+	float heightVal=heightMap.Sample(wrapSampler,input.texCoord).x;
+	float height=scale*heightVal-bias;
+	texCoord += height*input.cameraDirection.xy*useHeightTexture;
+		
+	float3 lightDir=-normalize(input.lightDir);
 	
-	
-	
-	if (useBumpTexture){
-		normal=normalize((2*(bumpMap.Sample(wrapSampler,texCoord)))-1.0);
-	}
-	
-	float3 lightDir=normalize(input.lightDir);
-	
-	float4 diffuseColour=diffuseMaterialColour;
-	float4 specularColour=specularMaterialColour;
-	if (useDiffuseTexture)
-		diffuseColour=diffuseMap.Sample(wrapSampler,texCoord);
-	if (useSpecularTexture)
-		specularColour=specularMap.Sample(wrapSampler,texCoord);
+	float4 diffuseColour=diffuseMaterialColour*!useDiffuseTexture + diffuseMap.Sample(wrapSampler,texCoord)*useDiffuseTexture;
+	float4 specularColour=specularMaterialColour*!useSpecularTexture + specularMap.Sample(wrapSampler,texCoord)*useSpecularTexture;
 		
 	float diffuse=saturate(dot(normal,lightDir));
 	
@@ -158,8 +144,8 @@ float4 PS(PS_INPUT input):SV_TARGET
 	float specular=pow(saturate(dot(normal,halfVec)),specularPower);
 	
 	return ((ambientMaterialColour*ambientLightColour)+
-	(diffuseColour*diffuseLightColour*diffuse)+
-	(specularColour*specularLightColour*specular));
+		(diffuseColour*diffuseLightColour*diffuse)+
+		(specularColour*specularLightColour*specular));
 }
 
 RasterizerState DisableCulling

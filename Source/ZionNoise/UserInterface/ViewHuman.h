@@ -38,7 +38,7 @@ namespace zn
 	    IKeyboardHandler* m_pKeyboardHandler;
         IMouseHandler* m_pMouseHandler;
         MovementController* m_pFreeCameraController;
-        float m_nextRender;
+        float m_currentTime;
         ScreenElementList m_screenElements;
     };
 }

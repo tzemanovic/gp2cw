@@ -48,7 +48,7 @@ namespace zn
         pSceneNode->SetParent( this );
     }
     
-    bool SceneNode::VIsVisible( Scene *pScene ) const
+    bool SceneNode::VIsVisible( Scene* pScene ) const
     {
         Mat4x4 toWorld, fromWorld;
 	    pScene->GetCamera()->GetTransform( &toWorld, &fromWorld );
@@ -61,7 +61,7 @@ namespace zn
 	    return frustum.IsInside( fromWorldPos, m_radius );
     }
 
-    void SceneNode::VPreRender( Scene *pScene )
+    void SceneNode::VPreRender( Scene* pScene )
     {
         shared_ptr< GameObject > pGameObject = g_pGame->GetGameLogic()->GetGameObject( m_gameObjectId );
         if( pGameObject )
@@ -74,7 +74,7 @@ namespace zn
         }
     }
 
-    void SceneNode::VRender( Scene *pScene )
+    void SceneNode::VRender( Scene* pScene )
     {
         if( m_pRenderComponent )
         {
@@ -92,7 +92,7 @@ namespace zn
                     pMeshMaterial->VSetAbientLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
                     pMeshMaterial->VSetDiffuseLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
 			        pMeshMaterial->VSetSpecularLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
-			        pMeshMaterial->VSetLightDirection( fVec3( 0.1f, 0.1f, 1.f ) );
+			        pMeshMaterial->VSetLightDirection( fVec3( 0.1f, -1.0f, 0.2f ) );
 			        
                     pMeshMaterial->VSetCameraPosition( pCamera->GetWorldPosition() );
 
@@ -115,7 +115,7 @@ namespace zn
         }
     }
 
-	void SceneNode::VRenderChildren( Scene *pScene )
+	void SceneNode::VRenderChildren( Scene* pScene )
     {
         for( SceneNodeVector::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i )
         {
@@ -129,12 +129,20 @@ namespace zn
         }
     }
 
-	void SceneNode::VPostRender( Scene *pScene )
+	void SceneNode::VPostRender( Scene* pScene )
     {
 
     }
 
-    void SceneNode::GetTransform( Mat4x4 *pToWorld, Mat4x4 *pFromWorld ) const
+    void SceneNode::VUpdate( Scene* pScene, const float deltaMs )
+    {
+        for( SceneNodeVector::iterator i = m_children.begin(), end = m_children.end(); i != end; ++i )
+        {
+            ( *i )->VUpdate( pScene, deltaMs );
+        }
+    }
+
+    void SceneNode::GetTransform( Mat4x4* pToWorld, Mat4x4* pFromWorld ) const
     {
         if( m_toWorld )
             *pToWorld = m_toWorld;

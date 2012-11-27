@@ -32,7 +32,7 @@ namespace zn
 
         static const Mat4x4Def identity;
 
-        static inline Mat4x4Def* Identity( Mat4x4Def* mat ) 
+        static inline Mat4x4Def* Identity( Mat4x4Def* pMat ) 
         {
             // not implemented yet
             return &Mat4x4Def();
@@ -68,7 +68,7 @@ namespace zn
             return out;
         }
 
-        static inline D3DXMATRIX* Identity( Mat4x4DefD3D* mat ) { return D3DXMatrixIdentity( mat ); }
+        static inline D3DXMATRIX* Identity( Mat4x4DefD3D* pMat ) { return D3DXMatrixIdentity( pMat ); }
 
         inline Mat4x4DefD3D Inverse() const
         {

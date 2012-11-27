@@ -11,7 +11,15 @@ namespace zn
         enum
         {
             Transform,
-            Mesh
+            Mesh,
+            SkySphere,
+            BoxCollider,
+            SphereCollider,
+            CapsuleCollider,
+            CylinderCollider,
+            MeshCollider,
+            RigidBody,
+            Count
         };
     }
 }

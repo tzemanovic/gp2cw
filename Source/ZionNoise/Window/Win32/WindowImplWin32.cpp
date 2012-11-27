@@ -155,18 +155,12 @@ namespace zn
             return Key::Space;
         case VK_RETURN:
             return Key::Return;
-        case VK_LCONTROL:
-            return Key::LCtrl;
-        case VK_RCONTROL:
-            return Key::RCtrl;
-        case VK_LMENU:
-            return Key::LAlt;
-        case VK_RMENU:
-            return Key::RAlt;
-        case VK_LSHIFT:
-            return Key::LShift;
-        case VK_RSHIFT:
-            return Key::RShift;
+        case VK_CONTROL:
+            return Key::Ctrl;
+        case VK_MENU:
+            return Key::Alt;
+        case VK_SHIFT:
+            return Key::Shift;
         }
         return Key::Undef;
     }

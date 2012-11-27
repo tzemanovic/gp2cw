@@ -21,7 +21,7 @@ namespace zn
 
         GameObjectComponentType GetType() { return m_type; }
 
-        virtual void VUpdate( float deltaMs ) {}
+        virtual void VUpdate( const float deltaMs ) {}
         virtual bool VInit() { return true; }
 
         void SetGameObject( shared_ptr< GameObject > pGameObject )

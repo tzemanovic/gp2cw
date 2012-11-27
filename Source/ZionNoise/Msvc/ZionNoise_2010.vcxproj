@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClInclude Include="..\GameObject\Component\GameObjectComponentType.h" />
     <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\BoxColliderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\ColliderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\RigidBodyComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\MeshComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\RenderComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\SkySphereComponent.h" />
@@ -22,6 +25,7 @@
     <ClInclude Include="..\Game\GameLogic.h" />
     <ClInclude Include="..\Geometry\Color.h" />
     <ClInclude Include="..\Geometry\Frustum.h" />
+    <ClInclude Include="..\Geometry\Geometry.h" />
     <ClInclude Include="..\Geometry\Mat4x4.h" />
     <ClInclude Include="..\Geometry\MeshGeometry.h" />
     <ClInclude Include="..\Geometry\ModelLoader.h" />
@@ -49,6 +53,8 @@
     <ClInclude Include="..\Graphics\Scene.h" />
     <ClInclude Include="..\Graphics\SceneNode.h" />
     <ClInclude Include="..\Main\ZionNoise.h" />
+    <ClInclude Include="..\Physics\ContactListener.h" />
+    <ClInclude Include="..\Physics\Physics.h" />
     <ClInclude Include="..\Scripting\LuaScriptManager.h" />
     <ClInclude Include="..\UserInterface\IKeyboardHandler.h" />
     <ClInclude Include="..\UserInterface\IMouseHandler.h" />
@@ -70,6 +76,9 @@
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GameObject\Component\Physics\BoxColliderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Physics\ColliderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Physics\RigidBodyComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\MeshComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\RenderComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\SkySphereComponent.cpp" />
@@ -78,6 +87,7 @@
     <ClCompile Include="..\Game\Game.cpp" />
     <ClCompile Include="..\Game\GameLogic.cpp" />
     <ClCompile Include="..\Geometry\Frustum.cpp" />
+    <ClCompile Include="..\Geometry\Geometry.cpp" />
     <ClCompile Include="..\Geometry\Mat4x4.cpp" />
     <ClCompile Include="..\Geometry\MeshGeometry.cpp" />
     <ClCompile Include="..\Geometry\ModelLoader.cpp" />
@@ -93,6 +103,7 @@
     <ClCompile Include="..\Graphics\Scene.cpp" />
     <ClCompile Include="..\Graphics\SceneNode.cpp" />
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
+    <ClCompile Include="..\Physics\Physics.cpp" />
     <ClCompile Include="..\Scripting\LuaScriptManager.cpp" />
     <ClCompile Include="..\UserInterface\MovementController.cpp" />
     <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
@@ -132,7 +143,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)\Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -140,7 +151,7 @@
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)\Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>

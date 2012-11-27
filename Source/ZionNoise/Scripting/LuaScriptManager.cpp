@@ -10,6 +10,8 @@
 #include "..\GameObject\Component\Render\MeshComponent.h"
 #include "..\GameObject\Component\Render\SkySphereComponent.h"
 #include "..\Graphics\IMeshMaterial.h"
+#include "..\GameObject\Component\Physics\RigidBodyComponent.h"
+#include "..\GameObject\Component\Physics\BoxColliderComponent.h"
 
 namespace zn
 {
@@ -71,7 +73,9 @@ namespace zn
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< IGameObjectComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< MeshComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< SkySphereComponent > ) )&GameObject::AddComponent )
-                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< TransformComponent > ) )&GameObject::AddComponent ),
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< TransformComponent > ) )&GameObject::AddComponent )
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< RigidBodyComponent > ) )&GameObject::AddComponent )
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< BoxColliderComponent > ) )&GameObject::AddComponent ),
             class_< IGameObjectComponent, shared_ptr< IGameObjectComponent > >( "IGameObjectComponent" ),
             class_< TransformComponent, IGameObjectComponent, shared_ptr< TransformComponent > >( "TransformComponent" )
                 .def( constructor<>() )
@@ -80,6 +84,7 @@ namespace zn
             class_< MeshComponent, RenderComponent, shared_ptr< MeshComponent > >( "MeshComponent" )
                 .def( constructor<> () )
                 .def( "LoadGeometryFromFile", &MeshComponent::LoadGeometryFromFile )
+                .def( "CreateCubeGeometry", &MeshComponent::CreateCubeGeometry )
                 .def( "GetMeshMaterial", &MeshComponent::GetMeshMaterial ),
             class_< IMeshMaterial >( "IMeshMaterial" )
                 .def( "VLoadDiffuseTexture", &IMeshMaterial::VLoadDiffuseTexture )
@@ -94,7 +99,11 @@ namespace zn
                     def( "GetGame", &LuaScriptManager::GetGame )
                 ],
             class_< Game >( "Game" )
-                .def( "AddGameObject", &Game::AddGameObject )
+                .def( "AddGameObject", &Game::AddGameObject ),
+            class_< RigidBodyComponent, IGameObjectComponent, shared_ptr< RigidBodyComponent > >( "RigidBodyComponent" )
+                .def( constructor< bool, float >() ),
+            class_< BoxColliderComponent, IGameObjectComponent, shared_ptr< BoxColliderComponent > >( "BoxColliderComponent" )
+                .def( constructor< fVec3 >() )
         ];
     }
 }

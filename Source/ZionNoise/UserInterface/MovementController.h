@@ -24,7 +24,7 @@ namespace zn
     protected:
 	    shared_ptr< SceneNode > m_pControlledObject;
 
-        Mat4x4 m_toWorld, m_fromWorld, m_position;
+        Mat4x4 m_toWorld, m_fromWorld, m_position, m_startingToWorld;
 
         float m_targetYaw;
 	    float m_targetPitch;

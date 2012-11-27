@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////
 
 #include "..\IWindowImpl.h"
-#include <Windows.h>
 #include "..\InputDevices.h"
 
 namespace zn

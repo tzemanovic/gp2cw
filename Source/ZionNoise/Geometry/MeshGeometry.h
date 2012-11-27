@@ -8,8 +8,8 @@
 
 namespace zn
 {
-    typedef vector< Vertex > Verticies;
-    typedef vector< Index > Indicies;
+    typedef vector< Vertex > Vertices;
+    typedef vector< Index > Indices;
 
     class MeshGeometry
     {
@@ -22,11 +22,12 @@ namespace zn
         bool CreateBuffers();
         void SetBuffers();
 
-        uint32 GetIndexCount() { return m_indicies.size(); }
+        uint32 GetIndexCount() { return m_indices.size(); }
+        Vertices& GetVertices() { return m_vertices; }
 
     private:
-        Verticies m_vertices;
-        Indicies m_indicies;
+        Vertices m_vertices;
+        Indices m_indices;
         VertexBuffer* m_pVertexBuffer;
         IndexBuffer* m_pIndexBuffer;
     };

@@ -11,10 +11,10 @@
 
 namespace zn
 {
-    const unsigned int SCREEN_REFRESH_RATE(1000/60);
+    const float SCREEN_REFRESH_RATE( 1000.f / 60.f );
 
     ViewHuman::ViewHuman() : m_pKeyboardHandler( NULL ), m_pMouseHandler( NULL ), m_pFreeCameraController( NULL ),
-        m_nextRender( 0.f )
+        m_currentTime( 0.f )
     {
 
     }
@@ -39,6 +39,8 @@ namespace zn
             m_screenElements.push_front( m_pScene );
 
             Frustum frustum;
+            Mat4x4 camPos = Mat4x4::identity;
+            camPos.SetPosition( fVec3( 0.f, 1.7f, 0.f ) );
             m_pCamera.reset( ZN_NEW CameraNode( &Mat4x4::identity, frustum ) );
             m_pCamera->Init();
             m_pScene->SetCamera( m_pCamera );
@@ -52,8 +54,8 @@ namespace zn
 
     void ViewHuman::VRender( const float deltaMs )
     {
-        m_nextRender -= deltaMs;
-        if( m_nextRender <= 0.f )
+        m_currentTime += deltaMs;
+        if( m_currentTime >= SCREEN_REFRESH_RATE )
         {
             g_pGame->GetRenderer()->PreRender();
 
@@ -64,13 +66,13 @@ namespace zn
 			{
 				if ( ( *i )->IsVisible() )
 				{
-					( *i )->VRender( deltaMs );
+					( *i )->VRender( m_currentTime );
 				}
 			}
 
             g_pGame->GetRenderer()->PostRender();
             g_pGame->GetRenderer()->Present();
-            m_nextRender = SCREEN_REFRESH_RATE;
+            m_currentTime = 0.f;
         }
     }
 
@@ -79,6 +81,11 @@ namespace zn
         if( m_pFreeCameraController )
         {
             m_pFreeCameraController->Update( deltaMs );
+        }
+        for( ScreenElementList::iterator i = m_screenElements.begin(), end = m_screenElements.end(); 
+            i != end; ++i )
+        {
+            ( *i )->VUpdate( deltaMs );
         }
     }
     

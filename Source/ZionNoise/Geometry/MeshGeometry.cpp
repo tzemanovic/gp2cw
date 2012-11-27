@@ -25,7 +25,7 @@ namespace zn
     
     void MeshGeometry::AddIndex( const Index index )
     {
-        m_indicies.push_back( index );
+        m_indices.push_back( index );
     }
 
     bool MeshGeometry::CreateBuffers()
@@ -34,7 +34,7 @@ namespace zn
         m_pIndexBuffer = ZN_NEW IndexBuffer();
         shared_ptr< Renderer > pRenderer = g_pGame->GetRenderer();
         if( pRenderer->CreateVertexBuffer( m_pVertexBuffer, sizeof( Vertex ) * m_vertices.size(), &m_vertices.at( 0 ) ) )
-            if( pRenderer->CreateIndexBuffer( m_pIndexBuffer, sizeof( Index ) * m_indicies.size(), &m_indicies.at( 0 ) ) )
+            if( pRenderer->CreateIndexBuffer( m_pIndexBuffer, sizeof( Index ) * m_indices.size(), &m_indices.at( 0 ) ) )
                 return true;
         return false;
     }

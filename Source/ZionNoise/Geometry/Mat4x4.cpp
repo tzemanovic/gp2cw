@@ -4,6 +4,7 @@
 
 #include "ZionNoiseStd.h"
 #include "Mat4x4.h"
+#include "Quaternion.h"
 
 namespace zn
 {

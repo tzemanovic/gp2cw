@@ -33,7 +33,9 @@ namespace zn
             return false;
         if( !InitGraphics( windowSize ) )
             return false;
+        // init game logic
         m_pGameLogic = ZN_NEW GameLogic();
+        // start timer
         m_pTimer = ZN_NEW Timer();
         m_pTimer->Start();
         return true;
@@ -130,10 +132,9 @@ namespace zn
     
     void Game::Update( float deltaMs )
     {
-        for( ViewList::iterator i = m_pGameLogic->m_viewList.begin(), end = m_pGameLogic->m_viewList.end();
-            i != end; ++i )
+        if( m_pGameLogic )
         {
-            ( *i )->VUpdate( deltaMs );
+            m_pGameLogic->Update( deltaMs );
         }
     }
 }

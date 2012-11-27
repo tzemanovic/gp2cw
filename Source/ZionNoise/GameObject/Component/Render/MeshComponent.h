@@ -14,6 +14,8 @@ namespace zn
 
     class MeshComponent : public RenderComponent
     {
+        friend class ModelLoader;
+
     public:
         MeshComponent();
         virtual ~MeshComponent();
@@ -21,14 +23,17 @@ namespace zn
         virtual bool VInit();
         
         void LoadGeometryFromFile( const string& filename );
-        void AddGeometry( MeshGeometry* pMeshGeometry );
+        void CreateCubeGeometry( const fVec3& dimensions );
         MeshGeometry* GetGeometry( uint32 index );
 
         uint32 GetGeometryCount() { return m_meshGeometries.size(); }
         IMeshMaterial* GetMeshMaterial() { return m_pMeshMaterial; }
 
     protected:
+        void AddGeometry( MeshGeometry* pMeshGeometry );
+
         virtual shared_ptr< SceneNode > VCreateSceneNode();
+        virtual const float VCalculateBoudingSphereRadius();
 
         IMeshMaterial* m_pMeshMaterial;
         MeshGeometryVector m_meshGeometries;

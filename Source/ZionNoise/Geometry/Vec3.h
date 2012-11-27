@@ -90,14 +90,19 @@ namespace zn
             return D3DXVec3Normalize( vec, vec );
         }
         
-        Vec3< D3DVECTOR3TYPE > operator+( const Vec3< D3DVECTOR3TYPE >& vec ) const
+        Vec3< D3DVECTOR3TYPE > operator + ( const Vec3< D3DVECTOR3TYPE >& vec ) const
         {
             return Vec3< D3DVECTOR3TYPE >( x + vec.x, y + vec.y, z + vec.z );
         }
         
-        Vec3< D3DVECTOR3TYPE > operator-( const Vec3< D3DVECTOR3TYPE >& vec ) const
+        Vec3< D3DVECTOR3TYPE > operator - ( const Vec3< D3DVECTOR3TYPE >& vec ) const
         {
             return Vec3< D3DVECTOR3TYPE >( x - vec.x, y - vec.y, z - vec.z );
+        }
+        
+        Vec3< D3DVECTOR3TYPE > operator / ( const float scalar ) const
+        {
+            return Vec3< D3DVECTOR3TYPE >( x / scalar, y / scalar, z / scalar );
         }
 
         template< class TT >

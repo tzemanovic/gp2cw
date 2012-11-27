@@ -47,8 +47,6 @@ using std::tr1::shared_ptr;
 using std::tr1::weak_ptr;
 using std::tr1::static_pointer_cast;
 
-
-
 using std::vector;
 using std::map;
 using std::list;
@@ -78,6 +76,7 @@ shared_ptr< T > MakeStrongPtr( weak_ptr< T > pWeakPtr )
 #   ifndef WIN32_LEAN_AND_MEAN
 #       define WIN32_LEAN_AND_MEAN
 #   endif
+#   include <Windows.h>
 #else
 #   error This operation system is not supported
 #endif
@@ -137,17 +136,33 @@ namespace zn
     extern const float ZN_2PI;
 }
 
+/// HAVOK includes
+#include <Common/Base/hkBase.h>
+#include <Common/Base/Memory/System/Util/hkMemoryInitUtil.h>
+#include <Common/Base/Memory/Allocator/Malloc/hkMallocAllocator.h>
+#include <Common/Base/Monitor/hkMonitorStream.h>
+#include <Common/Base/Monitor/MonitorStreamAnalyzer/hkMonitorStreamAnalyzer.h>
+#include <Common/Base/Fwd/hkcstdio.h>
+// Physics
+#include <Physics/Dynamics/World/hkpWorld.h>
+#include <Physics/Dynamics/Entity/hkpRigidBody.h>
+#include <Physics/Dynamics/Collide/ContactListener/hkpContactListener.h>
+#include <Physics/Collide/Dispatch/hkpAgentRegisterUtil.h>
+#include <Physics/Collide/Shape/Convex/Box/hkpBoxShape.h>
+#include <Physics/Collide/Shape/Convex/Sphere/hkpSphereShape.h>
+#include <Physics/Collide/Shape/Convex/Capsule/hkpCapsuleShape.h>
+#include <Physics/Collide/Shape/Convex/ConvexVertices/hkpConvexVerticesShape.h>
+#include <Physics/Collide/Shape/Convex/ConvexVertices/hkpConvexVerticesConnectivityUtil.h>
+#include <Physics/Utilities/Dynamics/Inertia/hkpInertiaTensorComputer.h>
+// Visual Debugger includes
+#include <Common/Visualize/hkVisualDebugger.h>
+#include <Physics/Utilities/VisualDebugger/hkpPhysicsContext.h>
+// Platform specific initialization
+#include <Common/Base/System/Init/PlatformInit.cxx>
+///end HAVOK includes
+
 #include "..\Utilities\Math.h"
-#include "..\Geometry\Vec2.h"
-#include "..\Geometry\Vec3.h"
-#include "..\Geometry\Vec4.h"
-#include "..\Geometry\Mat4x4.h"
-#include "..\Geometry\Quaternion.h"
-#include "..\Geometry\Vertex.h"
-#include "..\Geometry\Color.h"
-#include "..\Geometry\Vertex.h"
-#include "..\Geometry\Frustum.h"
-#include "..\Geometry\Plane.h"
+#include "..\Geometry\Geometry.h"
 #include "..\Graphics\RenderPass.h"
 
 #include "..\Game\Game.h"

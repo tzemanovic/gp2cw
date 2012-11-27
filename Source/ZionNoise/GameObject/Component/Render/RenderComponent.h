@@ -17,10 +17,14 @@ namespace zn
         virtual bool VInit();
 
     protected:
-        shared_ptr< SceneNode > VGetSceneNode();
 
         virtual shared_ptr< SceneNode > VCreateSceneNode() = 0;
+        virtual const float VCalculateBoudingSphereRadius() = 0;
 
         shared_ptr< SceneNode > m_pSceneNode;
+
+    private:
+        shared_ptr< SceneNode > VGetSceneNode();
+
     };
 }

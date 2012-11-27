@@ -68,12 +68,9 @@ namespace zn
             Tab,
             Space,
             Return,
-            LCtrl,
-            RCtrl,
-            LAlt,
-            RAlt,
-            LShift,
-            RShift,
+            Ctrl,
+            Alt,
+            Shift,
             Undef,
             Count
         };

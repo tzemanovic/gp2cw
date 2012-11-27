@@ -10,24 +10,30 @@ namespace zn
     class D3DQUATERNIONTYPE;
 
     template< class T >
-    class Quaternion
+    class QuaternionDef
     {
     public:
         T x, y, z, w;
 
-        Quaternion() {};
+        QuaternionDef() {};
     };
 
     template<>
-    class Quaternion< D3DQUATERNIONTYPE > : public D3DXQUATERNION
+    class QuaternionDef< D3DQUATERNIONTYPE > : public D3DXQUATERNION
     {
     public:
-        static D3DXQUATERNION* Identity( Quaternion* quat ) { return D3DXQuaternionIdentity( quat ); }
+        QuaternionDef( const float x = 0.0f, const float y = 0.0f, const float z = 0.0f, const float w = 0.0f ) :
+          D3DXQUATERNION( x, y, z, w ) 
+        {
+          
+        }
+
+        static D3DXQUATERNION* Identity( QuaternionDef* quat ) { return D3DXQuaternionIdentity( quat ); }
     };
 
 #ifdef ZN_PLATFORM_WIN32
-    typedef Quaternion< D3DQUATERNIONTYPE > fQuaternion;
+    typedef QuaternionDef< D3DQUATERNIONTYPE > Quaternion;
 #else
-    typedef Quaternion< float > fQuaternion;
+    typedef QuaternionDef< float > Quaternion;
 #endif
 }
