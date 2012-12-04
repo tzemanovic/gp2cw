@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZNTestGame_2010", "ZNTestGame_2010.vcxproj", "{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZionNoise_2010", "..\..\ZionNoise\Msvc\ZionNoise_2010.vcxproj", "{2CB41B8D-4CBE-4838-9602-ACCB8EE16E7E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ZNTestGame_2010", "ZNTestGame_2010.vcxproj", "{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,14 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Debug|Win32.ActiveCfg = Debug|Win32
-		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Debug|Win32.Build.0 = Debug|Win32
-		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Release|Win32.ActiveCfg = Release|Win32
-		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Release|Win32.Build.0 = Release|Win32
 		{2CB41B8D-4CBE-4838-9602-ACCB8EE16E7E}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2CB41B8D-4CBE-4838-9602-ACCB8EE16E7E}.Debug|Win32.Build.0 = Debug|Win32
 		{2CB41B8D-4CBE-4838-9602-ACCB8EE16E7E}.Release|Win32.ActiveCfg = Release|Win32
 		{2CB41B8D-4CBE-4838-9602-ACCB8EE16E7E}.Release|Win32.Build.0 = Release|Win32
+		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Debug|Win32.Build.0 = Debug|Win32
+		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Release|Win32.ActiveCfg = Release|Win32
+		{B76C592D-B049-4F1A-BFAF-6ACE284A1AB7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

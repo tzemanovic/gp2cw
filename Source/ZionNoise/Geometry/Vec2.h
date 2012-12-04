@@ -23,6 +23,11 @@ namespace zn
     {
     public:
         Vec2( const float x = 0, const float y = 0 ) : D3DXVECTOR2( x, y ) {}
+
+        Vec2< D3DVECTOR2TYPE > operator - ( const Vec2< D3DVECTOR2TYPE >& vec ) const
+        {
+            return Vec2< D3DVECTOR2TYPE >( x - vec.x, y - vec.y );
+        }
     };
     
     typedef Vec2< uint16 > uint16Vec2;

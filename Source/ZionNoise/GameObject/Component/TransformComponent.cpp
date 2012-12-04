@@ -27,6 +27,7 @@ namespace zn
             Geometry::MatrixScaling( &m_matScale, m_scale );
             Geometry::MatrixMultiply( &m_transform, &m_matRot, &m_matScale );
             Geometry::MatrixMultiply( &m_transform, &m_transform, &m_matPos );
+            m_changeTransform = false;
         }
     }
 }

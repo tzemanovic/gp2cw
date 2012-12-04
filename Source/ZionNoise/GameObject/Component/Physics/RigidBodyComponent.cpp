@@ -67,14 +67,11 @@ namespace zn
 	        m_pRigidBody->setUserData( hkUlong( m_pGameObject->GetId() ) );
 
 	        //pos and rotate the rigid body to match our object
-	        hkVector4 hkPos;
-            Mat4x4 transform = pTransformComponent->GetTransform();
-            fVec3 pos = transform.GetPosition();
-            Quaternion rot;
-            Geometry::QuaternionRotationMatrix( &rot, &transform );
-	        hkPos.set( pos.x, pos.y, pos.z );
-	        hkQuaternion hkRot;
-	        hkRot.set( rot.x, rot.x, rot.y, rot.w);
+            fVec3 pos = pTransformComponent->GetPosition();
+            Quaternion rot = pTransformComponent->GetRotation();
+	        hkVector4 hkPos( pos.x, pos.y, pos.z );
+	        hkQuaternion hkRot( rot.x, rot.y, rot.z, rot.w );
+            hkRot.normalize();
 	        m_pRigidBody->setPosition( hkPos );
 	        m_pRigidBody->setRotation( hkRot );
 

@@ -14,6 +14,7 @@ namespace zn
         fVec2 texCoord;
         fVec3 normal;
         fVec3 tangent;
+        fVec3 binormal;
     };
 
 #   ifdef ZN_PLATFORM_WIN32
@@ -65,6 +66,16 @@ namespace zn
 	            DXGI_FORMAT_R32G32B32_FLOAT, // format
 	            0, // input slot
 	            48, // aligned byte offset
+	            D3D11_INPUT_PER_VERTEX_DATA, // input slot class
+	            0 // instance data step rate
+            },
+
+            {
+                "BINORMAL", // semantic name
+	            0, // semantic index
+	            DXGI_FORMAT_R32G32B32_FLOAT, // format
+	            0, // input slot
+	            60, // aligned byte offset
 	            D3D11_INPUT_PER_VERTEX_DATA, // input slot class
 	            0 // instance data step rate
             },

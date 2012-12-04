@@ -506,6 +506,7 @@ namespace zn
     {
         POINT lpPoint;
         GetCursorPos( &lpPoint );
+        ScreenToClient( m_wndHandle, &lpPoint );
         return uint16Vec2( uint16( lpPoint.x ), uint16( lpPoint.y ) );
     }
 

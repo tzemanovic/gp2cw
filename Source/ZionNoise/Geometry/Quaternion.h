@@ -29,6 +29,7 @@ namespace zn
         }
 
         static D3DXQUATERNION* Identity( QuaternionDef* quat ) { return D3DXQuaternionIdentity( quat ); }
+        static D3DXQUATERNION* Normalize( QuaternionDef* quat ) { return D3DXQuaternionNormalize( quat, quat ); }
     };
 
 #ifdef ZN_PLATFORM_WIN32

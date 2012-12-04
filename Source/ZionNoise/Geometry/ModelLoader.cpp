@@ -27,37 +27,6 @@ namespace zn
         float halfHeight = dimensions.y / 2.f;
         float halfLength = dimensions.z / 2.f;
         
-        /*Vertex vertices[] = 
-        {
-            // front
-            { fVec3( -halfWidth, halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ) }, //0 front top left
-            { fVec3( halfWidth, halfHeight, -halfLength ), Color(), fVec2( 1.0f, 0.0f ) },//1 front top right
-            { fVec3( -halfWidth, -halfHeight, -halfLength ), Color(), fVec2( 0.0f, 1.0f ) }, //2 front bottom left
-            { fVec3( halfWidth, -halfHeight, -halfLength ),  Color(), fVec2( 1.0f, 1.0f ) }, //3 front bottom right
-
-            //back
-            { fVec3( -halfWidth, halfHeight, halfLength ), Color(), fVec2( 0.0f, 1.0f ) }, //4 back top left
-            { fVec3( halfWidth, halfHeight, halfLength ), Color(), fVec2( 1.0f, 1.0f ) },//5 back top right
-            { fVec3( -halfWidth, -halfHeight, halfLength ), Color(), fVec2( 0.0f, 0.0f ) }, //6 back bottom left
-            { fVec3( halfWidth, -halfHeight, halfLength ), Color(), fVec2( 1.0f, 0.0f ) } //7 back bottom right
-        };
-        Index indices[]=
-        {
-            2, 0, 3, 3, 0, 1,// front face
-            3, 1, 7, 7, 1, 5, // right
-            6, 4, 2, 2, 4, 0, // left
-            7, 5, 6, 6, 5, 4, // back
-            0, 4, 1, 1, 4, 5, // top
-            6, 2, 7, 7, 2, 3 // bottom
-        };
-        for( uint16 i = 0; i < 8; i++ )
-        {
-            pGeometry->AddVertex( vertices[i] );
-        }
-        for( uint16 i = 0; i < 36; i++ )
-        {
-            pGeometry->AddIndex( indices[i] );
-        }*/
         Vertex vertices[] =
         {
             { fVec3( -halfWidth,  halfHeight, -halfLength ), Color(), fVec2( 0.0f, 0.0f ), fVec3::up }, // 0 +Y (top face)
@@ -99,7 +68,7 @@ namespace zn
             17, 16, 18, 18, 16, 19, // front
             21, 20, 22, 22, 20, 23 // back
         };
-        ComputeTangents( vertices, 24 );
+        ComputeTangentsAndBinormals( vertices, 24, indices, 36 );
         for( uint16 i = 0; i < 24; i++ )
         {
             pGeometry->AddVertex( vertices[i] );
@@ -147,7 +116,7 @@ namespace zn
                             FbxVector4* pFbxVerticies = pMesh->GetControlPoints();
                             uint32 vertexCount = pMesh->GetControlPointsCount();
                             uint32 indexCount = pMesh->GetPolygonVertexCount();
-                            int32* pIndicies = pMesh->GetPolygonVertices();
+                            Index* pIndicies = ( Index* )pMesh->GetPolygonVertices();
                             Vertex* pVerticies = new Vertex[vertexCount];
                             for( uint32 k = 0; k < vertexCount; ++k )
                             {
@@ -186,8 +155,8 @@ namespace zn
                                     }
                                 }
                             }
-
-                            ComputeTangents( pVerticies, vertexCount );
+                            
+                            ComputeTangentsAndBinormals( pVerticies, vertexCount, pIndicies, indexCount );
                             for( uint32 k = 0; k < vertexCount; ++k )
                             {
                                 pGeometry->AddVertex( pVerticies[k] );
@@ -205,55 +174,50 @@ namespace zn
         }
     }
 
-    void ModelLoader::ComputeTangents( Vertex* pVerticies, uint32 vertexCount )
+    void ModelLoader::ComputeTangentsAndBinormals( Vertex* pVerticies, uint32 vertexCount, Index* pIndices,
+        uint32 indexCount )
     {
-        uint32 triCount = vertexCount/3;
-	    fVec3* tan1 = ZN_NEW fVec3[vertexCount];
-	    fVec3* tan2 = ZN_NEW fVec3[vertexCount];
+        uint32 triCount = indexCount / 3;
+	    fVec3* tangents = ZN_NEW fVec3[vertexCount];
+	    fVec3* binormals = ZN_NEW fVec3[vertexCount];
 
 	    for( uint32 i = 0; i < triCount; i += 3 )
 	    {
-		    fVec3 v1 = pVerticies[i].position;
-		    fVec3 v2 = pVerticies[i+1].position;
-		    fVec3 v3 = pVerticies[i+2].position;
+		    fVec3 v1 = pVerticies[pIndices[i]].position;
+		    fVec3 v2 = pVerticies[pIndices[i+1]].position;
+		    fVec3 v3 = pVerticies[pIndices[i+2]].position;
 
-            fVec2 uv1 = pVerticies[i].texCoord;
-            fVec2 uv2 = pVerticies[i+1].texCoord;
-            fVec2 uv3 = pVerticies[i+2].texCoord;
-			
-		    float x1 = v2.x - v1.x;
-            float x2 = v3.x - v1.x;
-            float y1 = v2.y - v1.y;
-            float y2 = v3.y - v1.y;
-            float z1 = v2.z - v1.z;
-            float z2 = v3.z - v1.z;
+            fVec2 uv1 = pVerticies[pIndices[i]].texCoord;
+            fVec2 uv2 = pVerticies[pIndices[i+1]].texCoord;
+            fVec2 uv3 = pVerticies[pIndices[i+2]].texCoord;
 
-            float s1 = uv2.x - uv1.x;
-            float s2 = uv3.x - uv1.x;
-            float t1 = uv2.y - uv1.y;
-            float t2 = uv3.y - uv1.y;
+            fVec3 edge1 = v2 - v1;
+            fVec3 edge2 = v3 - v1;
+            fVec2 edge1uv = uv2 - uv1;
+            fVec2 edge2uv = uv3 - uv1;
 
-		    float r = 1.0f / ( s1 * t2 - s2 * t1 );
-		    fVec3 sdir = fVec3( ( t2 * x1 - t1 * x2 ) * r, ( t2 * y1 - t1 * y2 ) * r, ( t2 * z1 - t1 * z2 ) * r );
-            fVec3 tdir = fVec3( ( s1 * x2 - s2 * x1 ) * r, ( s1 * y2 - s2 * y1 ) * r, ( s1 * z2 - s2 * z1 ) * r );
+            float cp = edge1uv.x * edge2uv.y - edge1uv.y * edge2uv.x;
 
-            tan1[i] += sdir;
-            tan1[i+1] += sdir;
-            tan1[i+2] += sdir;
-
-            tan2[i] += tdir;
-            tan2[i+1] += tdir;
-            tan2[i+2] += tdir;
-	    }
-	    for( uint32 i = 0 ; i < vertexCount; i++ )
-	    {
-		    fVec3 n = pVerticies[i].normal;
-		    fVec3 t = tan1[i];
-		    fVec3 tmp = ( t - n * fVec3::Vec3Dot( &n , &t ) );
-            fVec3::Normalize( &tmp );
-		    pVerticies[i].tangent = fVec3( tmp.x, tmp.y, tmp.z );
-	    }
-        ZN_SAFE_DELETE_ARRAY( tan2 );
-        ZN_SAFE_DELETE_ARRAY( tan1 );
+            if ( cp != 0.0f ) {
+                float mul = 1.0f / cp;
+                fVec3 tan = (edge1 * edge2uv.y - edge2 * edge1uv.y) * mul;
+                fVec3 binorm = (edge1 * edge2uv.x - edge2 * edge1uv.x) * mul;
+                tangents[pIndices[i]] += tan;
+                binormals[pIndices[i]] += binorm;
+                tangents[pIndices[i+1]] += tan;
+                binormals[pIndices[i+1]] += binorm;
+                tangents[pIndices[i+2]] += tan;
+                binormals[pIndices[i+2]] += binorm;
+            }
+        }
+        for( uint32 i = 0; i < vertexCount; ++i )
+        {
+            fVec3::Normalize( &tangents[i] );
+            fVec3::Normalize( &binormals[i] );
+            pVerticies[i].tangent = tangents[i];
+            pVerticies[i].binormal = binormals[i];
+        }
+        ZN_SAFE_DELETE_ARRAY( tangents );
+        ZN_SAFE_DELETE_ARRAY( binormals );
     }
 }

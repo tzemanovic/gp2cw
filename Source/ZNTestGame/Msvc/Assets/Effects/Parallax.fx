@@ -89,6 +89,7 @@ struct VS_INPUT
 	float3 normal:NORMAL;
 	float3 tangent:TANGENT;
 	float2 texCoord:TEXCOORD0;
+	float3 binormal:BINORMAL;
 };
 
 struct PS_INPUT
@@ -98,27 +99,27 @@ struct PS_INPUT
 	float3 cameraDirection:VIEWDIR;
 	float3 lightDir:LIGHTDIR;
 	float2 texCoord:TEXCOORD0;
+	float3 tangent:TANGENT;
+	float3 binormal:BINORMAL;
 };
 
 PS_INPUT VS(VS_INPUT input)
 {
-	PS_INPUT output=(PS_INPUT)0;
+	PS_INPUT output = (PS_INPUT)0;
 	
-	float4x4 matViewProjection=mul(matView,matProjection);
-	float4x4 matWorldViewProjection=mul(matWorld,matViewProjection);
-	float4 worldPos=mul(input.pos,matWorld);
+	float4x4 matViewProjection = mul(matView, matProjection);
+	float4x4 matWorldViewProjection = mul(matWorld, matViewProjection);
+	float4 worldPos = mul(input.pos,matWorld);
 	
-	float3x3 worldToTangent;
-	worldToTangent[0]=mul(input.tangent,matWorld);
-	worldToTangent[1]=mul(cross(input.tangent,input.normal),matWorld);
-	worldToTangent[2]=mul(input.normal,matWorld);
-	output.normal=normalize(mul(input.normal,worldToTangent*useBumpTexture + matWorld*!useBumpTexture));
-	output.cameraDirection=mul(normalize(cameraPosition.xyz-worldPos.xyz),worldToTangent*useBumpTexture + matWorld*!useBumpTexture);
-	output.lightDir=mul(lightDirection.xyz,worldToTangent*useBumpTexture + identityMatrix3x3*!useBumpTexture);		
+	output.normal = normalize(mul(input.normal, matWorld));
+	output.cameraDirection = mul(normalize(cameraPosition.xyz-worldPos.xyz), matWorld);	
+	output.lightDir = normalize(lightDirection.xyz);		
+	output.tangent = normalize(mul(input.tangent, matWorld));
+	output.binormal = normalize(mul(input.binormal, matWorld));
 	
-	output.pos=mul(input.pos,matWorldViewProjection);
+	output.pos = mul(input.pos, matWorldViewProjection);
 
-	output.texCoord=input.texCoord;
+	output.texCoord = input.texCoord;
 	return output;
 }
 
@@ -126,26 +127,27 @@ PS_INPUT VS(VS_INPUT input)
 
 float4 PS(PS_INPUT input):SV_TARGET
 {
-	float2 texCoord=input.texCoord;
-	float3 normal=input.normal*!useBumpTexture + normalize((2*(bumpMap.Sample(wrapSampler,texCoord)))-1.0)*useBumpTexture;
+	float heightVal = heightMap.Sample(wrapSampler, input.texCoord).x;
+	float height = scale * heightVal - bias;
+	float2 texCoord = input.texCoord + (height * input.cameraDirection.xy) * useHeightTexture;
 	
-	float heightVal=heightMap.Sample(wrapSampler,input.texCoord).x;
-	float height=scale*heightVal-bias;
-	texCoord += height*input.cameraDirection.xy*useHeightTexture;
+	float3 bumpMapSampled = ((2.0 * (bumpMap.Sample(wrapSampler, texCoord))) - 1.0) * useBumpTexture;
+	
+	float3 normal = normalize(input.normal + float3(bumpMapSampled.r, 0.0, bumpMapSampled.g));
+	
+	float3 lightDir = float3(input.lightDir.x, -input.lightDir.y, input.lightDir.z);
+	
+	float4 diffuseColour = diffuseMaterialColour * !useDiffuseTexture + diffuseMap.Sample(wrapSampler,texCoord)*  useDiffuseTexture;
+	float4 specularColour = specularMaterialColour * !useSpecularTexture + specularMap.Sample(wrapSampler,texCoord) * useSpecularTexture;
 		
-	float3 lightDir=-normalize(input.lightDir);
+	float diffuse = saturate(dot(normal, lightDir));
 	
-	float4 diffuseColour=diffuseMaterialColour*!useDiffuseTexture + diffuseMap.Sample(wrapSampler,texCoord)*useDiffuseTexture;
-	float4 specularColour=specularMaterialColour*!useSpecularTexture + specularMap.Sample(wrapSampler,texCoord)*useSpecularTexture;
-		
-	float diffuse=saturate(dot(normal,lightDir));
+	float3 halfVec = normalize(lightDir + input.cameraDirection);
+	float specular = pow(saturate(dot(normal, halfVec)), specularPower);
 	
-	float3 halfVec=normalize(lightDir+input.cameraDirection);
-	float specular=pow(saturate(dot(normal,halfVec)),specularPower);
-	
-	return ((ambientMaterialColour*ambientLightColour)+
-		(diffuseColour*diffuseLightColour*diffuse)+
-		(specularColour*specularLightColour*specular));
+	return ((ambientMaterialColour * ambientLightColour) +
+		(diffuseColour * diffuseLightColour * diffuse) +
+		(specularColour * specularLightColour * specular));
 }
 
 RasterizerState DisableCulling
@@ -164,10 +166,10 @@ technique10 Render
 {
 	pass P0
 	{
-		SetVertexShader(CompileShader(vs_4_0, VS() ) );
-		SetGeometryShader( NULL );
-		SetPixelShader( CompileShader( ps_4_0,  PS() ) );
+		SetVertexShader(CompileShader(vs_4_0, VS()));
+		SetGeometryShader(NULL);
+		SetPixelShader(CompileShader(ps_4_0, PS()));
 		SetRasterizerState(DisableCulling); 
-		SetDepthStencilState(EnableZBuffering,0);
+		SetDepthStencilState(EnableZBuffering, 0);
 	}
 }

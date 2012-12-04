@@ -79,7 +79,9 @@ namespace zn
             class_< IGameObjectComponent, shared_ptr< IGameObjectComponent > >( "IGameObjectComponent" ),
             class_< TransformComponent, IGameObjectComponent, shared_ptr< TransformComponent > >( "TransformComponent" )
                 .def( constructor<>() )
-                .def( "SetPosition", &TransformComponent::SetPosition ),
+                .def( "SetPosition", &TransformComponent::SetPosition )
+                .def( "SetRotation", ( void( TransformComponent::* )( const fVec3& ) )&TransformComponent::SetRotation )
+                .def( "SetScale", &TransformComponent::SetScale ),
             class_< RenderComponent, IGameObjectComponent, shared_ptr< RenderComponent > >( "RenderComponent" ),
             class_< MeshComponent, RenderComponent, shared_ptr< MeshComponent > >( "MeshComponent" )
                 .def( constructor<> () )

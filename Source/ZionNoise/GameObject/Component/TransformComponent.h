@@ -19,6 +19,11 @@ namespace zn
         void SetPosition( const fVec3& pos ) { m_transform.SetPosition( pos ); m_pos = pos; m_changeTransform = true; }
         const Quaternion& GetRotation() const { return m_rot; }
         void SetRotation( const Quaternion& rot ) { m_rot = rot; m_changeTransform = true; }
+        void SetRotation( const fVec3& rotDegrees ) 
+        { 
+            Geometry::QuaternionRotationVectorDeg( &m_rot, rotDegrees );
+            m_changeTransform = true; 
+        }
         const fVec3& GetScale() const { return m_scale; }
         void SetScale( const fVec3& scale ) { m_scale = scale; m_changeTransform = true; }
         

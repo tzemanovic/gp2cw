@@ -15,6 +15,7 @@ namespace zn
 
     private:
         static void LoadModelFromFBXFile( MeshComponent& meshComponent, const string& filename );
-        static void ComputeTangents( Vertex* pVerticies, uint32 vertexCount );
+        static void ComputeTangentsAndBinormals( Vertex* pVerticies, uint32 vertexCount, Index* pIndices,
+            uint32 indexCount );
     };
 }
