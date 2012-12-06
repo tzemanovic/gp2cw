@@ -146,6 +146,13 @@ namespace zn
 // Physics
 #include <Physics/Dynamics/World/hkpWorld.h>
 #include <Physics/Dynamics/Entity/hkpRigidBody.h>
+#include <Physics/Utilities/CharacterControl/hkpCharacterControl.h>
+#include <Physics/Utilities/CharacterControl/FirstPersonCharacter/hkpFirstPersonCharacter.h>
+#include <Physics/Utilities/CharacterControl/CharacterRigidBody/hkpCharacterRigidBody.h>
+#include <Physics/Utilities/CharacterControl/CharacterRigidBody/hkpCharacterRigidBodyListener.h>
+#include <Physics/Utilities/CharacterControl/StateMachine/hkpCharacterContext.h>
+#include <Physics/Utilities/CharacterControl/StateMachine/hkpCharacterStateManager.h>
+#include <Physics/Utilities/CharacterControl/StateMachine/hkpDefaultCharacterStates.h>
 #include <Physics/Dynamics/Collide/ContactListener/hkpContactListener.h>
 #include <Physics/Collide/Dispatch/hkpAgentRegisterUtil.h>
 #include <Physics/Collide/Shape/Convex/Box/hkpBoxShape.h>

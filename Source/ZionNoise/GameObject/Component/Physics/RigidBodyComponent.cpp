@@ -8,6 +8,8 @@
 #include "..\TransformComponent.h"
 #include "..\..\GameObject.h"
 #include "BoxColliderComponent.h"
+#include "MeshColliderComponent.h"
+#include "CapsuleColliderComponent.h"
 #include "..\..\..\Physics\Physics.h"
 
 namespace zn
@@ -31,15 +33,15 @@ namespace zn
     {
         //Grab the transform
 	    shared_ptr< TransformComponent > pTransformComponent = MakeStrongPtr( m_pGameObject->GetComponent< TransformComponent >( GameObjectComponent::Transform ) );
-        if( !pTransformComponent )
-        {
-            return false;
-        }
-        else
+        if( pTransformComponent )
         {
             //grab the collider. If we have one, then initialise
             shared_ptr< ColliderComponent > pColliderComponent = MakeStrongPtr( m_pGameObject->GetComponent< BoxColliderComponent >( GameObjectComponent::BoxCollider ) );
 	        if( !pColliderComponent )
+                pColliderComponent = MakeStrongPtr( m_pGameObject->GetComponent< MeshColliderComponent >( GameObjectComponent::MeshCollider ) );
+            if( !pColliderComponent )
+                pColliderComponent = MakeStrongPtr( m_pGameObject->GetComponent< CapsuleColliderComponent >( GameObjectComponent::CapsuleCollider ) );
+            if( !pColliderComponent )
                 return false;
 
             if ( !pColliderComponent->IsShapeCreated() )
@@ -80,6 +82,7 @@ namespace zn
 
             return true;
         }
+        return false;
     }
 
     /*void RigidBodyComponent::VUpdate( float deltaMs )

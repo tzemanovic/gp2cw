@@ -3,6 +3,7 @@
 ////////////////////////////////////////////////////
 
 #include "ZNTestGameStd.h"
+#include "ZNTestGame.h"
 
 int main()
 {
@@ -12,16 +13,29 @@ int main()
 #   ifdef _DEBUG
     initialized = game.Init( "ZN Test Game", uint16Vec2( 1024, 768 ), WindowStyle::Window );
 #   else
-    initialized = game.Init( "ZN Test Game", uint16Vec2( 1024, 768 ), WindowStyle::Fullscreen );
+    //initialized = game.Init( "ZN Test Game", uint16Vec2( 1024, 768 ), WindowStyle::Fullscreen );
+    initialized = game.Init( "ZN Test Game", uint16Vec2( 1024, 768 ), WindowStyle::Window );
 #   endif
 
     if( initialized )
     {
-        shared_ptr< IView > pView = shared_ptr< IView >( ZN_NEW ViewHuman() );
-        game.AddView( pView, 0 );
+        //shared_ptr< IView > pView = shared_ptr< IView >( ZN_NEW ViewHuman() );
+        //game.AddView( pView );
 
         LuaScriptManager* lua = LuaScriptManager::Get();
         lua->Init();
+        lua->GetGameScope()->def( "AddView", ( void( Game::* )( shared_ptr< ViewHumanFirstPerson > ) )&Game::AddView );
+        lua->Bind();
+        lua_State* pLuaState = lua->GetLuaState();
+        module( pLuaState )
+	    [
+            class_< ViewHumanFirstPerson, ViewHuman, shared_ptr< ViewHumanFirstPerson > >( "ViewHumanFirstPerson" )
+                .def( constructor<>() )
+                .def( "SetOwner", &ViewHumanFirstPerson::VSetOwner )
+                .def( "SetControlledObject", &ViewHumanFirstPerson::SetControlledObject )
+        ];
+
+
         lua->ExecuteFile( "Assets\\Scripts\\game.lua" );
 
         try

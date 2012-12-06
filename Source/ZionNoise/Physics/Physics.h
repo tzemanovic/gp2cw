@@ -47,4 +47,6 @@ namespace zn
         RigidBodyMap m_rigidBodies;
         float m_currentTime;
     };
+
+    extern const float PHYSICS_UPDATE_TIME;
 }

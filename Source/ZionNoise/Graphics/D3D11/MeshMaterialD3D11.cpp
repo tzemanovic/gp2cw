@@ -10,7 +10,7 @@ namespace zn
 {
     MeshMaterialD3D11::MeshMaterialD3D11( const string& filename ) : m_techniqueName( "Render" ), m_pEffect( NULL ), m_pTechnique( NULL ),
         m_pInputLayout( NULL ), m_pDiffuseTexture( NULL ), m_pSpecularTexture( NULL ), m_pBumpTexture( NULL ), 
-        m_pParallaxTexture( NULL ), m_pEnvMapTexture( NULL ), 
+        m_pParallaxTexture( NULL ), m_pEnvMapTexture( NULL ), m_textureRepeat( 1.0f, 1.0f ), 
         m_ambientMaterial( Color( 0.5f, 0.5f, 0.5f, 1.0f ) ), m_diffuseMaterial( Color( 0.8f, 0.8f, 0.8f, 1.0f ) ),
         m_specularMaterial( Color( 1.0f, 1.0f, 1.0f, 1.0f ) ), m_specularPower( 25.f )
     {
@@ -56,6 +56,7 @@ namespace zn
 	            m_pDiffuseMaterialVariable = m_pEffect->GetVariableByName( "diffuseMaterialColour" )->AsVector();
 	            m_pSpecularMaterialVariable = m_pEffect->GetVariableByName( "specularMaterialColour" )->AsVector();
 	            m_pSpecularPowerVariable = m_pEffect->GetVariableByName( "specularPower" )->AsScalar();
+	            m_pTextureRepeatVariable = m_pEffect->GetVariableByName( "textureRepeat" )->AsVector();
 	            // camera
 	            m_pCameraPositionVariable = m_pEffect->GetVariableByName( "cameraPosition" )->AsVector();
                 // booleans

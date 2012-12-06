@@ -24,6 +24,7 @@ namespace zn
 
         uint32 GetIndexCount() { return m_indices.size(); }
         Vertices& GetVertices() { return m_vertices; }
+        uint32 GetVertexCount() { return m_vertices.size(); }
 
     private:
         Vertices m_vertices;

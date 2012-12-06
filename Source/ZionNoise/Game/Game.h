@@ -27,8 +27,8 @@ namespace zn
         // run game loop
         void Run();
         // add view
-        void AddView( shared_ptr< IView > pView, GameObjectId gameObjectId );
-        void AddSceneNode( shared_ptr< SceneNode > pSceneNode );
+        void AddView( shared_ptr< IView > pView );
+        void AddSceneNode( GameObjectId id, shared_ptr< SceneNode > pSceneNode );
         const uint16Vec2& GetWindowSize() const;
         void AddGameObject( shared_ptr< GameObject > pGameObject );
 

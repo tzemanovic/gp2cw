@@ -7,7 +7,8 @@
 
 namespace zn
 {
-    BoxColliderComponent::BoxColliderComponent( const fVec3& size ) : ColliderComponent( GameObjectComponent::BoxCollider )
+    BoxColliderComponent::BoxColliderComponent( const fVec3& size ) 
+        : ColliderComponent( GameObjectComponent::BoxCollider )
     {
         m_halfSize = size / 2.f;  
     }

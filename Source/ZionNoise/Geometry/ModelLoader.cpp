@@ -10,12 +10,12 @@
 
 namespace zn
 {
-    void ModelLoader::LoadModelFromFile( MeshComponent& meshComponent, const string& filename )
+    void ModelLoader::LoadModelFromFile( MeshComponent& meshComponent, const string& filename, const float scale )
     {
         string fileExt = filename.substr( filename.find( '.' ) + 1 );
         if( fileExt.compare( "fbx" ) == 0 )
         {
-            LoadModelFromFBXFile( meshComponent, filename );
+            LoadModelFromFBXFile( meshComponent, filename, scale );
         }
     }
     
@@ -80,7 +80,7 @@ namespace zn
         meshComponent.AddGeometry( pGeometry );
     }
 
-    void ModelLoader::LoadModelFromFBXFile( MeshComponent& meshComponent, const string& filename )
+    void ModelLoader::LoadModelFromFBXFile( MeshComponent& meshComponent, const string& filename, const float scale )
     {
         static FbxManager* pManager = FbxManager::Create();
         static FbxIOSettings* pSettings = FbxIOSettings::Create( pManager, IOSROOT );
@@ -120,9 +120,9 @@ namespace zn
                             Vertex* pVerticies = new Vertex[vertexCount];
                             for( uint32 k = 0; k < vertexCount; ++k )
                             {
-                                pVerticies[k].position.x = float( pFbxVerticies[k][0] );
-                                pVerticies[k].position.y = float( pFbxVerticies[k][1] );
-                                pVerticies[k].position.z = float( pFbxVerticies[k][2] );
+                                pVerticies[k].position.x = float( pFbxVerticies[k][0] * scale );
+                                pVerticies[k].position.y = float( pFbxVerticies[k][1] * scale );
+                                pVerticies[k].position.z = float( pFbxVerticies[k][2] * scale );
                             }
 
                             for( int32 polyIndex = 0; polyIndex < pMesh->GetPolygonCount(); ++polyIndex )

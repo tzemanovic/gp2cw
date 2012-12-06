@@ -24,12 +24,18 @@ namespace zn
         virtual ~ViewHuman();
 
         void SetRenderer( shared_ptr< Renderer > pRenderer );
+        void SetCameraOffset( const fVec3& offset );
 
         virtual void VInit();
         virtual void VRender( const float deltaMs );
         virtual void VUpdate( const float deltaMs );
         virtual const bool VProcessMessage( const Message& message );
-        virtual void VAddSceneNode( shared_ptr< SceneNode > pSceneNode );
+        virtual void VAddSceneNode( GameObjectId id, shared_ptr< SceneNode > pSceneNode );
+        virtual void VSetOwner( GameObjectId id ) { IView::VSetOwner( id ); }
+        void SetAmbientLightColor( const Color& color ) { m_pScene->SetAmbientLightColor( color ); }
+        void SetDiffuseLightColor( const Color& color ) { m_pScene->SetDiffuseLightColor( color ); }
+        void SetSpecularLightColor( const Color& color ) { m_pScene->SetSpecularLightColor( color ); }
+        void SetLightDirection( const fVec3& dir ) { m_pScene->SetLightDirection( dir ); }
 
     protected:
         shared_ptr< ScreenElementScene > m_pScene;

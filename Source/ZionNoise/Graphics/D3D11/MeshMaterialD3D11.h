@@ -60,6 +60,11 @@ namespace zn
         {
             m_pCameraPositionVariable->SetFloatVector( ( float* )( &dir ) );
         }
+        
+        void VSetTextureRepeat( const fVec2& repeat )
+        {
+            m_textureRepeat = repeat;
+        }
 
         void VSetTextures()
         {
@@ -77,6 +82,8 @@ namespace zn
 			    m_pUseBumpTextureVariable->SetBool( true );
 		    if( m_pParallaxTexture )
 			    m_pUseParallaxTextureVariable->SetBool( true );
+
+            m_pTextureRepeatVariable->SetFloatVector( ( float* )( &m_textureRepeat ) );
         }
 
         void VSetMaterials()
@@ -131,6 +138,7 @@ namespace zn
 	    ID3D11ShaderResourceView* m_pBumpTexture;
 	    ID3D11ShaderResourceView* m_pParallaxTexture;
         ID3D11ShaderResourceView* m_pEnvMapTexture;
+        fVec2 m_textureRepeat;
 	    // Texture switches
 	    ID3DX11EffectScalarVariable* m_pUseDiffuseTextureVariable;
 	    ID3DX11EffectScalarVariable* m_pUseSpecularTextureVariable;
@@ -147,6 +155,7 @@ namespace zn
 	    ID3DX11EffectVectorVariable* m_pDiffuseMaterialVariable;
 	    ID3DX11EffectVectorVariable* m_pSpecularMaterialVariable;
 	    ID3DX11EffectScalarVariable* m_pSpecularPowerVariable;
+        ID3DX11EffectVectorVariable* m_pTextureRepeatVariable;
 	    // Camera
 	    ID3DX11EffectVectorVariable* m_pCameraPositionVariable;
 	    // Material colours

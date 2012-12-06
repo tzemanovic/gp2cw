@@ -3,25 +3,18 @@
 ////////////////////////////////////////////////////
 
 #include "ZionNoiseStd.h"
-#include "LuaScriptManager.h"
-#include "..\GameObject\GameObject.h"
-#include "..\GameObject\Component\IGameObjectComponent.h"
-#include "..\GameObject\Component\TransformComponent.h"
-#include "..\GameObject\Component\Render\MeshComponent.h"
-#include "..\GameObject\Component\Render\SkySphereComponent.h"
-#include "..\Graphics\IMeshMaterial.h"
-#include "..\GameObject\Component\Physics\RigidBodyComponent.h"
-#include "..\GameObject\Component\Physics\BoxColliderComponent.h"
+#include "..\Main\ZionNoise.h"
 
 namespace zn
 {
-    LuaScriptManager::LuaScriptManager() : m_pLuaState( NULL )
+    LuaScriptManager::LuaScriptManager() : m_pLuaState( NULL ), gameScope( NULL )
     {
 
     }
 
     LuaScriptManager::~LuaScriptManager()
     {
+        ZN_SAFE_DELETE( gameScope );
         if( m_pLuaState )
         {
             lua_close( m_pLuaState );
@@ -35,14 +28,22 @@ namespace zn
 	    luabind::open( m_pLuaState );
         if( !m_pLuaState )
             return false;
+        Prebind();
 
-        Bind();
         return true;
     }
 
     void LuaScriptManager::ExecuteFile( const string& filename )
     {
         luaL_dofile( m_pLuaState, filename.c_str() );
+    }
+
+    void LuaScriptManager::Prebind()
+    {
+        gameScope = ZN_NEW class_< Game >( "Game" );
+        gameScope->def( "AddGameObject", &Game::AddGameObject );
+        gameScope->def( "AddView", ( void( Game::* )( shared_ptr< IView > ) )&Game::AddView );
+        gameScope->def( "AddView", ( void( Game::* )( shared_ptr< ViewHuman > ) )&Game::AddView );
     }
 
     void LuaScriptManager::Bind()
@@ -63,11 +64,35 @@ namespace zn
         */
         module( m_pLuaState )
 	    [
-            class_< fVec3 >( "fVec3" )
+            class_< IView, shared_ptr< IView > >( "IView" ),
+            class_< ViewHuman, IView, shared_ptr< ViewHuman > >( "ViewHuman" )
+                .def( constructor<>() )
+                .def( "SetCameraOffset", &ViewHuman::SetCameraOffset )
+                .def( "SetAmbientLightColor", &ViewHuman::SetAmbientLightColor )
+                .def( "SetDiffuseLightColor", &ViewHuman::SetDiffuseLightColor )
+                .def( "SetSpecularLightColor", &ViewHuman::SetSpecularLightColor )
+                .def( "SetLightDirection", &ViewHuman::SetLightDirection ),
+            class_< fVec2 >( "Vec2" )
+                .def( constructor< float, float >() )
+                .def_readwrite( "x", &fVec2::x )
+                .def_readwrite( "y", &fVec2::y ),
+            class_< fVec3 >( "Vec3" )
                 .def( constructor< float, float, float >() )
                 .def_readwrite( "x", &fVec3::x )
                 .def_readwrite( "y", &fVec3::y )
                 .def_readwrite( "z", &fVec3::z ),
+            class_< fVec4 >( "Vec4" )
+                .def( constructor< float, float, float, float >() )
+                .def_readwrite( "x", &fVec4::x )
+                .def_readwrite( "y", &fVec4::y )
+                .def_readwrite( "z", &fVec4::z )
+                .def_readwrite( "w", &fVec4::w ),
+            class_< Color >( "Color" )
+                .def( constructor< float, float, float, float >() )
+                .def_readwrite( "r", &Color::r )
+                .def_readwrite( "g", &Color::g )
+                .def_readwrite( "b", &Color::b )
+                .def_readwrite( "a", &Color::a ),
             class_< GameObject, shared_ptr< GameObject > >( "GameObject" )
                 .def( constructor< int >() )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< IGameObjectComponent > ) )&GameObject::AddComponent )
@@ -75,7 +100,9 @@ namespace zn
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< SkySphereComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< TransformComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< RigidBodyComponent > ) )&GameObject::AddComponent )
-                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< BoxColliderComponent > ) )&GameObject::AddComponent ),
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< BoxColliderComponent > ) )&GameObject::AddComponent )
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< MeshColliderComponent > ) )&GameObject::AddComponent )
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< FirstPersonCharacterComponent > ) )&GameObject::AddComponent ),
             class_< IGameObjectComponent, shared_ptr< IGameObjectComponent > >( "IGameObjectComponent" ),
             class_< TransformComponent, IGameObjectComponent, shared_ptr< TransformComponent > >( "TransformComponent" )
                 .def( constructor<>() )
@@ -89,10 +116,11 @@ namespace zn
                 .def( "CreateCubeGeometry", &MeshComponent::CreateCubeGeometry )
                 .def( "GetMeshMaterial", &MeshComponent::GetMeshMaterial ),
             class_< IMeshMaterial >( "IMeshMaterial" )
-                .def( "VLoadDiffuseTexture", &IMeshMaterial::VLoadDiffuseTexture )
-                .def( "VLoadSpecularTexture", &IMeshMaterial::VLoadSpecularTexture )
-                .def( "VLoadBumpTexture", &IMeshMaterial::VLoadBumpTexture )
-                .def( "VLoadParallaxTexture", &IMeshMaterial::VLoadParallaxTexture ),
+                .def( "LoadDiffuseTexture", &IMeshMaterial::VLoadDiffuseTexture )
+                .def( "LoadSpecularTexture", &IMeshMaterial::VLoadSpecularTexture )
+                .def( "LoadBumpTexture", &IMeshMaterial::VLoadBumpTexture )
+                .def( "LoadParallaxTexture", &IMeshMaterial::VLoadParallaxTexture )
+                .def( "SetTextureRepeat", &IMeshMaterial::VSetTextureRepeat ),
             class_< SkySphereComponent, MeshComponent, shared_ptr< SkySphereComponent > >( "SkySphereComponent" )
                 .def( constructor< string >() ),
             class_< LuaScriptManager >( "LuaScriptManager" )
@@ -100,12 +128,17 @@ namespace zn
 			    [
                     def( "GetGame", &LuaScriptManager::GetGame )
                 ],
-            class_< Game >( "Game" )
-                .def( "AddGameObject", &Game::AddGameObject ),
+            *gameScope,
             class_< RigidBodyComponent, IGameObjectComponent, shared_ptr< RigidBodyComponent > >( "RigidBodyComponent" )
                 .def( constructor< bool, float >() ),
+            class_< FirstPersonCharacterComponent, RigidBodyComponent, shared_ptr< FirstPersonCharacterComponent > >( "FirstPersonCharacterComponent" )
+                .def( constructor< CharacterControllerInfo >() ),
+            class_< CharacterControllerInfo >( "CharacterControllerInfo" )
+                .def( constructor<>() ),
             class_< BoxColliderComponent, IGameObjectComponent, shared_ptr< BoxColliderComponent > >( "BoxColliderComponent" )
-                .def( constructor< fVec3 >() )
+                .def( constructor< fVec3 >() ),
+            class_< MeshColliderComponent, IGameObjectComponent, shared_ptr< MeshColliderComponent > >( "MeshColliderComponent" )
+                .def( constructor<>() )
         ];
     }
 }

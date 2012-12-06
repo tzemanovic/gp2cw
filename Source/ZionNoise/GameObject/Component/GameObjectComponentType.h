@@ -19,6 +19,7 @@ namespace zn
             CylinderCollider,
             MeshCollider,
             RigidBody,
+            FirstPersonCharacter,
             Count
         };
     }

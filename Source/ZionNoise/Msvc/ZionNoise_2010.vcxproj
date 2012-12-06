@@ -14,7 +14,10 @@
     <ClInclude Include="..\GameObject\Component\GameObjectComponentType.h" />
     <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h" />
     <ClInclude Include="..\GameObject\Component\Physics\BoxColliderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\CapsuleColliderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\FirstPersonCharacterComponent.h" />
     <ClInclude Include="..\GameObject\Component\Physics\ColliderComponent.h" />
+    <ClInclude Include="..\GameObject\Component\Physics\MeshColliderComponent.h" />
     <ClInclude Include="..\GameObject\Component\Physics\RigidBodyComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\MeshComponent.h" />
     <ClInclude Include="..\GameObject\Component\Render\RenderComponent.h" />
@@ -56,6 +59,8 @@
     <ClInclude Include="..\Physics\ContactListener.h" />
     <ClInclude Include="..\Physics\Physics.h" />
     <ClInclude Include="..\Scripting\LuaScriptManager.h" />
+    <ClInclude Include="..\UserInterface\CharacterControllerInfo.h" />
+    <ClInclude Include="..\UserInterface\FirstPersonController.h" />
     <ClInclude Include="..\UserInterface\IKeyboardHandler.h" />
     <ClInclude Include="..\UserInterface\IMouseHandler.h" />
     <ClInclude Include="..\UserInterface\MovementController.h" />
@@ -77,7 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GameObject\Component\Physics\BoxColliderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Physics\CapsuleColliderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Physics\FirstPersonCharacterComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Physics\ColliderComponent.cpp" />
+    <ClCompile Include="..\GameObject\Component\Physics\MeshColliderComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Physics\RigidBodyComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\MeshComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Render\RenderComponent.cpp" />
@@ -105,6 +113,7 @@
     <ClCompile Include="..\Main\ZionNoiseMain.cpp" />
     <ClCompile Include="..\Physics\Physics.cpp" />
     <ClCompile Include="..\Scripting\LuaScriptManager.cpp" />
+    <ClCompile Include="..\UserInterface\FirstPersonController.cpp" />
     <ClCompile Include="..\UserInterface\MovementController.cpp" />
     <ClCompile Include="..\UserInterface\ViewHuman.cpp" />
     <ClCompile Include="..\Utilities\ITimerImpl.cpp" />
@@ -161,7 +170,7 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_CONFIG_SIMD=1;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>ZionNoiseStd.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -182,7 +191,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_CONFIG_SIMD=1;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>ZionNoiseStd.h</PrecompiledHeaderFile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>

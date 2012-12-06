@@ -31,6 +31,11 @@ namespace zn
         m_pRenderer = pRenderer;
     }
 
+    void ViewHuman::SetCameraOffset( const fVec3& offset )
+    {
+        m_pCamera->SetOffset( offset );
+    }
+
     void ViewHuman::VInit()
     {
         if( m_pRenderer )
@@ -44,6 +49,7 @@ namespace zn
             m_pCamera.reset( ZN_NEW CameraNode( &Mat4x4::identity, frustum ) );
             m_pCamera->Init();
             m_pScene->SetCamera( m_pCamera );
+            m_pScene->AddSceneNode( NO_GAME_OBJECT_ID, m_pCamera );
 
             m_pFreeCameraController = ZN_NEW MovementController( m_pCamera, 0, 0 );
             m_pKeyboardHandler = m_pFreeCameraController;
@@ -115,8 +121,8 @@ namespace zn
         return result;
     }
 
-    void ViewHuman::VAddSceneNode( shared_ptr< SceneNode > pSceneNode )
+    void ViewHuman::VAddSceneNode( GameObjectId id, shared_ptr< SceneNode > pSceneNode )
     {
-        m_pScene->AddSceneNode( pSceneNode );
+        m_pScene->AddSceneNode( id, pSceneNode );
     }
 }

@@ -25,6 +25,7 @@ namespace zn
         virtual void VSetSpecularLightColor( const Color& color ) = 0;
         virtual void VSetLightDirection( const fVec3& dir ) = 0;
         virtual void VSetCameraPosition( const fVec3& dir ) = 0;
+        virtual void VSetTextureRepeat( const fVec2& repeat ) = 0;
         virtual void VSetTextures() = 0;
         virtual void VSetMaterials() = 0;
         virtual void VBindInputLayout() = 0;

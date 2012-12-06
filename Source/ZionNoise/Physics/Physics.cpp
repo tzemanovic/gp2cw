@@ -110,7 +110,7 @@ namespace zn
         m_currentTime += deltaMs;
         if( m_currentTime >= PHYSICS_UPDATE_TIME )
         {
-            m_pWorld->stepDeltaTime( PHYSICS_UPDATE_TIME / 1000.f );
+            m_pWorld->stepDeltaTime( PHYSICS_UPDATE_TIME * 0.001f );
 		    //Update visual debugger
 		    if( m_useVisualDebugger )
 			    m_pVisualDebugger->step();

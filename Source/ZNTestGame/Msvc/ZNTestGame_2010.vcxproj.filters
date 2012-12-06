@@ -5,11 +5,17 @@
     <ClCompile Include="..\Main\ZNTestGameMain.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="..\UserInterface\ViewHumanFirstPerson.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZNTestGameStd.h" />
     <ClInclude Include="..\UserInterface\ViewHumanFirstPerson.h">
       <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Main\ZNTestGame.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

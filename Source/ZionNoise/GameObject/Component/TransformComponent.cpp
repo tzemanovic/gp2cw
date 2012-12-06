@@ -11,6 +11,7 @@ namespace zn
         m_changeTransform( false )
     {
         Mat4x4::Identity( &m_transform );
+        Mat4x4::Identity( &m_transformNoScale );
         Mat4x4::Identity( &m_matScale );
         Mat4x4::Identity( &m_matPos );
         Mat4x4::Identity( &m_matRot );
@@ -27,6 +28,7 @@ namespace zn
             Geometry::MatrixScaling( &m_matScale, m_scale );
             Geometry::MatrixMultiply( &m_transform, &m_matRot, &m_matScale );
             Geometry::MatrixMultiply( &m_transform, &m_transform, &m_matPos );
+            Geometry::MatrixMultiply( &m_transformNoScale, &m_matRot, &m_matPos );
             m_changeTransform = false;
         }
     }

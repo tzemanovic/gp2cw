@@ -188,6 +188,21 @@
     <ClInclude Include="..\Physics\ContactListener.h">
       <Filter>Physics</Filter>
     </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\MeshColliderComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\CapsuleColliderComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\Physics\FirstPersonCharacterComponent.h">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\FirstPersonController.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\UserInterface\CharacterControllerInfo.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -301,6 +316,18 @@
     </ClCompile>
     <ClCompile Include="..\Physics\Physics.cpp">
       <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\MeshColliderComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\CapsuleColliderComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\Physics\FirstPersonCharacterComponent.cpp">
+      <Filter>GameObject\Component\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UserInterface\FirstPersonController.cpp">
+      <Filter>UserInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -49,7 +49,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir);$(SolutionDir)..\..\ZionNoise\3rdParty\Effects11\Inc;$(SolutionDir)..\..\ZionNoise\3rdParty\boost\include;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\include;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(HAVOKSDK_DIR)Lib\win32_vs2010\debug_multithreaded_dll</LibraryPath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(HAVOKSDK_DIR)Lib\win32_vs2010\release_multithreaded_dll</LibraryPath>
     <OutDir>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
@@ -88,11 +88,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Main\ZNTestGame.h" />
     <ClInclude Include="..\UserInterface\ViewHumanFirstPerson.h" />
     <ClInclude Include="ZNTestGameStd.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Main\ZNTestGameMain.cpp" />
+    <ClCompile Include="..\UserInterface\ViewHumanFirstPerson.cpp" />
     <ClCompile Include="ZNTestGameStd.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

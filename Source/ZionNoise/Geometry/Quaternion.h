@@ -22,8 +22,14 @@ namespace zn
     class QuaternionDef< D3DQUATERNIONTYPE > : public D3DXQUATERNION
     {
     public:
-        QuaternionDef( const float x = 0.0f, const float y = 0.0f, const float z = 0.0f, const float w = 0.0f ) :
-          D3DXQUATERNION( x, y, z, w ) 
+        QuaternionDef( const float x = 0.0f, const float y = 0.0f, const float z = 0.0f, const float w = 0.0f ) 
+            : D3DXQUATERNION( x, y, z, w ) 
+        {
+          
+        }
+
+        QuaternionDef( const D3DXQUATERNION& quat ) 
+            : D3DXQUATERNION( quat.x, quat.y, quat.z, quat.w ) 
         {
           
         }

@@ -31,6 +31,11 @@ namespace zn
                 Math::DegreesToRadians( vec.x ), Math::DegreesToRadians( vec.z ) );
         }
 
+        D3DXQUATERNION* QuaternionRotationAxis( Quaternion* pOut, const fVec3& axis, const float angle )
+        {
+            return D3DXQuaternionRotationAxis( pOut, &axis, angle );
+        }
+
         D3DXMATRIX* MatrixRotationQuaternion( Mat4x4* pMat, const Quaternion* pQuaternion )
         {
             return D3DXMatrixRotationQuaternion( pMat, pQuaternion );
@@ -49,6 +54,11 @@ namespace zn
         D3DXMATRIX* MatrixScaling( Mat4x4* pOut, const fVec3& scale )
         {
             return D3DXMatrixScaling( pOut, scale.x, scale.y, scale.z );
+        }
+
+        D3DXMATRIX* MatrixLookAtLH( Mat4x4* pOut, const fVec3& eye, const fVec3& target, const fVec3& up )
+        {
+            return D3DXMatrixLookAtLH( pOut, &eye, &target, &up );
         }
 
 #       endif

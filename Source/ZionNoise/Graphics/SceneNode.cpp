@@ -15,11 +15,15 @@
 namespace zn
 {
     SceneNode::SceneNode( const GameObjectId gameObjectId, RenderComponent* pRenderComponent, 
-        const RenderPassType renderPass, const Mat4x4* pToWorld, const Mat4x4* pFromWorld ) 
+        const RenderPassType renderPass, const Mat4x4* pToWorld, const Mat4x4* pToWorldNoScale ) 
         : m_gameObjectId( gameObjectId ), m_pParent( NULL ), m_pRenderComponent( pRenderComponent ),
         m_renderPass( renderPass ), m_radius( 0.f )
     {
-        SetTransform( pToWorld, pFromWorld );
+        SetTransform( pToWorld );
+        if( pToWorldNoScale )
+            m_toWorldNoScale = *pToWorldNoScale;
+        else
+            m_toWorldNoScale = *pToWorld;
     }
 
     SceneNode::~SceneNode()
@@ -70,6 +74,7 @@ namespace zn
             if( pTransformComponent )
             {
                 m_toWorld = pTransformComponent->GetTransform();
+                m_toWorldNoScale = pTransformComponent->GetTransformNoScale();
             }
         }
     }
@@ -89,10 +94,10 @@ namespace zn
                     pMeshMaterial->VSetView( pCamera->GetView() );
                     pMeshMaterial->VSetWorld( m_toWorld );
 
-                    pMeshMaterial->VSetAbientLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
-                    pMeshMaterial->VSetDiffuseLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
-			        pMeshMaterial->VSetSpecularLightColor( Color( 0.5f, 0.5f, 0.5f, 1.0f ) );
-			        pMeshMaterial->VSetLightDirection( fVec3( 0.1f, -1.0f, 0.2f ) );
+                    pMeshMaterial->VSetAbientLightColor( pScene->GetAmbientLightColor() );
+                    pMeshMaterial->VSetDiffuseLightColor( pScene->GetDiffuseLightColor() );
+			        pMeshMaterial->VSetSpecularLightColor( pScene->GetSpecularLightColor() );
+			        pMeshMaterial->VSetLightDirection( pScene->GetLightDirection() );
 			        
                     pMeshMaterial->VSetCameraPosition( pCamera->GetWorldPosition() );
 

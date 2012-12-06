@@ -1,6 +1,6 @@
 #pragma once
 ////////////////////////////////////////////////////
-// mouse handler interface
+// movement controller
 ////////////////////////////////////////////////////
 
 #include "IKeyboardHandler.h"
@@ -29,9 +29,7 @@ namespace zn
         float m_targetYaw;
 	    float m_targetPitch;
 	    float m_yaw;
-	    float m_yawOnDown;
 	    float m_pitch;
-	    float m_pitchOnDown;
 	    float m_maxSpeed;
 	    float m_currentSpeed;
         

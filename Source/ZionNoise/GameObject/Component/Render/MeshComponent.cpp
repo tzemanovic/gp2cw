@@ -61,9 +61,9 @@ namespace zn
         return false;
     }
 
-    void MeshComponent::LoadGeometryFromFile( const string& filename )
+    void MeshComponent::LoadGeometryFromFile( const string& filename, const float scale )
     {
-        ModelLoader::LoadModelFromFile( *this, filename );
+        ModelLoader::LoadModelFromFile( *this, filename, scale );
     }
 
     void MeshComponent::CreateCubeGeometry( const fVec3& dimensions )
@@ -92,7 +92,7 @@ namespace zn
             return shared_ptr< SceneNode >();
         }
 
-        shared_ptr< SceneNode > pSceneNode( ZN_NEW SceneNode( m_pGameObject->GetId(), this, RenderPass::GameObjects, &pTransformComponent->GetTransform() ) );
+        shared_ptr< SceneNode > pSceneNode( ZN_NEW SceneNode( m_pGameObject->GetId(), this, RenderPass::GameObjects, &pTransformComponent->GetTransform(), &pTransformComponent->GetTransformNoScale() ) );
         pSceneNode->SetRadius( VCalculateBoudingSphereRadius() );
 
         return pSceneNode;

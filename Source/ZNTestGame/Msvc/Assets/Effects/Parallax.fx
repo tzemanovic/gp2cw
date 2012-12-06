@@ -6,12 +6,12 @@ float4x4 matProjection:PROJECTION<string UIWidget="None";>;
 float4 ambientMaterialColour<
 	string UIName="Ambient Material";
 	string UIWidget="Color";
-> =float4(0.5f,0.5f,0.5f,1.0f);
+> =float4(1.0f,1.0f,1.0f,1.0f);
 
 float4 diffuseMaterialColour<
 	string UIName="Diffuse Material";
 	string UIWidget="Color";
-> =float4(0.8f,0.8f,0.8f,1.0f);
+> =float4(1.0f,1.0f,1.0f,1.0f);
 
 float4 specularMaterialColour<
 	string UIName="Specular Material";
@@ -75,6 +75,7 @@ const float3x3 identityMatrix3x3 = {
 	float3(0,1,0),
 	float3(0,0,1)
 };
+float2 textureRepeat = float2(1.0, 1.0);
 
 SamplerState wrapSampler
 {
@@ -129,7 +130,7 @@ float4 PS(PS_INPUT input):SV_TARGET
 {
 	float heightVal = heightMap.Sample(wrapSampler, input.texCoord).x;
 	float height = scale * heightVal - bias;
-	float2 texCoord = input.texCoord + (height * input.cameraDirection.xy) * useHeightTexture;
+	float2 texCoord = input.texCoord * textureRepeat + (height * input.cameraDirection.xy) * textureRepeat * useHeightTexture;
 	
 	float3 bumpMapSampled = ((2.0 * (bumpMap.Sample(wrapSampler, texCoord))) - 1.0) * useBumpTexture;
 	
@@ -145,7 +146,7 @@ float4 PS(PS_INPUT input):SV_TARGET
 	float3 halfVec = normalize(lightDir + input.cameraDirection);
 	float specular = pow(saturate(dot(normal, halfVec)), specularPower);
 	
-	return ((ambientMaterialColour * ambientLightColour) +
+	return ((diffuseColour * ambientLightColour) +
 		(diffuseColour * diffuseLightColour * diffuse) +
 		(specularColour * specularLightColour * specular));
 }

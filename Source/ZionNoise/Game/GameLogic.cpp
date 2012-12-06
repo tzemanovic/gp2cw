@@ -24,11 +24,10 @@ namespace zn
         m_gameObjectMap.clear();
     }
 
-    void GameLogic::AddView( shared_ptr< IView > pView, GameObjectId gameObjectId )
+    void GameLogic::AddView( shared_ptr< IView > pView )
     {
         uint32 viewId = static_cast<int>( m_viewList.size() );
         m_viewList.push_back( pView );
-        pView->Attach( viewId, gameObjectId );
     }
 
     void GameLogic::Update( const float deltaMs )

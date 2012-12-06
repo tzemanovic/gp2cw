@@ -20,6 +20,7 @@ namespace zn
         }
 
         bool Init();
+        void Bind();
         void ExecuteFile( const string& filename );
 
         lua_State* GetLuaState()
@@ -32,10 +33,13 @@ namespace zn
             return g_pGame;
         }
 
+        class_< Game >* GetGameScope() { return gameScope; }
+
     private:
         LuaScriptManager();
-        void Bind();
+        void Prebind();
 
         lua_State* m_pLuaState;
+        class_< Game >* gameScope;
     };
 }

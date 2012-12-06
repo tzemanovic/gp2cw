@@ -24,7 +24,8 @@ namespace zn
         virtual void VRender( const float deltaMs ) = 0;
         virtual void VUpdate( const float deltaMs ) = 0;
         virtual const bool VProcessMessage( const Message& message ) = 0;
-        virtual void VAddSceneNode( shared_ptr< SceneNode > pSceneNode ) = 0;
+        virtual void VAddSceneNode( GameObjectId id, shared_ptr< SceneNode > pSceneNode ) = 0;
+        virtual void VSetOwner( GameObjectId id ) { m_owner = id; }
 
     protected:
         ViewId m_viewId;

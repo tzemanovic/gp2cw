@@ -25,11 +25,13 @@ namespace zn
         D3DXQUATERNION* QuaternionRotationMatrix( Quaternion* pQuaternion, const Mat4x4* pMat );
         D3DXQUATERNION* QuaternionRotationVectorRad( Quaternion* pQuaternion, const fVec3& vec );
         D3DXQUATERNION* QuaternionRotationVectorDeg( Quaternion* pQuaternion, const fVec3& vec );
+        D3DXQUATERNION* QuaternionRotationAxis( Quaternion* pOut, const fVec3& axis, const float angle );
 
         D3DXMATRIX* MatrixRotationQuaternion( Mat4x4* pMat, const Quaternion* pQuaternion );
         D3DXMATRIX* MatrixMultiply( Mat4x4* pOut, const Mat4x4* pMat1, const Mat4x4* pMat2 );
         D3DXMATRIX* MatrixTranslation( Mat4x4* pOut, const fVec3& translation );
         D3DXMATRIX* MatrixScaling( Mat4x4* pOut, const fVec3& scale );
+        D3DXMATRIX* MatrixLookAtLH( Mat4x4* pOut, const fVec3& eye, const fVec3& target, const fVec3& up );
 
 #       endif
     }

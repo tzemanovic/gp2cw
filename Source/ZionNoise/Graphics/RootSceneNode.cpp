@@ -17,6 +17,8 @@ namespace zn
 	    SceneNode::VAddChild( pSkyGroup );
         shared_ptr< SceneNode > pGameObjectsGroup( ZN_NEW SceneNode( NO_GAME_OBJECT_ID, NULL, RenderPass::GameObjects, &Mat4x4::identity ) );
 	    SceneNode::VAddChild( pGameObjectsGroup );
+        shared_ptr< SceneNode > pHUDGroup( ZN_NEW SceneNode( NO_GAME_OBJECT_ID, NULL, RenderPass::HUD, &Mat4x4::identity ) );
+	    SceneNode::VAddChild( pHUDGroup );
     }
 
     void RootSceneNode::VAddChild( shared_ptr< SceneNode > pSceneNode )
@@ -32,10 +34,9 @@ namespace zn
         {
             switch( i )
             {
-                case RenderPass::GameObjects:
-                    m_children[i]->VRenderChildren( pScene );
-                    break;
                 case RenderPass::Sky:
+                case RenderPass::GameObjects:
+                case RenderPass::HUD:
                     m_children[i]->VRenderChildren( pScene );
                     break;
             }

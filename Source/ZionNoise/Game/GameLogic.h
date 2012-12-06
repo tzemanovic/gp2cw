@@ -21,7 +21,7 @@ namespace zn
         ~GameLogic();
 
         // add view
-        void AddView( shared_ptr< IView > pView, GameObjectId gameObjectId );
+        void AddView( shared_ptr< IView > pView );
         void Update( const float deltaMs );
 
         shared_ptr< GameObject > GetGameObject( GameObjectId id );

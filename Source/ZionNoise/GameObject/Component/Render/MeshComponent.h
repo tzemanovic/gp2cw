@@ -22,7 +22,7 @@ namespace zn
 
         virtual bool VInit();
         
-        void LoadGeometryFromFile( const string& filename );
+        void LoadGeometryFromFile( const string& filename, const float scale = 1.f );
         void CreateCubeGeometry( const fVec3& dimensions );
         MeshGeometry* GetGeometry( uint32 index );
 

@@ -30,10 +30,7 @@ namespace zn
                 weak_ptr< TComponent > pWeakChildComponent( pChildComponent );
                 return pWeakChildComponent;
             }
-            else
-            {
-                return weak_ptr< TComponent >();
-            }
+            return weak_ptr< TComponent >();
         }
         GameObjectId GetId() { return m_id; }
 

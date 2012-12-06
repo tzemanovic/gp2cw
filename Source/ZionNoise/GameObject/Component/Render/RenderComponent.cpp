@@ -6,6 +6,7 @@
 #include "RenderComponent.h"
 #include "..\..\..\Game\Game.h"
 #include "..\..\..\Graphics\SceneNode.h"
+#include "..\..\GameObject.h"
 
 namespace zn
 {
@@ -19,7 +20,7 @@ namespace zn
         shared_ptr< SceneNode > pSceneNode = VGetSceneNode();
         if( pSceneNode )
         {
-            g_pGame->AddSceneNode( pSceneNode );
+            g_pGame->AddSceneNode( m_pGameObject->GetId(), pSceneNode );
             return true;
         }
         return false;

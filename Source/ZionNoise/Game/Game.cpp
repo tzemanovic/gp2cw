@@ -77,9 +77,9 @@ namespace zn
         }
     }
 
-    void Game::AddView( shared_ptr< IView > pView, GameObjectId gameObjectId )
+    void Game::AddView( shared_ptr< IView > pView )
     {
-        m_pGameLogic->AddView( pView, gameObjectId );
+        m_pGameLogic->AddView( pView );
         shared_ptr< ViewHuman > pHumanView  = static_pointer_cast< ViewHuman >( pView );
         if( pHumanView )
         {
@@ -88,12 +88,12 @@ namespace zn
         pView->VInit();
     }
 
-    void Game::AddSceneNode( shared_ptr< SceneNode > pSceneNode )
+    void Game::AddSceneNode( GameObjectId id, shared_ptr< SceneNode > pSceneNode )
     {
         for( ViewList::iterator i = m_pGameLogic->m_viewList.begin(), end = m_pGameLogic->m_viewList.end();
             i != end; ++i )
         {
-            ( *i )->VAddSceneNode( pSceneNode );
+            ( *i )->VAddSceneNode( id, pSceneNode );
         }
     }
 

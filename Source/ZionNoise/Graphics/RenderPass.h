@@ -12,6 +12,7 @@ namespace zn
             First,
 	        Sky,
 	        GameObjects,
+            HUD,
 	        Count
         };
     }

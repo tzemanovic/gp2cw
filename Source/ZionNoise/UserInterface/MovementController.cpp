@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////
-// mouse handler interface
+// movement controller
 ////////////////////////////////////////////////////
 
 #include "ZionNoiseStd.h"
@@ -114,9 +114,9 @@ namespace zn
             m_pControlledObject->SetTransform( &m_toWorld, &m_fromWorld );
         }
 
-        m_yaw += (m_targetYaw - m_yaw) * ( .35f );
+        m_yaw += ( m_targetYaw - m_yaw ) * ( .35f );
         m_targetPitch = Math::Maxf( -90, Math::Minf( 90, m_targetPitch ) );
-        m_pitch += (m_targetPitch - m_pitch) * ( .35f );
+        m_pitch += ( m_targetPitch - m_pitch ) * ( .35f );
 
         // Calculate the new rotation matrix from the camera yaw and pitch
         Mat4x4 matRot;
@@ -132,7 +132,7 @@ namespace zn
             fVec4 direction4 = xTranslation + yTranslation + zTranslation;
             fVec3 direction( direction4.x, direction4.y, direction4.z );
             fVec3::Normalize( &direction );
-            float deltaS = deltaMs / 1000.0f;
+            float deltaS = deltaMs * 0.001f;
             // 5 seconds to go full speed
             float numberOfSeconds = 5.f;
             if( m_currentSpeed < m_maxSpeed )
