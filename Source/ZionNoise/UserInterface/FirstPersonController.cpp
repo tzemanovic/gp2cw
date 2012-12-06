@@ -15,8 +15,7 @@ namespace zn
         m_yaw( 0.f ), m_maxSpeed( 0.f )
     {
         uint16Vec2 mousePos = g_pGame->GetWindow()->GetCursorPos();
-        m_mouseLastX = mousePos.x;
-        m_mouseLastY = mousePos.y;   
+        m_mouseLastX = mousePos.x;  
         // reset arrays to false
         memset( m_keyState, 0x00, sizeof( m_keyState ) );
         memset( m_keyOldState, 0x00, sizeof( m_keyOldState ) );
@@ -44,12 +43,10 @@ namespace zn
 
     bool FirstPersonController::VOnMouseMsg( const Message& msg )
     {
-        if( msg == Message::MouseMove && ( m_mouseLastX != msg.mouseMove.x || m_mouseLastY != msg.mouseMove.y ) )
+        if( msg == Message::MouseMove && ( m_mouseLastX != msg.mouseMove.x ) )
         {
             m_targetYaw = m_targetYaw + ( m_mouseLastX - msg.mouseMove.x );
-            //m_targetPitch = m_targetPitch + ( msg.mouseMove.y - m_mouseLastY );
             m_mouseLastX = msg.mouseMove.x;
-            m_mouseLastY = msg.mouseMove.y;
             return true;
         }
         return false;

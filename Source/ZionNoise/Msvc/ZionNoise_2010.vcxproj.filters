@@ -203,6 +203,18 @@
     <ClInclude Include="..\UserInterface\CharacterControllerInfo.h">
       <Filter>UserInterface</Filter>
     </ClInclude>
+    <ClInclude Include="..\Audio\AudioManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Audio\Sound.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Audio\Channel.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameObject\Component\AudioComponent.h">
+      <Filter>GameObject\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZionNoiseStd.cpp" />
@@ -329,6 +341,12 @@
     <ClCompile Include="..\UserInterface\FirstPersonController.cpp">
       <Filter>UserInterface</Filter>
     </ClCompile>
+    <ClCompile Include="..\Audio\AudioManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameObject\Component\AudioComponent.cpp">
+      <Filter>GameObject\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Main">
@@ -378,6 +396,9 @@
     </Filter>
     <Filter Include="GameObject\Component\Physics">
       <UniqueIdentifier>{932cb579-4f30-470e-a65b-6817d37aa425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{466ea997-ca73-4791-9150-64e7a6dffd52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

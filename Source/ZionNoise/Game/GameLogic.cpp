@@ -6,6 +6,7 @@
 #include "GameLogic.h"
 #include "..\GameObject\GameObject.h"
 #include "..\Physics\Physics.h"
+#include "..\Audio\AudioManager.h"
 
 namespace zn
 {
@@ -34,6 +35,8 @@ namespace zn
     {
         Physics::Get()->Update( deltaMs );
         Physics::Get()->SyncVisibleScene();
+
+        AudioManager::Get()->Update();
 
         // update views
         for( ViewList::iterator i = m_viewList.begin(), end = m_viewList.end();

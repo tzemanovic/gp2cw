@@ -102,7 +102,8 @@ namespace zn
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< RigidBodyComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< BoxColliderComponent > ) )&GameObject::AddComponent )
                 .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< MeshColliderComponent > ) )&GameObject::AddComponent )
-                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< FirstPersonCharacterComponent > ) )&GameObject::AddComponent ),
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< FirstPersonCharacterComponent > ) )&GameObject::AddComponent )
+                .def( "AddComponent", ( void( GameObject::* )( shared_ptr< GameObject >, shared_ptr< AudioComponent > ) )&GameObject::AddComponent ),
             class_< IGameObjectComponent, shared_ptr< IGameObjectComponent > >( "IGameObjectComponent" ),
             class_< TransformComponent, IGameObjectComponent, shared_ptr< TransformComponent > >( "TransformComponent" )
                 .def( constructor<>() )
@@ -138,7 +139,24 @@ namespace zn
             class_< BoxColliderComponent, IGameObjectComponent, shared_ptr< BoxColliderComponent > >( "BoxColliderComponent" )
                 .def( constructor< fVec3 >() ),
             class_< MeshColliderComponent, IGameObjectComponent, shared_ptr< MeshColliderComponent > >( "MeshColliderComponent" )
+                .def( constructor<>() ),
+            class_< AudioManager >( "AudioManager" )
+                .scope
+			    [
+                    def( "Get", &AudioManager::Get )
+                ]
+                .def( "Init", &AudioManager::Init )
+                .def( "LoadSound", &AudioManager::LoadSound )
+                .def( "PlaySound", &AudioManager::PlaySound ),
+            class_< Sound >( "Sound" )
+                .def( constructor<>() ),
+            class_< Channel >( "Channel" )
                 .def( constructor<>() )
+                .def( "Stop", &Channel::Stop ),
+            class_< AudioComponent, IGameObjectComponent, shared_ptr< AudioComponent > >( "AudioComponent" )
+                .def( constructor<>() )
+                .def( "Play", &AudioComponent::Play )
+                .def( "SetFilename", &AudioComponent::SetFilename )
         ];
     }
 }

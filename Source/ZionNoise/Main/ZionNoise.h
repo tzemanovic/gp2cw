@@ -4,6 +4,9 @@
 ////////////////////////////////////////////////////
 
 #include "..\Msvc\ZionNoiseStd.h"
+#include "..\Audio\AudioManager.h"
+#include "..\Audio\Sound.h"
+#include "..\Audio\Channel.h"
 #include "..\Game\Game.h"
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\Component\TransformComponent.h"
@@ -13,6 +16,7 @@
 #include "..\GameObject\Component\Physics\BoxColliderComponent.h"
 #include "..\GameObject\Component\Physics\MeshColliderComponent.h"
 #include "..\GameObject\Component\Physics\FirstPersonCharacterComponent.h"
+#include "..\GameObject\Component\AudioComponent.h"
 #include "..\Graphics\D3D11\MeshMaterialD3D11.h"
 #include "..\Graphics\Scene.h"
 #include "..\Graphics\SceneNode.h"

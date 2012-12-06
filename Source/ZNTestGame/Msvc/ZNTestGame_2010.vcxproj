@@ -40,16 +40,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(SolutionDir)..\..\ZionNoise\3rdParty\Effects11\Inc;$(SolutionDir)..\..\ZionNoise\3rdParty\boost\include;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\include;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(HAVOKSDK_DIR)Lib\win32_vs2010\debug_multithreaded_dll</LibraryPath>
+    <IncludePath>$(SolutionDir);$(SolutionDir)..\..\ZionNoise\3rdParty\Effects11\Inc;$(SolutionDir)..\..\ZionNoise\3rdParty\boost\include;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\include;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\include;$(HAVOKSDK_DIR)source;$(FMODSDK_DIR)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(FMODSDK_DIR)lib;$(HAVOKSDK_DIR)Lib\win32_vs2010\debug_multithreaded_dll</LibraryPath>
     <OutDir>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(SolutionDir)..\..\ZionNoise\3rdParty\Effects11\Inc;$(SolutionDir)..\..\ZionNoise\3rdParty\boost\include;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\include;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
-    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(HAVOKSDK_DIR)Lib\win32_vs2010\release_multithreaded_dll</LibraryPath>
+    <IncludePath>$(SolutionDir);$(SolutionDir)..\..\ZionNoise\3rdParty\Effects11\Inc;$(SolutionDir)..\..\ZionNoise\3rdParty\boost\include;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\include;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\include;$(HAVOKSDK_DIR)source;$(FMODSDK_DIR)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration);$(SolutionDir)..\..\ZionNoise\3rdParty\FBX SDK\2013.3\lib\vs2010\x86;$(SolutionDir)..\..\ZionNoise\3rdParty\lua\msvc-10.0-x86;$(SolutionDir)..\..\ZionNoise\3rdParty\luabind\msvc-10.0-x86;$(FMODSDK_DIR)lib;$(HAVOKSDK_DIR)Lib\win32_vs2010\release_multithreaded_dll</LibraryPath>
     <OutDir>$(SolutionDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)$(PlatformName)$(Configuration)</TargetName>
@@ -65,7 +65,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;d3d11.lib;d3dx11.lib;d3d10.lib;d3dx10.lib;DxErr.lib;XInput.lib;Effects11.lib;d3dcompiler.lib;zionnoise_2010.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;luabind.debug.lib;lua.debug.lib;fbxsdk-2013.3d.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;d3d11.lib;d3dx11.lib;d3d10.lib;d3dx10.lib;DxErr.lib;XInput.lib;Effects11.lib;d3dcompiler.lib;zionnoise_2010.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;fmodex_vc.lib;luabind.debug.lib;lua.debug.lib;fbxsdk-2013.3d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -84,7 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;d3d11.lib;d3dx11.lib;d3d10.lib;d3dx10.lib;DxErr.lib;XInput.lib;Effects11.lib;d3dcompiler.lib;zionnoise_2010.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;luabind.release.lib;lua.release.lib;fbxsdk-2013.3.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;d3d11.lib;d3dx11.lib;d3d10.lib;d3dx10.lib;DxErr.lib;XInput.lib;Effects11.lib;d3dcompiler.lib;zionnoise_2010.lib;hkBase.lib;hkCompat.lib;hkSceneData.lib;hkSerialize.lib;hkVisualize.lib;hkInternal.lib;hkGeometryUtilities.lib;hkcdInternal.lib;hkcdCollide.lib;hkpCollide.lib;hkpConstraintSolver.lib;hkpDynamics.lib;hkpInternal.lib;hkpUtilities.lib;hkpVehicle.lib;fmodex_vc.lib;luabind.release.lib;lua.release.lib;fbxsdk-2013.3.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

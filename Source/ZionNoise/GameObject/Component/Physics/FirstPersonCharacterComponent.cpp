@@ -7,6 +7,8 @@
 #include "..\..\..\Physics\Physics.h"
 #include "..\..\GameObject.h"
 #include "..\TransformComponent.h"
+#include "..\..\..\Audio\AudioManager.h"
+#include "..\AudioComponent.h"
 
 namespace zn
 {
@@ -114,6 +116,7 @@ namespace zn
     void FirstPersonCharacterComponent::VUpdate( const float deltaMs )
     {
         m_currentTime += deltaMs;
+        // update character controller
         if( m_currentTime >= PHYSICS_UPDATE_TIME )
         {
             hkpWorld* world = Physics::Get()->GetWorld();
@@ -141,6 +144,28 @@ namespace zn
 
 	        world->unmarkForWrite();
             m_currentTime = 0.f;
+
+            if( m_forwardBack != 0.f || m_leftRight != 0.f )
+            {
+                shared_ptr< AudioComponent > pAudioComponent = MakeStrongPtr( m_pGameObject->GetComponent< AudioComponent >( GameObjectComponent::Audio ) );
+                if( pAudioComponent )
+                    pAudioComponent->Play();
+            }
+        }
+        // update audio manager
+        shared_ptr< TransformComponent > pTransformComponent = MakeStrongPtr( m_pGameObject->GetComponent< TransformComponent >( GameObjectComponent::Transform ) );
+        if( pTransformComponent )
+        {
+            fVec3 forward( fVec3::forward );
+            fVec3 up( fVec3::up );
+            Mat4x4 trans = pTransformComponent->GetTransformNoScale();
+            forward = trans.Transform( forward );
+            up = trans.Transform( up );
+            fVec3 position = trans.GetPosition();
+            hkVector4 hkVel = m_pRigidBody->getLinearVelocity();
+            fVec3 velocity( hkVel.getComponent( 0 ), hkVel.getComponent( 1 ), hkVel.getComponent( 2 ) );
+            //velocity = velocity * 1000.f / deltaMs;
+            AudioManager::Get()->UpdateListener( position, velocity, forward, up );
         }
     }
 

@@ -20,6 +20,7 @@ namespace zn
             MeshCollider,
             RigidBody,
             FirstPersonCharacter,
+            Audio,
             Count
         };
     }

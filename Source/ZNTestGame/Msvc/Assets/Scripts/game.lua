@@ -2,6 +2,8 @@
 function initGame()
 
 	game=LuaScriptManager.GetGame()
+	audio=AudioManager.Get()
+	audio:Init()
 	
 	--human view
 	humanView=ViewHumanFirstPerson()
@@ -24,11 +26,11 @@ function initGame()
 	terrainTrans:SetPosition(Vec3(0.0,-0.5,0.0))
 	terrain:AddComponent(terrain,terrainTrans)
 	terrainMesh=MeshComponent()
-	terrainMesh:CreateCubeGeometry(Vec3(1000.0, 0.001, 1000.0))
+	terrainMesh:CreateCubeGeometry(Vec3(500.0, 0.01, 500.0))
 	terrain:AddComponent(terrain,terrainMesh)
 	terrainBody=RigidBodyComponent(true,1.0)
 	terrain:AddComponent(terrain,terrainBody)
-	terrainBoxCollider=BoxColliderComponent(Vec3(1000.0, 0.001, 1000.0))
+	terrainBoxCollider=BoxColliderComponent(Vec3(500.0, 0.01, 500.0))
 	terrain:AddComponent(terrain,terrainBoxCollider)
 	game:AddGameObject(terrain)
 	terrainMeshMaterial=terrainMesh:GetMeshMaterial()
@@ -36,9 +38,10 @@ function initGame()
 	terrainMeshMaterial:LoadSpecularTexture("Assets\\Textures\\Ground\\ground6_spec.jpg")
 	terrainMeshMaterial:LoadBumpTexture("Assets\\Textures\\Ground\\ground6_normal.jpg")
 	--terrainMeshMaterial:LoadParallaxTexture("Assets\\Textures\\Ground\\ground6_height.jpg")
-	terrainMeshMaterial:SetTextureRepeat(Vec2(500.0, 500.0))
+	terrainMeshMaterial:SetTextureRepeat(Vec2(250.0, 250.0))
 	
 	-- new armored recond game object
+	--[[
 	armoredRecon=GameObject(3)
 	armoredReconTrans=TransformComponent()
 	armoredReconTrans:SetPosition(Vec3(0.0,2.5,10.0))
@@ -58,6 +61,7 @@ function initGame()
 	armoredReconMeshMaterial:LoadSpecularTexture("Assets\\Textures\\Vehicles\\armoredrecon_spec.png")
 	armoredReconMeshMaterial:LoadBumpTexture("Assets\\Textures\\Vehicles\\armoredrecon_N.png")
 	--armoredReconMeshMaterial:LoadParallaxTexture("Assets\\Textures\\Vehicles\\armoredrecon_Height.png")
+	--]]
 	
 	-- new knight game object
 	knight1=GameObject(4)
@@ -72,6 +76,9 @@ function initGame()
 	knight1:AddComponent(knight1,knight1Mesh)
 	knight1Body=FirstPersonCharacterComponent(charInfo)
 	knight1:AddComponent(knight1,knight1Body)
+	knight1StepSound=AudioComponent()
+	knight1StepSound:SetFilename("Assets\\Audio\\Sounds\\Knight\\earthSteps.ogg")
+	knight1:AddComponent(knight1,knight1StepSound)
 	game:AddGameObject(knight1)
 	knight1MeshMaterial=knight1Mesh:GetMeshMaterial()
 	knight1MeshMaterial:LoadDiffuseTexture("Assets\\Textures\\Characters\\Knight\\T_Black_Knight_D.jpg")
@@ -156,5 +163,9 @@ function initGame()
 	woodboard1MeshMaterial:LoadDiffuseTexture("Assets\\Textures\\Constructs\\woodboard.bmp")
 	woodboard1MeshMaterial:LoadSpecularTexture("Assets\\Textures\\Constructs\\woodboardS.bmp")
 	woodboard1MeshMaterial:LoadBumpTexture("Assets\\Textures\\Constructs\\underStandN.bmp")
+	
+	
+	bgmusic1=audio:LoadSound("Assets\\Audio\\Music\\music_misty_room.ogg", true, true, false)
+	audio:PlaySound(bgmusic1,-1)
 
 end

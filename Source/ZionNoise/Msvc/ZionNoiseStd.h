@@ -168,6 +168,8 @@ namespace zn
 #include <Common/Base/System/Init/PlatformInit.cxx>
 ///end HAVOK includes
 
+#include <fmod.hpp>
+
 #include "..\Utilities\Math.h"
 #include "..\Geometry\Geometry.h"
 #include "..\Graphics\RenderPass.h"

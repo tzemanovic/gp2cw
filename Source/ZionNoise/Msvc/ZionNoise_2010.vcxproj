@@ -11,6 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Audio\AudioManager.h" />
+    <ClInclude Include="..\Audio\Channel.h" />
+    <ClInclude Include="..\Audio\Sound.h" />
+    <ClInclude Include="..\GameObject\Component\AudioComponent.h" />
     <ClInclude Include="..\GameObject\Component\GameObjectComponentType.h" />
     <ClInclude Include="..\GameObject\Component\IGameObjectComponent.h" />
     <ClInclude Include="..\GameObject\Component\Physics\BoxColliderComponent.h" />
@@ -81,6 +85,8 @@
     <ClInclude Include="ZionNoiseStd.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Audio\AudioManager.cpp" />
+    <ClCompile Include="..\GameObject\Component\AudioComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Physics\BoxColliderComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Physics\CapsuleColliderComponent.cpp" />
     <ClCompile Include="..\GameObject\Component\Physics\FirstPersonCharacterComponent.cpp" />
@@ -152,7 +158,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(FMODSDK_DIR)inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LibraryPath>$(LibraryPath)</LibraryPath>
@@ -160,7 +166,7 @@
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)..\3rdParty\FBX SDK\2013.3\include;$(DXSDK_DIR)Include;$(ProjectDir)..\3rdParty\Effects11\Inc;$(ProjectDir)..\3rdParty\luabind\include;$(ProjectDir)..\3rdParty\lua\include;$(ProjectDir)..\3rdParty\boost\include;$(HAVOKSDK_DIR)source;$(FMODSDK_DIR)inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)..\..\Lib\$(PlatformName)$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\Temp\$(ProjectName)$(PlatformName)$(Configuration)\</IntDir>
