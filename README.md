@@ -17,6 +17,10 @@ gp2cw
 	<td>HAVOKSDK_DIR</td>
 	<td>Havok physics 2013.3 SIMD</td>
 </tr>
+<tr>
+	<td>FMODSDK_DIR</td>
+	<td>FMOD api</td>
+</tr>
 </table>
 
 ##Build in VS2010
@@ -48,6 +52,10 @@ gp2cw
 	<td>Strafe Left</td>
 </tr>
 <tr>
+	<td>Spacebar</td>
+	<td>Jump</td>
+</tr>
+<tr>
 	<td>Ctrl + W</td>
 	<td>Debug view - Move Up</td>
 </tr>
@@ -60,7 +68,7 @@ gp2cw
 	<td>Debug view - Reset Position</td>
 </tr>
 <tr>
-	<td>Mousemove</td>
-	<td>Debug view - Rotate View</td>
+	<td>Mouse move</td>
+	<td>Rotate View</td>
 </tr>
 </table>
