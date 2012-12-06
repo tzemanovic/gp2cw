@@ -1,7 +1,6 @@
-gp2cw
+Games Programing 2 Coursework
 =====
-
-#Games Programming 2 - Coursework
+Tomas Zemanovic - S1033008
 
 ##Dependencies
 <table border="1">
@@ -22,14 +21,16 @@ gp2cw
 	<td>FMOD api</td>
 </tr>
 </table>
+<p>Other smaller libraries are packed within 3rdParty folder.</p>
 
 ##Build in VS2010
 1. Open Source\ZNTestGame\Msvc\ZNTestGame_2010.sln
-2. Build ZionNoise_2010 Project first
-3. Build Solution
+2. Build ZionNoise_2010 Project first.
+3. Make sure ZNTestGame is setup as startup project.
+4. Build & Run Solution.
 <p>If you are using NO SIMD Havok (getting linker error error LNK2001: unresolved external symbol "struct hkQuadReal const * const g_vectorConstants" (?g_vectorConstants@@3QBUhkQuadReal@@B)), change ZionNoise_2012 Properties / C/C++ / Preprocessor Definitions HK_CONFIG_SIMD from 1 to 2.</p>
 
-##Controls
+##Game Controls
 <table border="1">
 <tr>
 	<td>F2</td>
